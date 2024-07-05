@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login form</title>
+    <link rel="stylesheet" href="/css/background.css">
+    <link rel="stylesheet" href="/css/loginStyles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <h2>Welcome</h2>
+        <form action="#">
+            <div class="input-field">
+                <input type="email" id="email" placeholder="Username">
+                <i class="bx bxs-user"></i>
+            </div>
+            <div class="input-field">
+                <input type="password" id="password" placeholder="Password" required>
+                <i class="bx bxs-lock-alt"></i>
+            </div>
+            <button type="submit" class="login">Login</button>
+            <p>Don't have an account?<a href="#" class="sign-up">sign-up</a></p>
+        </form>
+    </div>
+</body>
+</html>

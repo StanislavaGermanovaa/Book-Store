@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Index - E-Book Site</title>
+        <link rel="stylesheet" href="/css/background.css">
+        <link rel="stylesheet" href="/css/styles.css">
+    </head>
+
+    <body>
+        <header>
+            <div class="logo">Book store</div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a th:href="@{/books}">Books</a></li>
+                <li><a href="#">Authors</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Admin Dashboard</a></li>
+                <li><a href="#">Add Book</a></li>
+            </ul>
+            <ul>
+                <li><a th:href="@{/login}">Login</a></li>
+                <li><a th:href="@{/register}">Register</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+            <div class="field-search">
+                <input type="search" placeholder="search" id="search">
+                <label for="search"></label>
+            </div>
+        </header>
+        <section class="index-section">
+            <div class="books-move">
+                <span style="--i:1;"><img src="/img/first_lie_wins.jpg" alt=""></span>
+                <span style="--i:2;"><img src="/img/iron-flame.jpg" alt=""></span>
+                <span style="--i:3;"><img src="/img/sandwich.jpg" alt=""></span>
+                <span style="--i:4;"><img src="/img/swan-song.webp" alt=""></span>
+                <span style="--i:5;"><img src="/img/the-demon-of-unrest.jpg" alt=""></span>
+                <span style="--i:6;"><img src="/img/the-paradise-problem.jpg" alt=""></span>
+                <span style="--i:7;"><img src="/img/the-teacher.jpg" alt=""></span>
+                <span style="--i:8;"><img src="/img/this-summer-will-be-different.jpg" alt=""></span>
+            </div>
+            <blockquote class="quote">
+                “A truly good book is something as natural, 
+                and as unexpectedly and unaccountably fair and perfect, 
+                as a wild flower discovered on the prairies of the West or in the jungles of the East. 
+                Genius is a light which makes the darkness visible,
+                 like the lightning’s flash, which perchance shatters the temple of knowledge itself,
+                 --and not a taper lighted at the hearth-stone of the race,
+                  which pales before the light of common day.”
+                <cite> ― Henry David Thoreau</cite>
+            </blockquote>
+            
+        </section>
+        <footer>
+            <p>&copy; 2024 Book Site</p>
+        </footer>
+    </body>
+</html>

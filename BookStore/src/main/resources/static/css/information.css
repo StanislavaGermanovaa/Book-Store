@@ -1,0 +1,154 @@
+.Books-list{
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+}
+
+.Books-list h2{
+    color: aliceblue;
+    margin-top: 2em;
+    margin-bottom: 3em;
+}
+
+.Books-list .books-links{
+    
+    font-size: 100%;
+    font-family: 'Noto Sans', serif;
+font-weight: 700;
+line-height: 2;
+box-sizing: inherit;
+margin: 0;
+padding: 0;
+display: grid;
+grid-template-columns: repeat(5,minmax(0,1fr));
+padding-left: 1rem;
+padding-right: 1rem;
+}
+
+.Books-list .books-links .books-info .img{
+    line-height: inherit;
+cursor: pointer;
+font-size: 0.875rem;
+text-decoration: underline;
+position: relative;
+height: 275px;
+display: flex;
+align-items: flex-end;
+justify-content: center;
+}
+
+.Books-list .books-links .books-info img{
+    border: 0;
+    max-height: 275px;
+    max-width: 150px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
+}
+
+.Books-list .books-links .books-info .book-name{
+    box-sizing: inherit;
+    background-color: transparent;
+cursor: pointer;
+text-decoration: underline;
+margin-bottom: .75rem;
+display: inline-block;
+max-height: 3.7rem;
+overflow-y: hidden;
+white-space: normal;
+padding-left: .625rem;
+padding-right: .625rem;
+font-family: Noto Serif;
+font-size: 1rem;
+font-weight: 700;
+line-height: 1.25;
+color: aliceblue;
+text-decoration-line: none;
+}
+
+.Books-list .books-links .books-info span{
+    font-family: 'Noto Sans', serif;
+    color: aliceblue;
+font-weight: 400;
+box-sizing: inherit;
+margin-bottom: .375rem;
+padding-left: .625rem;
+padding-right: .625rem;
+font-size: .75rem;
+line-height: 2rem;
+}
+
+.book-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
+}
+
+.book-details h1{
+   
+    box-sizing: inherit;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    margin-top: 0.5;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    font-family: Noto Serif;
+    font-size: 1.875rem;
+    line-height: 1.25;
+    color: aliceblue;
+}
+
+.book-details a{
+    background-color: transparent;
+line-height: inherit;
+cursor: pointer;
+font-size: 1.5rem;
+color: #4ab69a;
+text-decoration: underline;
+text-decoration-line: none;
+margin-bottom: 2rem;
+}
+.book-details img{
+box-sizing: inherit;
+display: inline-block;
+vertical-align: middle;
+max-width: 100%;
+height: auto;
+color: #888;
+font-size: 10px;
+line-height: 14px ;
+white-space: normal; 
+border: 0;
+--tw-shadow: 0px 0px 20px 3px #555;
+--tw-shadow-colored: 0px 0px 20px 3px var(--tw-shadow-color);
+box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
+}
+
+.book-details span{
+    text-align: center;
+    box-sizing: inherit;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    margin-bottom: 1rem;
+    font-family: Noto Serif;
+    font-size: 1.5rem;
+    line-height: 1.25;
+    color: aliceblue;
+}
+
+.book-details p{
+    text-align: center;
+    box-sizing: inherit;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    margin-bottom: 0.5rem;
+    font-family: Noto Serif;
+    font-size: 1.5rem;
+    line-height: 1.25;
+    color: aliceblue;
+}
+
+
+

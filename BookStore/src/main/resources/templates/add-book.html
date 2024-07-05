@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add-book</title>
+    <link rel="stylesheet" href="/css/background.css">
+    <link rel="stylesheet" href="/css/loginStyles.css">
+    
+</head>
+<body>
+    <header>
+        <div class="logo">Book store</div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Books</a></li>
+            <li><a href="#">Authors</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Admin Dashboard</a></li>
+            <li><a href="#">Add Book</a></li>
+        </ul>
+        <ul>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Register</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+        <div class="field-search">
+            <input type="search" placeholder="search" id="search">
+            <label for="search"></label>
+        </div>
+    </header>
+
+    <main  class="book-details">
+        <div class="wrapper-add-book">
+            <h2>Enter Book Details</h2>
+            <form action="#">
+                <div class="input-field">
+                    <input type="title" id="title" placeholder="title" required>
+                </div>
+                <div class="input-field">
+                    <input type="author" id="author" placeholder="author" required>
+                </div>
+                <div class="input-field">
+                    <input type="category" id="category" placeholder="category" required>
+                </div>
+                <div class="input-field">
+                    <input type="description" id="description" placeholder="description" required>
+                </div>
+                <div class="input-field">
+                    <input type="image" alt="Example Image" placeholder="image">
+                </div>
+                <button type="submit" class="add">Add</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Book Site</p>
+    </footer>
+</body>
+</html>
