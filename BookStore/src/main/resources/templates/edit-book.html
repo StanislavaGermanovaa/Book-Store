@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Books-details</title>
+        <link rel="stylesheet" href="/css/background.css">
+        <link rel="stylesheet" href="/css/loginStyles.css">
+        
+    </head>
+<body>
+    <header>
+        <div class="logo">Book store</div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Books</a></li>
+            <li><a href="#">Authors</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Admin Board</a></li>
+        </ul>
+        <ul>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Register</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+        <div class="field-search">
+            <input type="search" placeholder="search" id="search">
+            <label for="search"></label>
+        </div>
+    </header>
+    <main class="edit-book">
+        <h2>Edit Book Details</h2>
+        <form action="update" method="POST">
+            <div class="input-field">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" value="Existing Book Title" >
+            </div>
+            <div class="input-field">
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="author" value="Existing Author Name">
+            </div>
+            <div class="input-field">
+                <label for="category">Category:</label>
+                <input type="text" id="category" name="category" value="Existing Category">
+            </div>
+            <div class="input-field">
+                <label for="description">Description:</label>
+                <textarea class="description" id="description" name="description">Existing book description...</textarea>
+            </div>
+            <div class="input-field">
+                <label for="image">Image:</label>
+                <input type="url" id="image" name="image" value="Image URL">
+            </div>
+            <div class="btns">
+                <button type="submit" class="edit">Edit</button>
+                <button type="submit" class="delete">Delete</button>
+            </div>
+        </form>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Book Site</p>
+    </footer>
+</body>
+</html>

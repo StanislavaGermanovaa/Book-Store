@@ -13,7 +13,7 @@ html{
     left: 50%;
     transform: translate(-50%,-50%);
     width: 350px;
-    height: 420px;
+    height: 490px;
     text-align: center;
     border: 1px solid rgb(241, 241, 241);
     border-radius: 12px;
@@ -23,14 +23,16 @@ html{
     box-shadow: 5px 5px 10px 0 rgba(0,0,0,0.5);
 }
 
-.wrapper-add-book{
-    margin-top: 50px;
+.book-details .wrapper-add-book{
+    margin-top: 100px;
     width: 400px;
-    height: 500px;
+    height: 560px;
 }
 
-.wrapper h2{
-    font-size: 30px;
+
+.wrapper h2,
+.book-details .wrapper-add-book h2{
+    font-size: 20px;
     color: #fffefe;
 }
 
@@ -38,7 +40,7 @@ html{
     position: relative;
 }
 
-.input-field input[type="username"],
+.input-field input[type="text"],
 .input-field input[type="email"],
 .input-field input[type="password"],
 .input-field input[type="confirm-password"],
@@ -46,7 +48,7 @@ html{
 .input-field input[type="author"],
 .input-field input[type="category"],
 .input-field input[type="description"],
-.input-field input[type="image"]{
+.input-field input[type="url"]{
     border-radius: 10px;
     background: transparent;
     margin: 15px;
@@ -69,7 +71,7 @@ input::placeholder{
     color: rgb(255, 255, 255);
 }
 
-.input-field input[type="username"]:focus::placeholder,
+.input-field input[type="text"]:focus::placeholder,
 .input-field input[type="email"]:focus::placeholder,
 .input-field input[type="password"]:focus::placeholder,
 .input-field input[type="confirm-password"]:focus::placeholder,
@@ -77,13 +79,13 @@ input::placeholder{
 .input-field input[type="author"]:focus::placeholder,
 .input-field input[type="category"]:focus::placeholder,
 .input-field input[type="description"]:focus::placeholder,
-.input-field input[type="image"]:focus::placeholder{
+.input-field input[type="url"]:focus::placeholder{
     transform: translateY(-100%);
     transition: transform 0.2s ease-in-out;
     font-size: 14px;
 }
 
-.input-field input[type="username"]:not(:focus)::placeholder,
+.input-field input[type="text"]:not(:focus)::placeholder,
 .input-field input[type="emial"]:not(:focus)::placeholder,
 .input-field input[type="passowrd"]:not(:focus)::placeholder,
 .input-field input[type="confirm-passowrd"]:not(:focus)::placeholder,
@@ -91,7 +93,7 @@ input::placeholder{
 .input-field input[type="author"]:not(:focus)::placeholder,
 .input-field input[type="category"]:not(:focus)::placeholder,
 .input-field input[type="description"]:not(:focus)::placeholder,
-.input-field input[type="image"]:not(:focus)::placeholder{
+.input-field input[type="url"]:not(:focus)::placeholder{
     transform: translateY(0%);
     transition: transform 0.2s ease-in-out;
     font-size: 16px;

@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books-details</title>
+    <title>Books-list</title>
     <link rel="stylesheet" href="/css/background.css">
     <link rel="stylesheet" href="/css/information.css">
-    
+
 </head>
+
 <body>
     <header>
         <div class="logo">Book store</div>
@@ -31,16 +33,29 @@ xmlns:th="http://www.thymeleaf.org">
         </div>
     </header>
 
-    <main  class="book-details">
-            <h1>Book titel</h1>
-            <a href="#">Author name</a>
-            <img src="/img/first_lie_wins.jpg" alt="">
-            <span>categoryName</span>
-            <p>Description</p>
+    <main class="admin">
+        <h2>Welcome, Admin!</h2>
+        <div class="container">
+            <div class="text-center"><img src="/img/profile.jpg" width="100" class="rounded-circle"></div>
+            <div class="text-center">
+                <h5 class="mt-4 mb-0">Full name</h5>
+                <span text="full-name">UI/UX Designer</span>
+                <h5 class="mt-2 mb-0">Username</h5>
+                <span text="username">UI/UX Designer</span>
+                <h5 class="mt-2 mb-0">Age</h5>
+                <span text="age">33</span>
+            </div>
+            <ul>
+                <li><a href="#">Add Book</a></li>
+                <li><a href="#">Delete Book</a></li>
+                <li><a href="#">Edit Book</a></li>
+            </ul>
+        </div>
     </main>
 
     <footer>
         <p>&copy; 2024 Book Site</p>
     </footer>
 </body>
+
 </html>

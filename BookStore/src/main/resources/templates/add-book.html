@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>add-book</title>
+    <title>Add-book</title>
     <link rel="stylesheet" href="/css/background.css">
     <link rel="stylesheet" href="/css/loginStyles.css">
     
@@ -18,8 +18,7 @@
             <li><a href="#">Authors</a></li>
             <li><a href="#">Categories</a></li>
             <li><a href="#">Profile</a></li>
-            <li><a href="#">Admin Dashboard</a></li>
-            <li><a href="#">Add Book</a></li>
+            <li><a href="#">Admin Board</a></li>
         </ul>
         <ul>
             <li><a href="#">Login</a></li>
@@ -32,24 +31,29 @@
         </div>
     </header>
 
-    <main  class="book-details">
+    <main class="book-details">
         <div class="wrapper-add-book">
             <h2>Enter Book Details</h2>
-            <form action="#">
+            <form action="/add-book" method="POST">
                 <div class="input-field">
-                    <input type="title" id="title" placeholder="title" required>
+                    <label for="title" class="sr-only">Title</label>
+                    <input type="text" id="title" name="title" placeholder="Title" required>
                 </div>
                 <div class="input-field">
-                    <input type="author" id="author" placeholder="author" required>
+                    <label for="author" class="sr-only">Author</label>
+                    <input type="text" id="author" name="author" placeholder="Author" required>
                 </div>
                 <div class="input-field">
-                    <input type="category" id="category" placeholder="category" required>
+                    <label for="category" class="sr-only">Category</label>
+                    <input type="text" id="category" name="category" placeholder="Category" required>
                 </div>
                 <div class="input-field">
-                    <input type="description" id="description" placeholder="description" required>
+                    <label for="description" class="sr-only">Description</label>
+                    <input type="text" id="description" name="description" placeholder="Description" required>
                 </div>
                 <div class="input-field">
-                    <input type="image" alt="Example Image" placeholder="image">
+                    <label for="image" class="sr-only">Image URL</label>
+                    <input type="url" id="image" name="image" placeholder="Image URL">
                 </div>
                 <button type="submit" class="add">Add</button>
             </form>

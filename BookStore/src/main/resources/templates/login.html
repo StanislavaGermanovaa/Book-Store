@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,17 +12,19 @@
 <body>
     <div class="wrapper">
         <h2>Welcome</h2>
-        <form action="#">
+        <form action="/login" method="POST">
             <div class="input-field">
-                <input type="email" id="email" placeholder="Username">
+                <label for="email" class="sr-only">Email</label>
+                <input type="email" id="email" name="email" placeholder="Email" required>
                 <i class="bx bxs-user"></i>
             </div>
             <div class="input-field">
-                <input type="password" id="password" placeholder="Password" required>
+                <label for="password" class="sr-only">Password</label>
+                <input type="password" id="password" name="password" placeholder="Password" required>
                 <i class="bx bxs-lock-alt"></i>
             </div>
             <button type="submit" class="login">Login</button>
-            <p>Don't have an account?<a href="#" class="sign-up">sign-up</a></p>
+            <p>Don't have an account? <a href="/register" class="sign-up">Sign up</a></p>
         </form>
     </div>
 </body>
