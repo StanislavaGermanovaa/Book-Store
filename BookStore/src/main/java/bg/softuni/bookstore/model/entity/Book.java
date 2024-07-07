@@ -23,6 +23,9 @@ public class Book extends BaseEntity{
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column(nullable = false)
+    private double price;
+
     public Book() {
     }
 
@@ -64,5 +67,13 @@ public class Book extends BaseEntity{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

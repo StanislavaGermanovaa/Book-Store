@@ -10,7 +10,8 @@
     margin-bottom: 3em;
 }
 
-.Books-list .books-links{
+.Books-list .books-links,
+.authors .books-by-author ul{
     
     font-size: 100%;
     font-family: 'Noto Sans', serif;
@@ -151,4 +152,201 @@ box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #000
 }
 
 
+.authors h2{
+    box-sizing: inherit;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    margin-top: 0.5;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    font-family: Noto Serif;
+    font-size: 1.875rem;
+    line-height: 1.25;
+    color: rgb(8, 8, 8);
+}
+
+
+.authors .authors-info{
+    display: flex;
+}
+
+.authors .about-the-author,
+.authors .books-by-author{
+    line-height: 20px;
+    font-family: "Amazon Ember",Arial,sans-serif;
+    font-size: 1.25vw;
+    box-sizing: border-box;
+    float: left;
+    position: relative;
+    margin-top: -1px;
+    border-width: 1px 0 0 1px;
+    border-style: solid;
+    background-color: #999898;
+    text-align: center;
+    vertical-align: top;
+    width: 100%;
+    height: auto;
+    border-color: #fff;
+}
+
+
+.authors .about-the-author p,
+.authors .books-by-author a{
+    text-decoration: none;
+    color: #060505;
+}
+
+
+.profile .container,
+.admin .container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+    height: 530px;
+    text-align: center;
+    border: 1px solid rgb(241, 241, 241);
+    border-radius: 12px;
+    padding: 10px 20px;
+    background: transparent;
+    backdrop-filter: blur(6px);
+    box-shadow: 5px 5px 10px 0 rgba(0,0,0,0.5);
+    margin-top: 70px;
+}
+
+.profile .container .text-center button,
+.admin .container li{
+    background: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 45px;
+    width: 200px;
+    height: 30px;
+}
+
+.admin .container a{
+    color: #060505;
+}
+
+.admin{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+    height: 530px;
+    text-align: center;
+    color: white;
+    margin-top: 50px;
+}
+
+.categories .container{
+    font-size: 100%;
+    font-family: 'Noto Sans', serif;
+    font-weight: 1000;
+    line-height: 2;
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.categories .container .category-container{
+    font-size: 100%;
+    font-family: 'Noto Sans', serif;
+    background-color: #f2c9e9;
+    box-sizing: inherit;
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: 2rem;
+    border-radius: 1em;
+    border: 0.2em solid #fff;
+}
+
+.categories .container .category-container .books li{
+    font-size: 100%;
+    font-family: 'Noto Sans', serif;
+    font-weight: 1000;
+    line-height: 2;
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5,minmax(0,1fr));
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.categories .container .category-container .books img{
+    width: 80px;
+}
+
+.shopping-bag .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.shopping-bag .container .cart-header {
+    border-bottom: 2px solid #eaeaea;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #343a40;
+}
+
+.shopping-bag .container .table-hover tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.shopping-bag .container .table th {
+    border-top: none;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.shopping-bag .container .table td {
+    vertical-align: middle;
+}
+
+.cart-total {
+    border-top: 2px solid #eaeaea;
+    padding-top: 10px;
+    font-size: 18px;
+    color: #343a40;
+}
+
+.btn {
+    font-size: 14px;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
 

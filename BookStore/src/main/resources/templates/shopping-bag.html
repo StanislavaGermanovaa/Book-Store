@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/background.css">
+    <link rel="stylesheet" href="/css/information.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">Book store</div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Books</a></li>
+            <li><a href="#">Authors</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Shopping Bag</a></li>
+            <li><a href="#">Admin Board</a></li>
+        </ul>
+        <ul>
+            <li><a href="#">Login</a></li>
+            <li><a href="#">Register</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+        <div class="field-search">
+            <input type="search" placeholder="search" id="search">
+            <label for="search"></label>
+        </div>
+    </header>
+    <main class="shopping-bag">
+        <div class="container">
+            <h1 class="cart-header">Your Shopping Cart</h1>
+
+            <div th:if="${cart.cartItems.isEmpty()}">
+                <div class="alert alert-info" role="alert">
+                    Your cart is empty.
+                </div>
+            </div>
+
+            <div th:if="${not #lists.isEmpty(cart.cartItems)}">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Subtotal</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${cart.cartItems}">
+                            <td th:text="${item.Book.title}">Title</td>
+                            <td th:text="${item.quantity}">Quantity</td>
+                            <td th:text="${item.eBook.price}">Price</td>
+                            <td th:text="${#numbers.formatDecimal(item.eBook.price * item.quantity, 2)}">Subtotal</td>
+                            <td>
+                                <form th:action="@{/cart/remove}" method="post" class="d-inline">
+                                    <input type="hidden" name="eBookId" th:value="${item.eBook.id}" />
+                                    <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="cart-total text-right">
+                    <h5>Total: <span
+                            th:text="${#numbers.formatDecimal(#lists.sum(cart.cartItems, 'eBook.price * quantity'), 2)}"></span>
+                    </h5>
+                </div>
+            </div>
+
+            <form th:action="@{/orders/checkout}" method="post" class="text-right mt-3">
+                <button type="submit" class="btn btn-success">Checkout</button>
+            </form>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Book Site</p>
+    </footer>
+</body>
+
+</html>
