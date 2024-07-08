@@ -12,7 +12,8 @@ xmlns:th="http://www.thymeleaf.org">
 <body>
     <div class="wrapper">
         <h2>Welcome</h2>
-        <form action="/register" method="POST">
+        <form th:action="@{/users/register}" method="POST"
+        >
             <div class="input-field">
                 <label for="username" class="sr-only">Username</label>
                 <input type="text" id="username" name="username" placeholder="Username" required>
