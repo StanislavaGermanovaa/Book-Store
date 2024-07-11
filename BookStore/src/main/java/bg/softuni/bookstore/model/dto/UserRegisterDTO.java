@@ -3,20 +3,22 @@ package bg.softuni.bookstore.model.dto;
 import jakarta.validation.constraints.*;
 
 public class UserRegisterDTO {
-    @NotBlank
-    @Size(min = 2)
-    private String username;
     @NotEmpty
-    @Size(min=5)
-    private String fullName;
+    @Size(min = 3)
+    private String username;
 
     @Email
     private String email;
-    @Min(0)
-    @Max(90)
+
+    @NotEmpty
+    @Size(min=5,max = 30)
+    private String fullName;
+
+    @NotEmpty
     private Integer age;
 
-    @Size(min = 5)
+    @NotEmpty
+    @Size(min = 3,max = 20)
     private String password;
 
     private String confirmPassword;

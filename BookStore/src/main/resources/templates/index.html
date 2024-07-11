@@ -4,33 +4,13 @@
     
     <head>
         <meta charset="UTF-8">
-        <title>Index - E-Book Site</title>
+        <title>Book store</title>
         <link rel="stylesheet" href="/css/background.css">
         <link rel="stylesheet" href="/css/styles.css">
     </head>
 
     <body>
-        <header>
-            <div class="logo">Book store</div>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Books</a></li>
-                <li><a href="#">Authors</a></li>
-                <li><a href="#">Categories</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Shopping Bag</a></li>
-                <li><a href="#">Admin Board</a></li>
-            </ul>
-            <ul>
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Register</a></li>
-                <li><a href="#">Logout</a></li>
-            </ul>
-            <div class="field-search">
-                <input type="search" placeholder="search" id="search">
-                <label for="search"></label>
-            </div>
-        </header>
+    <header th:replace="fragments/header"></header>
         <section class="index-section">
             <div class="books-move">
                 <span style="--i:1;"><img th:src="@{/images/first_lie_wins.jpg}" alt=""></span>
@@ -54,8 +34,6 @@
             </blockquote>
             
         </section>
-        <footer>
-            <p>&copy; 2024 Book Site</p>
-        </footer>
+        <footer th:replace="fragments/footer"></footer>
     </body>
 </html>

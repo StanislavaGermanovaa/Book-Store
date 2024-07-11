@@ -4,33 +4,13 @@ xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Books-details</title>
+        <title>Book store</title>
         <link rel="stylesheet" href="/css/background.css">
         <link rel="stylesheet" href="/css/loginStyles.css">
         
     </head>
 <body>
-    <header>
-        <div class="logo">Book store</div>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Books</a></li>
-            <li><a href="#">Authors</a></li>
-            <li><a href="#">Categories</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Shopping Bag</a></li>
-            <li><a href="#">Admin Board</a></li>
-        </ul>
-        <ul>
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Register</a></li>
-            <li><a href="#">Logout</a></li>
-        </ul>
-        <div class="field-search">
-            <input type="search" placeholder="search" id="search">
-            <label for="search"></label>
-        </div>
-    </header>
+<header th:replace="fragments/header"></header>
     <main class="edit-book">
         <h2>Edit Book Details</h2>
         <form action="update" method="POST">
@@ -62,8 +42,6 @@ xmlns:th="http://www.thymeleaf.org">
 
     </main>
 
-    <footer>
-        <p>&copy; 2024 Book Site</p>
-    </footer>
+    <footer th:replace="fragments/footer"></footer>
 </body>
 </html>

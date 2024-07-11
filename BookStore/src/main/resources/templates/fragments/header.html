@@ -1,0 +1,21 @@
+<header th:fragment="header">
+    <div class="logo">Book store</div>
+    <ul>
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/}">Books</a></li>
+        <li><a th:href="@{/}"Authors</a></li>
+        <li><a th:href="@{/}">Categories</a></li>
+        <li><a th:href="@{/users/profle}">Profile</a></li>
+        <li><a th:href="@{/}">Shopping Bag</a></li>
+        <li><a th:href="@{/}">Admin Board</a></li>
+    </ul>
+    <ul>
+        <li><a th:href="@{/users/login}">Login</a></li>
+        <li><a th:href="@{/users/register}">Register</a></li>
+        <li><a th:href="@{/}">Logout</a></li>
+    </ul>
+    <div class="field-search">
+        <input type="search" placeholder="search" id="search">
+        <label for="search"></label>
+    </div>
+</header>

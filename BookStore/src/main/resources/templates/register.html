@@ -4,34 +4,77 @@ xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register form</title>
+    <title>Book store</title>
     <link rel="stylesheet" href="/css/background.css">
     <link rel="stylesheet" href="/css/loginStyles.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel="stylesheet">
 </head>
 <body>
     <div class="wrapper">
-        <h2>Welcome</h2>
-        <form th:action="@{/users/register}" method="POST"
-        >
+        <form th:object="${registerData}"
+              th:action="@{/users/register}"
+              th:method="POST">
             <div class="input-field">
                 <label for="username" class="sr-only">Username</label>
-                <input type="text" id="username" name="username" placeholder="Username" required>
+                <input th:field="*{username}"
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Username"
+                       th:errorclass="is-invalid">
                 <i class="bx bxs-user"></i>
+                <small id="usernameError"
+                class="invalid-feedback bg-danger rounded">Username length must be more than 3 characters</small>
+                <small th:if="${#fields.hasErrors('username')}" id="usernameUniqueError"
+                       class=" bg-danger rounded">Username is already occupied</small>
             </div>
             <div class="input-field">
                 <label for="email" class="sr-only">Email</label>
-                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input th:field="*{email}"
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Email"
+                       th:errorclass="is-invalid">
                 <i class='bx bx-envelope'></i>
             </div>
             <div class="input-field">
+                <label for="name" class="sr-only">Name</label>
+                <input th:field="*{fullName}"
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="name"
+                       th:errorclass="is-invalid">
+                <i class='bx bxs-face'></i>
+            </div>
+            <div class="input-field">
+                <label for="age" class="sr-only">Age</label>
+                <input th:field="*{age}"
+                        type="text"
+                        id="age"
+                        name="age"
+                        placeholder="age"
+                       th:errorclass="is-invalid">
+                <i class='bx bx-face'></i>
+            </div>
+            <div class="input-field">
                 <label for="password" class="sr-only">Password</label>
-                <input type="password" id="password" name="password" placeholder="Password" required>
+                <input th:field="*{password}"
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Password"
+                       th:errorclass="is-invalid">
                 <i class="bx bxs-lock-alt"></i>
             </div>
             <div class="input-field">
                 <label for="confirm-password" class="sr-only">Confirm Password</label>
-                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required>
+                <input th:field="*{confirmPassword}"
+                        type="password"
+                        id="confirm-password"
+                        name="confirm-password"
+                        placeholder="Confirm Password">
                 <i class="bx bxs-lock-alt"></i>
             </div>
             <button type="submit" class="register">Register</button>

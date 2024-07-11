@@ -7,7 +7,8 @@ html{
 }
 
 .wrapper,
-.wrapper-add-book{
+.wrapper-add-book,
+.edit-book{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -29,9 +30,21 @@ html{
     height: 560px;
 }
 
+.wrapper{
+    height: 590px;
+    margin-top: 40px;
+}
+
+.edit-book{
+    margin-top: 100px;
+    width: 400px;
+    height: 620px;
+}
+
 
 .wrapper h2,
-.book-details .wrapper-add-book h2{
+.book-details .wrapper-add-book h2,
+.edit-book h2{
     font-size: 20px;
     color: #fffefe;
 }
@@ -48,7 +61,10 @@ html{
 .input-field input[type="author"],
 .input-field input[type="category"],
 .input-field input[type="description"],
-.input-field input[type="url"]{
+.input-field input[type="url"],
+.input-field .description,
+.input-field input[type="age"],
+.input-field input[type="name"]{
     border-radius: 10px;
     background: transparent;
     margin: 15px;
@@ -67,7 +83,8 @@ html{
     color: rgb(252 , 252, 252);
 }
 
-input::placeholder{
+input::placeholder,
+.input-field{
     color: rgb(255, 255, 255);
 }
 
@@ -79,7 +96,10 @@ input::placeholder{
 .input-field input[type="author"]:focus::placeholder,
 .input-field input[type="category"]:focus::placeholder,
 .input-field input[type="description"]:focus::placeholder,
-.input-field input[type="url"]:focus::placeholder{
+.input-field input[type="url"]:focus::placeholder,
+.input-field .description,
+.input-field input[type="age"]:focus::placeholder,
+.input-field input[type="name"]:focus::placeholder{
     transform: translateY(-100%);
     transition: transform 0.2s ease-in-out;
     font-size: 14px;
@@ -93,7 +113,10 @@ input::placeholder{
 .input-field input[type="author"]:not(:focus)::placeholder,
 .input-field input[type="category"]:not(:focus)::placeholder,
 .input-field input[type="description"]:not(:focus)::placeholder,
-.input-field input[type="url"]:not(:focus)::placeholder{
+.input-field input[type="url"]:not(:focus)::placeholder,
+.input-field .description,
+.input-field input[type="age"]:not(:focus)::placeholder,
+.input-field input[type="name"]:not(:focus)::placeholder{
     transform: translateY(0%);
     transition: transform 0.2s ease-in-out;
     font-size: 16px;
@@ -111,7 +134,8 @@ a.sign-up:hover{
 
 .wrapper .login,
 .wrapper .register,
-.wrapper-add-book .add{
+.wrapper-add-book .add,
+.edit-book .btns button{
     background: #fff;
     border: none;
     outline: none;
@@ -120,4 +144,8 @@ a.sign-up:hover{
     border-radius: 45px;
     width: 200px;
     height: 30px;
+}
+
+.edit-book .btns button{
+    margin-top: 10px;
 }

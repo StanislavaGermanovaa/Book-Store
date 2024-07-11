@@ -1,5 +1,6 @@
 package bg.softuni.bookstore.service;
 
+import bg.softuni.bookstore.model.dto.UserProfileDTO;
 import bg.softuni.bookstore.model.dto.UserRegisterDTO;
 import bg.softuni.bookstore.model.entity.User;
 import bg.softuni.bookstore.repo.UserRepository;
@@ -7,22 +8,50 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final UserHelperService userHelperService;
 
-    public UserService(ModelMapper modelMapper, PasswordEncoder passwordEncoder, UserRepository userRepository) {
+    public UserService(ModelMapper modelMapper, PasswordEncoder passwordEncoder, UserRepository userRepository, UserHelperService userHelperService) {
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
+        this.userHelperService = userHelperService;
     }
 
-    public void register(UserRegisterDTO data) {
-        User user=this.modelMapper.map(data, User.class);
-        user.setPassword(passwordEncoder.encode(data.getPassword()));
+    public void register(UserRegisterDTO userRegisterDTO) {
+        User user = this.modelMapper.map(userRegisterDTO, User.class);
+
+        user.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
 
         userRepository.save(user);
     }
+
+    public UserProfileDTO getProfileData() {
+        return modelMapper.map(userHelperService.getUser(), UserProfileDTO.class);
+    }
+
+//    public boolean register(UserRegisterDTO data) {
+//        Optional<User> user = userRepository.findByUsername(data.getUsername());
+//        if (user.isPresent()) {
+//            return false;
+//        }
+//
+//        user = userRepository.findByEmail(data.getEmail());
+//        if (user.isPresent()) {
+//            return false;
+//        }
+//
+//        User mapped = modelMapper.map(data, User.class);
+//        mapped.setPassword(passwordEncoder.encode(data.getPassword()));
+//        userRepository.save(mapped);
+//
+//
+//        return true;
+//    }
 }

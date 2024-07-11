@@ -4,7 +4,7 @@ xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login form</title>
+    <title>Book store</title>
     <link rel="stylesheet" href="/css/background.css">
     <link rel="stylesheet" href="/css/loginStyles.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel="stylesheet">
@@ -12,19 +12,33 @@ xmlns:th="http://www.thymeleaf.org">
 <body>
     <div class="wrapper">
         <h2>Welcome</h2>
-        <form th:action="@{/users/login}" method="POST">
+        <form th:method="post"
+              th:action="@{/users/login}"
+              th:object="${loginData}">
+
+            <div class="bg-danger" th:if="${showErrorMessage}" th:text="'Invalid username or password'"></div>
+
             <div class="input-field">
                 <label for="email" class="sr-only">Email</label>
-                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input
+                        th:field="*{username}"
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Email">
                 <i class="bx bxs-user"></i>
             </div>
             <div class="input-field">
                 <label for="password" class="sr-only">Password</label>
-                <input type="password" id="password" name="password" placeholder="Password" required>
+                <input th:field="*{password}"
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Password">
                 <i class="bx bxs-lock-alt"></i>
             </div>
             <button type="submit" class="login">Login</button>
-            <p>Don't have an account? <a href="/register" class="sign-up">Sign up</a></p>
+            <p>Don't have an account? <a th:href="@{/users/register}" class="sign-up">Sign up</a></p>
         </form>
     </div>
 </body>

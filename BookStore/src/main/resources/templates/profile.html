@@ -5,7 +5,7 @@ xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books-list</title>
+    <title>Book store</title>
     <link rel="stylesheet" href="/css/background.css">
     <link rel="stylesheet" href="/css/information.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
@@ -15,38 +15,18 @@ xmlns:th="http://www.thymeleaf.org">
 </head>
 
 <body>
-    <header>
-        <div class="logo">Book store</div>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Books</a></li>
-            <li><a href="#">Authors</a></li>
-            <li><a href="#">Categories</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Shopping Bag</a></li>
-            <li><a href="#">Admin Board</a></li>
-        </ul>
-        <ul>
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Register</a></li>
-            <li><a href="#">Logout</a></li>
-        </ul>
-        <div class="field-search">
-            <input type="search" placeholder="search" id="search">
-            <label for="search"></label>
-        </div>
-    </header>
+<header th:replace="fragments/header"></header>
 
     <main class="profile">
         <div class="container">
             <div class="text-center"><img src="/images/profile.jpg" width="100" class="rounded-circle"></div>
             <div class="text-center">
                 <h5 class="mt-4 mb-0">Full name</h5>
-                <span text="full-name">UI/UX Designer</span>
+                <span th:text="${profileData.fullName}">UI/UX Designer</span>
                 <h5 class="mt-2 mb-0">Username</h5>
-                <span text="username">UI/UX Designer</span>
+                <span th:text="${profileData.username}">UI/UX Designer</span>
                 <h5 class="mt-2 mb-0">Age</h5>
-                <span text="age">33</span>
+                <span th:text="${profileData.age}">33</span>
                 
                 <ul class="social-list">
                     <li><i class="fab fa-facebook-square"></i></li>
@@ -54,14 +34,12 @@ xmlns:th="http://www.thymeleaf.org">
                     <li><i class="fab fa-linkedin"></i></li>
                     <li><i class="fab fa-google"></i></li>
                 </ul>
-                <button type="submit" class="login">Back</button>
+                <button type="submit" class="login" th:href="@{/index}">Back</button>
             </div>
         </div>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Book Site</p>
-    </footer>
+    <footer th:replace="fragments/footer"></footer>
 </body>
 
 </html>

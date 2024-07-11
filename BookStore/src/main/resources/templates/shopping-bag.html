@@ -4,33 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Book store</title>
     <link rel="stylesheet" href="/css/background.css">
     <link rel="stylesheet" href="/css/information.css">
 </head>
 
 <body>
-    <header>
-        <div class="logo">Book store</div>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Books</a></li>
-            <li><a href="#">Authors</a></li>
-            <li><a href="#">Categories</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Shopping Bag</a></li>
-            <li><a href="#">Admin Board</a></li>
-        </ul>
-        <ul>
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Register</a></li>
-            <li><a href="#">Logout</a></li>
-        </ul>
-        <div class="field-search">
-            <input type="search" placeholder="search" id="search">
-            <label for="search"></label>
-        </div>
-    </header>
+<header th:replace="fragments/header"></header>
     <main class="shopping-bag">
         <div class="container">
             <h1 class="cart-header">Your Shopping Cart</h1>
@@ -81,9 +61,7 @@
 
     </main>
 
-    <footer>
-        <p>&copy; 2024 Book Site</p>
-    </footer>
+    <footer th:replace="fragments/footer"></footer>
 </body>
 
 </html>

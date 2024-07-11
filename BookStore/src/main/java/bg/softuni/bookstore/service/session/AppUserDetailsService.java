@@ -27,22 +27,21 @@ public class AppUserDetailsService implements UserDetailsService {
         return userRepository
                 .findByUsername(username)
                 .map(this::mapToUserDetails)
-                .orElseThrow(()->new UsernameNotFoundException("User whit username "+username+" not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("User with username " + username + " not found"));
     }
 
     private UserDetails mapToUserDetails(User user) {
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUsername())
                 .password(user.getPassword())
-                .authorities(mapToGrandAuthorities(user))
+                .authorities(mapToGrantedAuthorities(user))
                 .build();
-
     }
 
-    private List<GrantedAuthority> mapToGrandAuthorities(User user) {
+    private List<GrantedAuthority> mapToGrantedAuthorities(User user) {
         return user
                 .getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE"+role.getName().name()))
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName().name()))
                 .collect(Collectors.toUnmodifiableList());
     }
 }
