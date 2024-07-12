@@ -8,7 +8,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -36,22 +35,4 @@ public class UserService {
         return modelMapper.map(userHelperService.getUser(), UserProfileDTO.class);
     }
 
-//    public boolean register(UserRegisterDTO data) {
-//        Optional<User> user = userRepository.findByUsername(data.getUsername());
-//        if (user.isPresent()) {
-//            return false;
-//        }
-//
-//        user = userRepository.findByEmail(data.getEmail());
-//        if (user.isPresent()) {
-//            return false;
-//        }
-//
-//        User mapped = modelMapper.map(data, User.class);
-//        mapped.setPassword(passwordEncoder.encode(data.getPassword()));
-//        userRepository.save(mapped);
-//
-//
-//        return true;
-//    }
 }

@@ -12,20 +12,20 @@ xmlns:th="http://www.thymeleaf.org">
 <body>
     <div class="wrapper">
         <h2>Welcome</h2>
-        <form th:method="post"
+        <form th:method="POST"
               th:action="@{/users/login}"
               th:object="${loginData}">
 
-            <div class="bg-danger" th:if="${showErrorMessage}" th:text="'Invalid username or password'"></div>
+            <div class="bg-danger" th:if="${showErrorMessage}" th:text="'Invalid email or password'"></div>
 
             <div class="input-field">
-                <label for="email" class="sr-only">Email</label>
+                <label for="email" class="sr-only">Username</label>
                 <input
                         th:field="*{username}"
-                        type="email"
+                        type="text"
                         id="email"
                         name="email"
-                        placeholder="Email">
+                        placeholder="Username">
                 <i class="bx bxs-user"></i>
             </div>
             <div class="input-field">

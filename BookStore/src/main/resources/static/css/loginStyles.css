@@ -99,7 +99,8 @@ input::placeholder,
 .input-field input[type="url"]:focus::placeholder,
 .input-field .description,
 .input-field input[type="age"]:focus::placeholder,
-.input-field input[type="name"]:focus::placeholder{
+.input-field input[type="name"]:focus::placeholder,
+.input-field input[type="username"]:focus::placeholder{
     transform: translateY(-100%);
     transition: transform 0.2s ease-in-out;
     font-size: 14px;
@@ -116,7 +117,8 @@ input::placeholder,
 .input-field input[type="url"]:not(:focus)::placeholder,
 .input-field .description,
 .input-field input[type="age"]:not(:focus)::placeholder,
-.input-field input[type="name"]:not(:focus)::placeholder{
+.input-field input[type="name"]:not(:focus)::placeholder,
+.input-field input[type="username"]:not(:focus)::placeholder{
     transform: translateY(0%);
     transition: transform 0.2s ease-in-out;
     font-size: 16px;
