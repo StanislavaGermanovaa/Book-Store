@@ -1,0 +1,7 @@
+### Send POST request with json body
+POST https://localhost:8080/roles
+Content-Type: application/json
+
+{
+  "name": "ADMIN"
+}

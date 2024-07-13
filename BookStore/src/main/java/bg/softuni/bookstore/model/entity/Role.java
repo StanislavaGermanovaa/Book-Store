@@ -1,26 +1,35 @@
 package bg.softuni.bookstore.model.entity;
 
 import bg.softuni.bookstore.model.enums.UserRoles;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "roles")
-public class Role extends BaseEntity{
+public class Role {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    @NotNull
+    @Column(unique = true)
     @Enumerated(EnumType.STRING)
-    private UserRoles name;
+    private UserRoles role;
 
-    public Role() {
+    public Long getId() {
+        return id;
     }
 
-    public UserRoles getName() {
-        return name;
+    public Role setId(Long id) {
+        this.id = id;
+        return this;
+    }
+    public UserRoles getRole() {
+        return role;
     }
 
-    public void setName(UserRoles name) {
-        this.name = name;
+    public Role setRole(UserRoles role) {
+        this.role = role;
+        return this;
     }
 }
