@@ -35,7 +35,6 @@ public class UserHelperService {
     }
 
     public boolean isAuthenticated() {
-        // Spring security sets default user with Role ANONYMOUS when no user is authenticated.
         return !hasRole("ANONYMOUS");
     }
 

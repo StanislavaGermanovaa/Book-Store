@@ -2,9 +2,15 @@ package bg.softuni.bookstore.model.entity;
 
 import bg.softuni.bookstore.model.enums.CategoryType;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "categories")
+@Setter
+@Getter
+@NoArgsConstructor
 public class Category extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
@@ -13,22 +19,4 @@ public class Category extends BaseEntity{
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    public Category() {
-    }
-
-    public CategoryType getName() {
-        return name;
-    }
-
-    public void setName(CategoryType name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }
