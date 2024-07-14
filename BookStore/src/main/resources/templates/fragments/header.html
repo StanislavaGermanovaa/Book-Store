@@ -3,22 +3,29 @@
     <ul>
         <li><a th:href="@{/}">Home</a></li>
         <li><a th:href="@{/}">Books</a></li>
-        <li><a th:href="@{/}"Authors</a></li>
+        <li><a th:href="@{/}">Authors</a></li>
         <li><a th:href="@{/}">Categories</a></li>
+        <th:block sec:authorize="!isAnonymous()">
         <li><a th:href="@{/users/profile}">Profile</a></li>
         <li><a th:href="@{/}">Shopping Bag</a></li>
         <th:block sec:authorize="hasRole('ADMIN')">
-        <li><a th:href="@{/}">Admin Board</a></li>
+        <li><a th:href="@{/users/admin}">Admin Board</a></li>
+        </th:block>
         </th:block>
     </ul>
     <ul>
+        <th:block sec:authorize="isAnonymous()">
         <li><a th:href="@{/users/login}">Login</a></li>
         <li><a th:href="@{/users/register}">Register</a></li>
+        </th:block>
+        <th:block sec:authorize="!isAnonymous()">
         <li><form
                 th:method="POST"
                 th:action="@{/users/logout}"
         ><button type="submit">Logout</button>
-        </form></li>
+        </form>
+        </li>
+        </th:block>
     </ul>
     <div class="field-search">
         <input type="search" placeholder="search" id="search">

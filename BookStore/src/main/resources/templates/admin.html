@@ -20,14 +20,14 @@ xmlns:th="http://www.thymeleaf.org">
             <div class="text-center"><img src="/images/profile.jpg" width="100" class="rounded-circle"></div>
             <div class="text-center">
                 <h5 class="mt-4 mb-0">Full name</h5>
-                <span text="full-name">UI/UX Designer</span>
+                <span th:text="${adminData.fullName}">UI/UX Designer</span>
                 <h5 class="mt-2 mb-0">Username</h5>
-                <span text="username">UI/UX Designer</span>
+                <span th:text="${adminData.username}">UI/UX Designer</span>
                 <h5 class="mt-2 mb-0">Age</h5>
-                <span text="age">33</span>
+                <span th:text="${adminData.age}">33</span>
             </div>
             <ul>
-                <li><a href="#">Add Book</a></li>
+                <li><a th:href="@{/book/add}">Add Book</a></li>
                 <li><a href="#">Delete Book</a></li>
                 <li><a href="#">Edit Book</a></li>
             </ul>

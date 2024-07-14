@@ -12,34 +12,69 @@ xmlns:th="http://www.thymeleaf.org">
 <body>
 <header th:replace="fragments/header"></header>
 
-    <main class="book-details">
-        <div class="wrapper-add-book">
-            <h2>Enter Book Details</h2>
-            <form action="/add-book" method="POST">
-                <div class="input-field">
-                    <label for="title" class="sr-only">Title</label>
-                    <input type="text" id="title" name="title" placeholder="Title" required>
-                </div>
-                <div class="input-field">
-                    <label for="author" class="sr-only">Author</label>
-                    <input type="text" id="author" name="author" placeholder="Author" required>
-                </div>
-                <div class="input-field">
-                    <label for="category" class="sr-only">Category</label>
-                    <input type="text" id="category" name="category" placeholder="Category" required>
-                </div>
-                <div class="input-field">
-                    <label for="description" class="sr-only">Description</label>
-                    <input type="text" id="description" name="description" placeholder="Description" required>
-                </div>
-                <div class="input-field">
-                    <label for="image" class="sr-only">Image URL</label>
-                    <input type="url" id="image" name="image" placeholder="Image URL">
-                </div>
-                <button type="submit" class="add">Add</button>
-            </form>
-        </div>
-    </main>
+<main class="book-details">
+    <div class="wrapper-add-book">
+        <h2>Enter Book Details</h2>
+        <form th:action="@{/book/add}" th:method="post" th:object="${addBookDTO}">
+            <div class="input-field">
+                <label for="title" class="sr-only"></label>
+                <input th:field="*{title}" type="text" id="title" name="title" placeholder="Title" th:errorclass="is-invalid">
+                <small th:if="${#fields.hasErrors('title')}" class="errors alert alert-danger">
+                    <span th:errors="*{title}"></span>
+                </small>
+            </div>
+            <div class="input-field">
+                <label for="authorId" class="sr-only"></label>
+                <select th:field="*{authorId}" th:errorclass="is-invalid" class="form-control">
+                    <option value="">- Select author -</option>
+                    <option th:each="author: ${allAuthors}" th:value="${author.id}" th:text="${author.name}"></option>
+                </select>
+                <small th:if="${#fields.hasErrors('authorId')}" class="errors alert alert-danger">
+                    <span th:errors="*{authorId}"></span>
+                </small>
+            </div>
+            <div class="input-field">
+                <label for="newAuthorName" class="sr-only"></label>
+                <input th:field="*{newAuthorName}" type="text" id="newAuthorName" name="newAuthorName" placeholder="New Author Name" th:errorclass="is-invalid">
+                <small th:if="${#fields.hasErrors('newAuthorName')}" class="errors alert alert-danger">
+                    <span th:errors="*{newAuthorName}"></span>
+                </small>
+            </div>
+            <div class="input-field">
+                <label for="category" class="sr-only"></label>
+                <select th:field="*{category}" th:errorclass="is-invalid" class="form-control">
+                    <option value="">- Select category -</option>
+                    <option th:each="type: ${allBookCategory}" th:value="${type}" th:text="${type}"></option>
+                </select>
+                <small th:if="${#fields.hasErrors('category')}" class="errors alert alert-danger">
+                    <span th:errors="*{category}"></span>
+                </small>
+            </div>
+            <div class="input-field">
+                <label for="description" class="sr-only"></label>
+                <input th:field="*{description}" type="text" id="description" name="description" placeholder="Description" th:errorclass="is-invalid">
+                <small th:if="${#fields.hasErrors('description')}" class="errors alert alert-danger">
+                    <span th:errors="*{description}"></span>
+                </small>
+            </div>
+            <div class="input-field">
+                <label for="price" class="sr-only"></label>
+                <input th:field="*{price}" type="text" id="price" name="price" placeholder="Price" th:errorclass="is-invalid">
+                <small th:if="${#fields.hasErrors('price')}" class="errors alert alert-danger">
+                    <span th:errors="*{price}"></span>
+                </small>
+            </div>
+            <div class="input-field">
+                <label for="image" class="sr-only"></label>
+                <textarea th:field="*{imageURL}" id="image" name="image" placeholder="Image URL" th:errorclass="is-invalid"></textarea>
+                <small th:if="${#fields.hasErrors('imageURL')}" class="errors alert alert-danger">
+                    <span th:errors="*{imageURL}"></span>
+                </small>
+            </div>
+            <button type="submit" class="add">Add</button>
+        </form>
+    </div>
+</main>
 
     <footer th:replace="fragments/footer"></footer>
 </body>
