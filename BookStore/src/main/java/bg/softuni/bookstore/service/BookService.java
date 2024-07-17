@@ -8,8 +8,6 @@ import bg.softuni.bookstore.model.entity.Category;
 import bg.softuni.bookstore.repo.AuthorRepository;
 import bg.softuni.bookstore.repo.BookRepository;
 import bg.softuni.bookstore.repo.CategoryRepository;
-import org.antlr.v4.runtime.misc.LogManager;
-import org.modelmapper.Converters;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,18 +48,9 @@ public class BookService {
                 .body(new ParameterizedTypeReference<>(){});
     }
 
-//    public void addBook(AddBookDTO addBookDTO) {
-//        LOGGER.info("Creating new book...");
-//
-//        booksRestClient
-//                .post()
-//                .uri("http://localhost:8080/books")
-//                .body(addBookDTO)
-//                .retrieve();
-//    }
-
     public void addBook(AddBookDTO addBookDTO) {
-
+        LOGGER.info("Creating new book...");
+//TODO make rest client
         Author author;
         if (addBookDTO.getAuthorId() != null) {
             author = authorRepository.findById(addBookDTO.getAuthorId())
@@ -74,13 +63,34 @@ public class BookService {
             throw new IllegalArgumentException("Author information is required");
         }
 
-        Category category = categoryRepository.findByName(addBookDTO.getCategory())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid category"));
-
-        Book book = modelMapper.map(addBookDTO, Book.class);
-        book.setAuthor(author);
-        book.setCategory(category);
-
-        bookRepository.save(book);
+        booksRestClient
+                .post()
+                .uri("http://localhost:8080/books")
+                .body(addBookDTO)
+                .retrieve();
     }
+
+//    public void addBook(AddBookDTO addBookDTO) {
+//
+//        Author author;
+//        if (addBookDTO.getAuthorId() != null) {
+//            author = authorRepository.findById(addBookDTO.getAuthorId())
+//                    .orElseThrow(() -> new IllegalArgumentException("Invalid author ID"));
+//        } else if (addBookDTO.getNewAuthorName() != null && !addBookDTO.getNewAuthorName().isEmpty()) {
+//            author = new Author();
+//            author.setName(addBookDTO.getNewAuthorName());
+//            author = authorRepository.save(author);
+//        } else {
+//            throw new IllegalArgumentException("Author information is required");
+//        }
+//
+//        Category category = categoryRepository.findByName(addBookDTO.getCategory())
+//                .orElseThrow(() -> new IllegalArgumentException("Invalid category"));
+//
+//        Book book = modelMapper.map(addBookDTO, Book.class);
+//        book.setAuthor(author);
+//        book.setCategory(category);
+//
+//        bookRepository.save(book);
+//    }
 }

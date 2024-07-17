@@ -3,6 +3,7 @@ package bg.softuni.bookstore.web;
 import bg.softuni.bookstore.model.dto.UserLoginDTO;
 import bg.softuni.bookstore.model.dto.UserRegisterDTO;
 import bg.softuni.bookstore.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,21 +23,27 @@ public class UserController {
 
     @GetMapping("users/register")
     public String viewRegister(Model model) {
-        model.addAttribute("registerData", new UserRegisterDTO());
-
+        if (!model.containsAttribute("registerData")) {
+            model.addAttribute("registerData", new UserRegisterDTO());
+        }
         return "register";
     }
 
     @PostMapping("users/register")
     public String doRegister(
-            UserRegisterDTO data,
+            @Valid UserRegisterDTO data,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes
     ) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("registerData", data);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
 
+            // TODO handle errors
+            return "redirect:register";
+        }
 
         userService.register(data);
-
         return "redirect:/users/login";
     }
 

@@ -23,10 +23,11 @@ xmlns:th="http://www.thymeleaf.org">
                         placeholder="Username"
                        th:errorclass="is-invalid">
                 <i class="bx bxs-user"></i>
-                <small id="usernameError"
-                class="invalid-feedback bg-danger rounded">Username length must be more than 3 characters</small>
-                <small th:if="${#fields.hasErrors('username')}" id="usernameUniqueError"
-                       class=" bg-danger rounded">Username is already occupied</small>
+                <th:block th:if="${#fields.hasErrors('username')}">
+                    <small th:each="error: ${#fields.detailedErrors('username')}"
+                           th:text="${error.getMessage()}"
+                           class="bg-danger text-white rounded d-block"></small>
+                </th:block>
             </div>
             <div class="input-field">
                 <label for="email" class="sr-only">Email</label>
@@ -37,6 +38,11 @@ xmlns:th="http://www.thymeleaf.org">
                         placeholder="Email"
                        th:errorclass="is-invalid">
                 <i class='bx bx-envelope'></i>
+                <th:block th:if="${#fields.hasErrors('email')}">
+                    <small th:each="error: ${#fields.detailedErrors('email')}"
+                           th:text="${error.getMessage()}"
+                           class="bg-danger text-white rounded d-block"></small>
+                </th:block>
             </div>
             <div class="input-field">
                 <label for="name" class="sr-only">Name</label>
@@ -47,6 +53,11 @@ xmlns:th="http://www.thymeleaf.org">
                         placeholder="name"
                        th:errorclass="is-invalid">
                 <i class='bx bxs-face'></i>
+                <th:block th:if="${#fields.hasErrors('fullName')}">
+                    <small th:each="error: ${#fields.detailedErrors('fullName')}"
+                           th:text="${error.getMessage()}"
+                           class="bg-danger text-white rounded d-block"></small>
+                </th:block>
             </div>
             <div class="input-field">
                 <label for="age" class="sr-only">Age</label>
@@ -57,6 +68,11 @@ xmlns:th="http://www.thymeleaf.org">
                         placeholder="age"
                        th:errorclass="is-invalid">
                 <i class='bx bx-face'></i>
+                <th:block th:if="${#fields.hasErrors('age')}">
+                    <small th:each="error: ${#fields.detailedErrors('age')}"
+                           th:text="${error.getMessage()}"
+                           class="bg-danger text-white rounded d-block"></small>
+                </th:block>
             </div>
             <div class="input-field">
                 <label for="password" class="sr-only">Password</label>
@@ -67,6 +83,11 @@ xmlns:th="http://www.thymeleaf.org">
                         placeholder="Password"
                        th:errorclass="is-invalid">
                 <i class="bx bxs-lock-alt"></i>
+                <th:block th:if="${#fields.hasErrors('password')}">
+                    <small th:each="error: ${#fields.detailedErrors('password')}"
+                           th:text="${error.getMessage()}"
+                           class="bg-danger text-white rounded d-block"></small>
+                </th:block>
             </div>
             <div class="input-field">
                 <label for="confirm-password" class="sr-only">Confirm Password</label>

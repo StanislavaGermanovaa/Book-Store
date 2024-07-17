@@ -23,7 +23,7 @@ public class Book extends BaseEntity{
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    @Column(nullable = false)
+    @Column(name = "image_url",nullable = false)
     private String imageURL;
 
     @Column(columnDefinition = "TEXT")
