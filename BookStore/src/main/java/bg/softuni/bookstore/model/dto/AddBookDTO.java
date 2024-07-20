@@ -15,8 +15,7 @@ public class AddBookDTO {
     @NotNull
     private String title;
 
-    private Long authorId;
-    private String newAuthorName;
+    private String author;
 
     @NotNull
     private CategoryType category;

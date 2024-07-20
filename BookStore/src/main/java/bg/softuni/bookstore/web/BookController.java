@@ -34,7 +34,7 @@ public class BookController {
 
     @ModelAttribute("allAuthors")
     public List<Author> allAuthors() {
-        return authorService.getAllAuthors(); // Assuming you have a method to get all authors
+        return authorService.getAllAuthors();
     }
 
     @GetMapping("/book/add")
