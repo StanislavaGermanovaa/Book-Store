@@ -2,7 +2,7 @@
     <div class="logo">Book store</div>
     <ul>
         <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/}">Books</a></li>
+        <li><a th:href="@{/books}">Books</a></li>
         <li><a th:href="@{/}">Authors</a></li>
         <li><a th:href="@{/}">Categories</a></li>
         <th:block sec:authorize="hasRole('USER')">
@@ -32,3 +32,4 @@
         <label for="search"></label>
     </div>
 </header>
+

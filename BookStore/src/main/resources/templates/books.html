@@ -15,66 +15,14 @@ xmlns:th="http://www.thymeleaf.org">
     <main class="Books-list">
         <h2>Available Books</h2>
         <div class="books-links">
-            <div class="books-info">
-                <a href="#" class="img">
-                    <img src="/images/first_lie_wins.jpg" alt="">
+            <div th:each="book : ${books}" class="books-info">
+                <a th:href="@{/book/{id}(id=${book.id})}" class="img">
+                    <img th:src="${book.imageURL}" alt="Book Image"/>
                 </a>
-                <a href="#" class="book-name">1 Book-name</a>
-                <span>Author name</span>
+                <a th:href="@{/book/{id}(id=${book.id})}" class="book-name" th:text="${book.title}">Book-name</a>
+                <span th:text="${book.authorName.name}">Author name</span>
             </div>
-            <div class="books-info">
-                <a href="#" class="img">
-                    <img src="/images/iron-flame.jpg" alt="">
-                </a>
-                <a href="#" class="book-name">2Book-name</a>
-                <span>Author name</span>
-            </div>
-            <div class="books-info">
-                <a href="#" class="img">
-                    <img src="/images/sandwich.jpg" alt="">
-                </a>
-                <a href="#" class="book-name">3Book-name</a>
-                <span>Author name</span>
-            </div>
-            <div class="books-info">
-                <a href="#" class="img">
-                    <img src="/images/swan-song.webp" alt="">
-                </a>
-                <a href="#" class="book-name">4Book-name</a>
-                <span>Author name</span>
-            </div>
-            <div class="books-info">
-                <a href="#" class="img">
-                    <img src="/images/the-demon-of-unrest.jpg" alt="">
-                </a>
-                <a href="#" class="book-name">5Book-name</a>
-                <span>Author name</span>
-            </div>
-            <div class="books-info">
-                <a href="#" class="img">
-                    <img src="/images/the-paradise-problem.jpg" alt="">
-                </a>
-                <a href="#" class="book-name">6Book-name</a>
-                <span>Author name</span>
-            </div>
-            <div class="books-info">
-                <a href="#" class="img">
-                    <img src="/images/the-teacher.jpg" alt="">
-                </a>
-                <a href="#" class="book-name">7Book-name</a>
-                <span>Author name</span>
-            </div>
-            <div class="books-info">
-                <a href="#" class="img">
-                    <img src="/images/this-summer-will-be-different.jpg" alt="">
-                </a>
-                <a href="#" class="book-name">8Book-name</a>
-                <span>Author name</span>
-            
         </div>
-
-    </div>
-        
     </main>
 
     <footer th:replace="fragments/footer"></footer>

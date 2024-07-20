@@ -112,19 +112,20 @@ text-decoration-line: none;
 margin-bottom: 2rem;
 }
 .book-details img{
-box-sizing: inherit;
-display: inline-block;
-vertical-align: middle;
-max-width: 100%;
-height: auto;
-color: #888;
-font-size: 10px;
-line-height: 14px ;
-white-space: normal; 
-border: 0;
---tw-shadow: 0px 0px 20px 3px #555;
---tw-shadow-colored: 0px 0px 20px 3px var(--tw-shadow-color);
-box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
+    box-sizing: inherit;
+    display: inline-block;
+    vertical-align: middle;
+    width: 300px;
+    height: 400px;
+    object-fit: cover;
+    color: #888;
+    font-size: 10px;
+    line-height: 14px;
+    white-space: normal;
+    border: 0;
+    --tw-shadow: 0px 0px 20px 3px #555;
+    --tw-shadow-colored: 0px 0px 20px 3px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .book-details span{
@@ -146,7 +147,7 @@ box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #000
     text-rendering: optimizeLegibility;
     margin-bottom: 0.5rem;
     font-family: Noto Serif;
-    font-size: 1.5rem;
+    font-size: 1rem;
     line-height: 1.25;
     color: aliceblue;
 }
