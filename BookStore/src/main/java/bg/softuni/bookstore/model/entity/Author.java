@@ -17,7 +17,7 @@ public class Author extends BaseEntity{
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
     private Set<Book> books;
 
     public Author() {

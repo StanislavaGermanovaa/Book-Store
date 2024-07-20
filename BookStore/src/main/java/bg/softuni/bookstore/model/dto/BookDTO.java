@@ -12,7 +12,7 @@ import lombok.Setter;
 public class BookDTO{
     private Long id;
     private String title;
-    private Author authorName;
+    private AuthorDTO author;
     private CategoryType category;
     private String imageURL;
     private String description;

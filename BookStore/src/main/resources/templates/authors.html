@@ -12,18 +12,16 @@ xmlns:th="http://www.thymeleaf.org">
 <body>
 <header th:replace="fragments/header"></header>
 
-    <main class="authors">
-        <h2>Author Name</h2>
+    <main class="authors"
+          th:object="${authorDetails}">
+        <h2 th:text="*{name}">Author Name</h2>
         <div class="authors-info">
-            <div class="about-the-author">
-                <p><strong>About the author</strong> ......</p>
-                </div>
             <div class="books-by-author">
                 <h3>Books by this Author</h3>
                 <ul>
-                    <li><a href="book-detail.html">Book Title 1</a></li>
-                    <li><a href="book-detail.html">Book Title 2</a></li>
-                    <li><a href="book-detail.html">Book Title 3</a></li>
+                    <li th:each="book : *{books}">
+                        <a th:href="@{/book/{id}(id=${book.id})}" th:text="${book.title}">Book Title</a>
+                    </li>
                 </ul>
             </div>
         </div>

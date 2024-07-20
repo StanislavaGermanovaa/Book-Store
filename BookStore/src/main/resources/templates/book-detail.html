@@ -15,7 +15,7 @@ xmlns:th="http://www.thymeleaf.org">
     <main  class="books-main">
         <div class="book-details" th:object="${bookDetails}">
             <h1 th:text="*{title}">Book title</h1>
-            <a th:text="*{authorName.name}" href="#">Author name</a>
+            <a th:href="@{/author/{id}(id=*{author.id})}" th:text="*{author.name}">Author name</a>
             <img th:src="@{*{imageURL}}" alt="Book Image" />
             <span th:text="*{category}">Category Name</span>
             <span th:text="${bookDetails.price}">Price</span>

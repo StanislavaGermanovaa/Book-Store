@@ -20,7 +20,7 @@ xmlns:th="http://www.thymeleaf.org">
                     <img th:src="${book.imageURL}" alt="Book Image"/>
                 </a>
                 <a th:href="@{/book/{id}(id=${book.id})}" class="book-name" th:text="${book.title}">Book-name</a>
-                <span th:text="${book.authorName.name}">Author name</span>
+                <span th:text="${book.author.name}">Author name</span>
             </div>
         </div>
     </main>

@@ -20,11 +20,10 @@ import java.util.List;
 @Controller
 public class BookController {
 
-    private final AuthorService authorService;
+
     private final BookService bookService;
 
-    public BookController(AuthorService authorService, BookService bookService) {
-        this.authorService = authorService;
+    public BookController( BookService bookService) {
         this.bookService = bookService;
     }
 
@@ -33,10 +32,6 @@ public class BookController {
         return CategoryType.values();
     }
 
-    @ModelAttribute("allAuthors")
-    public List<Author> allAuthors() {
-        return authorService.getAllAuthors();
-    }
 
     @GetMapping("/book/add")
     public String newBook(Model model) {
@@ -68,7 +63,7 @@ public class BookController {
     }
 
     @GetMapping("/book/{id}")
-    public String offerDetails(@PathVariable("id") Long id,
+    public String bookDetails(@PathVariable("id") Long id,
                                Model model) {
 
         model.addAttribute("bookDetails", bookService.getOfferDetails(id));

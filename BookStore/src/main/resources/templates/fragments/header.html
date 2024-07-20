@@ -3,7 +3,6 @@
     <ul>
         <li><a th:href="@{/}">Home</a></li>
         <li><a th:href="@{/books}">Books</a></li>
-        <li><a th:href="@{/}">Authors</a></li>
         <li><a th:href="@{/}">Categories</a></li>
         <th:block sec:authorize="hasRole('USER')">
         <li><a th:href="@{/users/profile}">Profile</a></li>
