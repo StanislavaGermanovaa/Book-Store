@@ -39,7 +39,6 @@ public class UserController {
             redirectAttributes.addFlashAttribute("registerData", data);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
 
-            // TODO handle errors
             return "redirect:register";
         }
 

@@ -8,7 +8,6 @@ import bg.softuni.bookstore.model.entity.Category;
 import bg.softuni.bookstore.repo.AuthorRepository;
 import bg.softuni.bookstore.repo.BookRepository;
 import bg.softuni.bookstore.repo.CategoryRepository;
-import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,56 +39,60 @@ public class BookService {
     }
 
     public List<BookDTO> getAllBooks() {
-        return bookRepository.findAll().stream()
-                .map(book -> modelMapper.map(book, BookDTO.class))
-                .collect(Collectors.toList());
-
-
-
-//        LOGGER.info("Get all books...");
+//        return bookRepository.findAll().stream()
+//                .map(book -> modelMapper.map(book, BookDTO.class))
+//                .collect(Collectors.toList());
 //
-//        return booksRestClient
-//                .get()
-//                .uri("http://localhost:8080/books")
-//                .accept(MediaType.APPLICATION_JSON)
-//                .retrieve()
-//                .body(new ParameterizedTypeReference<>(){});
+//
+        return booksRestClient
+                .get()
+                .uri("http://localhost:8081/books")
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(new ParameterizedTypeReference<>(){});
+
     }
 
     public void addBook(AddBookDTO addBookDTO){
 
-        Book book = modelMapper.map(addBookDTO, Book.class);
+//        Book book = modelMapper.map(addBookDTO, Book.class);
+//
+//        Author author = authorRepository.findAuthorByName(addBookDTO.getAuthor());
+//        if (author == null) {
+//            author = new Author();
+//            author.setName(addBookDTO.getAuthor());
+//
+//            author = authorRepository.save(author);
+//        }
+//
+//        Category category = categoryRepository.findByName(addBookDTO.getCategory())
+//               .orElseThrow(() -> new IllegalArgumentException("Invalid category"));
+//
+//        book.setCategory(category);
+//        book.setAuthor(author);
+//        bookRepository.save(book);
 
-        Author author = authorRepository.findAuthorByName(addBookDTO.getAuthor());
-        if (author == null) {
-            author = new Author();
-            author.setName(addBookDTO.getAuthor());
-
-            author = authorRepository.save(author);
-        }
-
-        Category category = categoryRepository.findByName(addBookDTO.getCategory())
-               .orElseThrow(() -> new IllegalArgumentException("Invalid category"));
-
-        book.setCategory(category);
-        book.setAuthor(author);
-        bookRepository.save(book);
-
+        booksRestClient
+                .post()
+                .uri("http://localhost:8081/books")
+                .body(addBookDTO)
+                .retrieve();
 
     }
 
     public BookDTO getOfferDetails(Long id) {
-        return bookRepository.findById(id)
-                .map(book -> modelMapper.map(book, BookDTO.class))
-                .orElse(null);
+//        return bookRepository.findById(id)
+//                .map(book -> modelMapper.map(book, BookDTO.class))
+//                .orElse(null);
 
 
-//        return booksRestClient
-//                .get()
-//                .uri("http://localhost:8081/offers/{id}", id)
-//                .accept(MediaType.APPLICATION_JSON)
-//                .retrieve()
-//                .body(BookDTO.class);
+        return booksRestClient
+                .get()
+                .uri("http://localhost:8081/books/{id}", id)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(BookDTO.class);
 
     }
+
 }

@@ -15,4 +15,5 @@ public class BooksApiConfig {
         this.baseUrl = baseUrl;
         return this;
     }
+
 }

@@ -19,6 +19,7 @@ spring:
     init:
       mode: never
 
+
   jpa:
     # Choose either MySQL 8 or MySQL 5 below
     # For MySQL 8
@@ -45,3 +46,7 @@ spring:
     resources:
       static-locations: file:./src/main/resources/static/
       cache-period: 0
+
+books:
+  api:
+    baseUrl: "http://localhost:8081/books"
