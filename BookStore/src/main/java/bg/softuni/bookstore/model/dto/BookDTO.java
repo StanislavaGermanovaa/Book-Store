@@ -1,7 +1,7 @@
 package bg.softuni.bookstore.model.dto;
 
-import bg.softuni.bookstore.model.entity.Author;
-import bg.softuni.bookstore.model.enums.CategoryType;
+
+import bg.softuni.bookstore.model.entity.Category;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +13,7 @@ public class BookDTO{
     private Long id;
     private String title;
     private AuthorDTO author;
-    private CategoryType category;
+    private Category category;
     private String imageURL;
     private String description;
     private double price;

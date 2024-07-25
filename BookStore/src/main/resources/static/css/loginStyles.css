@@ -8,7 +8,7 @@ html{
 
 .wrapper,
 .wrapper-add-book,
-.edit-book{
+.add-category{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -35,16 +35,14 @@ html{
     margin-top: 40px;
 }
 
-.edit-book{
+.add-category{
     margin-top: 100px;
-    width: 400px;
-    height: 620px;
 }
 
 
 .wrapper h2,
 .book-details .wrapper-add-book h2,
-.edit-book h2{
+.add-category h2{
     font-size: 20px;
     color: #fffefe;
 }
@@ -137,7 +135,7 @@ a.sign-up:hover{
 .wrapper .login,
 .wrapper .register,
 .wrapper-add-book .add,
-.edit-book .btns button{
+.add-category button{
     background: #fff;
     border: none;
     outline: none;
@@ -146,8 +144,4 @@ a.sign-up:hover{
     border-radius: 45px;
     width: 200px;
     height: 30px;
-}
-
-.edit-book .btns button{
-    margin-top: 10px;
 }

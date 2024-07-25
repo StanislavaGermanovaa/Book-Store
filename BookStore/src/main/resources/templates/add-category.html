@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Book store</title>
+        <link rel="stylesheet" href="/css/background.css">
+        <link rel="stylesheet" href="/css/loginStyles.css">
+        
+    </head>
+<body>
+<header th:replace="fragments/header"></header>
+<main class="add-category">
+    <h2> Add Category</h2>
+    <form th:action="@{/category/add}" th:method="post" th:object="${addCategoryDTO}">
+        <div class="input-field">
+            <label for="name">Name</label>
+            <input th:field="*{category}"
+                    type="text"
+                    id="name"
+                    name="name"
+                    value="Name"
+                   th:errorclass="is-invalid">
+            <small th:if="${#fields.hasErrors('category')}" class="errors alert alert-danger">
+                <span th:errors="*{category}"></span>
+            </small>
+        </div>
+        <div class="input-field">
+            <label for="description">Description</label>
+            <input th:field="*{description}"
+                    type="text"
+                    id="description"
+                    name="description"
+                    value="Description"
+                    th:errorclass="is-invalid">
+            <small th:if="${#fields.hasErrors('description')}" class="errors alert alert-danger">
+                <span th:errors="*{description}"></span>
+            </small>
+        </div>
+        <button type="submit" class="add">Add</button>
+    </form>
+
+</main>
+
+    <footer th:replace="fragments/footer"></footer>
+</body>
+</html>

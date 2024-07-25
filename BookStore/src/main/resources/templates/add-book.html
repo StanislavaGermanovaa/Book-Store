@@ -32,9 +32,11 @@ xmlns:th="http://www.thymeleaf.org">
             </div>
             <div class="input-field">
                 <label for="category" class="sr-only"></label>
-                <select th:field="*{category}" th:errorclass="is-invalid" class="form-control">
+                <select th:field="*{category}" id="category" th:errorclass="is-invalid" class="form-control">
                     <option value="">- Select category -</option>
-                    <option th:each="type: ${allBookCategory}" th:value="${type}" th:text="${type}"></option>
+                    <option th:each="category : ${allBookCategories}"
+                            th:value="${category.category}"
+                            th:text="${category.category}"></option>
                 </select>
                 <small th:if="${#fields.hasErrors('category')}" class="errors alert alert-danger">
                     <span th:errors="*{category}"></span>

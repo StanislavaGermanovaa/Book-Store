@@ -19,9 +19,7 @@ public class Book extends BaseEntity{
     @JoinColumn(name = "author_id", nullable = false)
     private Author author;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
+    private String category;
 
     @Column(name = "image_url",nullable = false)
     private String imageURL;

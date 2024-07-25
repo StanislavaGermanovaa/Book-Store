@@ -20,6 +20,6 @@ public class AuthorController {
     public String getAuthorDetails(@PathVariable("id") Long id, Model model) {
         AuthorDTO authorDTO = authorService.getAuthorDetails(id);
         model.addAttribute("authorDetails", authorDTO);
-        return "authors"; // Thymeleaf template name
+        return "authors";
     }
 }

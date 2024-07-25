@@ -1,6 +1,6 @@
 package bg.softuni.bookstore.model.dto;
 
-import bg.softuni.bookstore.model.enums.CategoryType;
+import bg.softuni.bookstore.model.entity.Category;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
@@ -17,8 +17,7 @@ public class AddBookDTO {
 
     private String author;
 
-    @NotNull
-    private CategoryType category;
+    private String category;
 
     private String imageURL;
 
