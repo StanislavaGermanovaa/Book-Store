@@ -24,15 +24,13 @@ public class BookService {
     private final Logger LOGGER = LoggerFactory.getLogger(BookService.class);
     private final RestClient booksRestClient;
     private final AuthorRepository authorRepository;
-    private final CategoryRepository categoryRepository;
     private final ModelMapper modelMapper;
     private final BookRepository bookRepository;
     private CategoryService categoryService;
 
-    public BookService(@Qualifier("booksRestClient") RestClient booksRestClient, AuthorRepository authorRepository, AuthorRepository authorRepository1, CategoryRepository categoryRepository, ModelMapper modelMapper, BookRepository bookRepository) {
+    public BookService(@Qualifier("booksRestClient") RestClient booksRestClient, AuthorRepository authorRepository, AuthorRepository authorRepository1, ModelMapper modelMapper, BookRepository bookRepository) {
         this.booksRestClient = booksRestClient;
         this.authorRepository = authorRepository1;
-        this.categoryRepository = categoryRepository;
         this.modelMapper = modelMapper;
         this.bookRepository = bookRepository;
     }
@@ -42,24 +40,6 @@ public class BookService {
                 .map(book -> modelMapper.map(book, BookDTO.class))
                 .collect(Collectors.toList());
     }
-
-//    public Category getCategory(String name) {
-//        return booksRestClient
-//                .get()
-//                .uri("http://localhost:8081/categories/name/{name}", name)
-//                .retrieve()
-//                .body(Category.class);
-//    }
-
-    public String getCategoryName(String name) {
-        return String.valueOf(booksRestClient
-                .get()
-                .uri("http://localhost:8081/categories/name/{name}", name)
-                .retrieve()
-                .body(Category.class));
-    }
-
-
 
     public void addBook(AddBookDTO addBookDTO){
 
@@ -71,18 +51,9 @@ public class BookService {
             author.setName(addBookDTO.getAuthor());
             author = authorRepository.save(author);
         }
-
-
-        String category = getCategoryName(addBookDTO.getCategory());
-        if (category == null) {
-            throw new RuntimeException("Category not found: " + addBookDTO.getCategory());
-        }
-
-        book.setCategory(category);
         book.setAuthor(author);
         bookRepository.save(book);
     }
-
 
 
     public BookDTO getBooksDetails(Long id) {

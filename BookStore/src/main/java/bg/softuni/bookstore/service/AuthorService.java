@@ -38,14 +38,6 @@ public class AuthorService {
                 })
                 .orElse(null);
 
-//
-//        return booksRestClient
-//                .get()
-//                .uri("http://localhost:8081/authors/{id}", id)
-//                .accept(MediaType.APPLICATION_JSON)
-//                .retrieve()
-//                .body(AuthorDTO.class);
-//
 
     }
 }
