@@ -16,6 +16,7 @@ public class SecurityConfig {
                             authorizeRequest
                                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                                     .requestMatchers("/", "/users/login", "/users/login-error", "/users/register","/books","/book/{id}","/categories/all").permitAll()
+                                    .requestMatchers("/users/admin","/book/add","/delete-books","/category/add").hasRole("ADMIN")
                                     .anyRequest().authenticated();
                         }
                 )
@@ -35,7 +36,6 @@ public class SecurityConfig {
                             logout.invalidateHttpSession(true);
                         }
                 )
-
                 .build();
     }
 }

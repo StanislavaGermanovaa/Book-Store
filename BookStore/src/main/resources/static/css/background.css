@@ -50,15 +50,15 @@ a:hover {
     border-bottom: 0.1em solid #fff;
 } 
 
-.field-search{
-    border-radius: 1em;
-    border: 0.2em solid #fff;
-}
+/*.field-search{*/
+/*    border-radius: 1em;*/
+/*    border: 0.2em solid #fff;*/
+/*}*/
 
-.field-search input{
-    border-radius: 1em;
-    border: 0.2em solid #fff;
-}
+/*.field-search input{*/
+/*    border-radius: 1em;*/
+/*    border: 0.2em solid #fff;*/
+/*}*/
 
 footer{
     color: #fff;
@@ -67,4 +67,30 @@ footer{
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+.field-search {
+    display: flex;
+    align-items: center;
+}
+
+.field-search input[type="search"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.field-search button {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    background-color: #010a13;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+.field-search button:hover {
+    background-color: #0056b3;
 }

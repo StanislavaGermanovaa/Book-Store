@@ -26,9 +26,23 @@
         </li>
         </th:block>
     </ul>
-    <div class="field-search">
-        <input type="search" placeholder="search" id="search">
-        <label for="search"></label>
-    </div>
+    <form class="field-search" id="search-form">
+        <input type="search" placeholder="Search for books" id="search" name="query">
+        <button type="submit">Search</button>
+    </form>
 </header>
+
+<script>
+    document.getElementById('search').addEventListener('input', function() {
+        let query = this.value;
+        if (query.length > 2) {
+            fetch(`/search?query=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    });
+</script>
 

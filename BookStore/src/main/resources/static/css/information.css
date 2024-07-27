@@ -352,42 +352,51 @@ margin-bottom: 2rem;
 }
 
 
-.categories-details h1 {
+.categories-details h1 ,
+.books-details h1{
     margin-top: 0;
 }
 
-.categories-details table {
+.categories-details table ,
+.books-details table{
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
     background-color: white;
 }
 
-.categories-details thead {
+.categories-details thead,
+.books-details thead{
     background-color: #333;
     color: white;
 }
 
 .categories-details th,
-.categories-details td {
+.categories-details td,
+.books-details th,
+.books-details td{
     border: 1px solid #ddd;
     padding: 12px;
     text-align: left;
 }
 
-.categories-details th {
+.categories-details th,
+.books-details th{
     font-weight: bold;
 }
 
-.categories-details tr:nth-child(even) {
+.categories-details tr:nth-child(even),
+.books-details tr:nth-child(even){
     background-color: #f2f2f2;
 }
 
-.categories-details tr:hover {
+.categories-details tr:hover,
+.books-details tr:hover{
     background-color: #ddd;
 }
 
-.categories-details .btn-delete {
+.categories-details .btn-delete,
+.books-details .btn-delete{
     background-color: #e74c3c;
     color: white;
     border: none;
@@ -398,6 +407,7 @@ margin-bottom: 2rem;
     text-align: center;
 }
 
-.categories-details .btn-delete:hover {
+.categories-details .btn-delete:hover,
+.books-details .btn-delete:hover{
     background-color: #c0392b;
 }

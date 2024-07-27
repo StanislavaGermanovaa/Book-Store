@@ -49,4 +49,7 @@ public class BookService {
                 .orElse(null);
     }
 
+    public void deleteBook(Long id) {
+        bookRepository.deleteById(id);
+    }
 }
