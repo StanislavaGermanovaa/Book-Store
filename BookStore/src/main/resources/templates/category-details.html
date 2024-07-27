@@ -24,22 +24,23 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="category : ${categories}">
+            <tr th:each="category : ${categoryDetails}">
                 <td th:text="${category.id}">1</td>
-                <td th:text="${category.name}">Category Name</td>
+                <td th:text="${category.category}">Category Name</td>
                 <td th:text="${category.description}">Category Description</td>
+                <th:block sec:authorize="hasRole('ADMIN')">
                 <td>
                     <form th:action="@{/categories/{id}(id=${category.id})}" method="post" style="display:inline;">
                         <input type="hidden" name="_method" value="delete">
                         <button type="submit" class="btn-delete">Delete</button>
                     </form>
                 </td>
+                </th:block>
             </tr>
             </tbody>
         </table>
     </section>
 </main>
 
-<footer th:replace="fragments/footer"></footer>
 </body>
 </html>

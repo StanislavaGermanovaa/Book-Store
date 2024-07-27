@@ -1,5 +1,6 @@
 package bg.softuni.bookstore.model.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ public class AddCategoryDTO {
 
     private Long id;
 
-    @NotNull
+    @NotBlank(message = "Name is mandatory")
     private String category;
 
     private String description;

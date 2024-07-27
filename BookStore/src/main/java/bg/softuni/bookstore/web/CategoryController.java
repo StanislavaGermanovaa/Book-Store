@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class CategoryController {
-
 
     private final CategoryService categoryService;
 
@@ -30,8 +30,6 @@ public class CategoryController {
 
         return "add-category";
     }
-
-
 
     @PostMapping("/category/add")
     public String createCategory(@Valid AddCategoryDTO addCategoryDTO,
@@ -50,6 +48,17 @@ public class CategoryController {
 
     }
 
+    @GetMapping("/categories/all")
+    public String getAllCategories(Model model) {
 
+        model.addAttribute("categoryDetails", categoryService.getAllCategories());
+        return "category-details";
+    }
+
+    @DeleteMapping("/categories/{id}")
+    public String deleteCategory(@PathVariable("id") Long id) {
+        categoryService.deleteCategory(id);
+        return "redirect:/categories/all";
+    }
 
 }

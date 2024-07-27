@@ -26,25 +26,6 @@ public class CategoryService {
                 .retrieve();
     }
 
-    public AddCategoryDTO getCategoryById(Long id) {
-        return booksRestClient
-                .get()
-                .uri("http://localhost:8081/categories/{id}", id)
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .body(AddCategoryDTO.class);
-    }
-
-
-    public AddCategoryDTO getCategoryByName(Category category) {
-        return booksRestClient
-                .get()
-                .uri("http://localhost:8081/categories/name/{name}",category)
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .body(AddCategoryDTO.class);
-    }
-
     public List<AddCategoryDTO> getAllCategories() {
         return booksRestClient
                 .get()
@@ -52,5 +33,12 @@ public class CategoryService {
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(new ParameterizedTypeReference<>(){});
+    }
+
+
+    public void deleteCategory(Long id) {
+        booksRestClient.delete()
+                .uri("http://localhost:8081/categories/{id}", id)
+                .retrieve();
     }
 }
