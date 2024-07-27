@@ -32,17 +32,4 @@
     </form>
 </header>
 
-<script>
-    document.getElementById('search').addEventListener('input', function() {
-        let query = this.value;
-        if (query.length > 2) {
-            fetch(`/search?query=${encodeURIComponent(query)}`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                })
-                .catch(error => console.error('Error:', error));
-        }
-    });
-</script>
 

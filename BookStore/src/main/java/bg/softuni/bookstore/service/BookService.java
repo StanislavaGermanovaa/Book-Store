@@ -52,4 +52,12 @@ public class BookService {
     public void deleteBook(Long id) {
         bookRepository.deleteById(id);
     }
+
+    public List<Book> searchBooks(String query) {
+
+        if (query == null || query.trim().isEmpty()) {
+            return List.of();
+        }
+        return bookRepository.findByTitleContainingIgnoreCase(query.trim());
+    }
 }

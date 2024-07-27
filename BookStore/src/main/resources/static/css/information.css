@@ -411,3 +411,50 @@ margin-bottom: 2rem;
 .books-details .btn-delete:hover{
     background-color: #c0392b;
 }
+
+.books-search {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.books-search h1 {
+    margin-top: 0;
+    font-size: 2rem;
+    color: #333;
+}
+
+#searchResults {
+    margin-top: 1.5rem;
+}
+
+#searchResults ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#searchResults li {
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+#searchResults li:last-child {
+    border-bottom: none;
+}
+
+#searchResults a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#searchResults a:hover {
+    text-decoration: underline;
+}
+
+#searchResults p {
+    margin: 0.5rem 0;
+    color: #555;
+}

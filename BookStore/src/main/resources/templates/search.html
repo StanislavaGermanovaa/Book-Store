@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book store</title>
+    <link rel="stylesheet" href="/css/background.css">
+    <link rel="stylesheet" href="/css/information.css">
+    <script src="/js/search.js" defer></script>
+
+</head>
+<body>
+<header th:replace="fragments/header"></header>
+
+<main class="books-search">
+    <h1>Search Results</h1>
+    <div id="searchResults">
+        <ul>
+            <th:block th:if="${#lists.isEmpty(books)}">
+                <li>No books found</li>
+            </th:block>
+            <th:block th:unless="${#lists.isEmpty(books)}">
+                <th:block th:each="book : ${books}">
+                    <li>
+                        <a th:href="@{/book/{id}(id=${book.id})}" th:text="${book.title}">Book Title</a>
+                        <p>Author: <span th:text="${book.author.name}">Author Name</span></p>
+                        <p>Category: <span th:text="${book.category}">Category Name</span></p>
+                    </li>
+                </th:block>
+            </th:block>
+        </ul>
+    </div>
+</main>
+
+<footer th:replace="fragments/footer"></footer>
+</body>
+</html>
