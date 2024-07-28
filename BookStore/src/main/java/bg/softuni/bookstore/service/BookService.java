@@ -72,4 +72,9 @@ public class BookService {
             throw new IllegalArgumentException("Book not found");
         }
     }
+
+
+    public List<Book> getLowStockBooks(int threshold) {
+        return bookRepository.findByStockLessThan(threshold);
+    }
 }

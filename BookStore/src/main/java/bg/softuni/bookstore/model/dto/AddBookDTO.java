@@ -1,7 +1,6 @@
 package bg.softuni.bookstore.model.dto;
 
-import bg.softuni.bookstore.model.entity.Category;
-import bg.softuni.bookstore.vallidation.annotation.UniqueUsername;
+
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

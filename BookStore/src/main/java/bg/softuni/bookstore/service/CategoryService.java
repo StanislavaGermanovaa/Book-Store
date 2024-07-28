@@ -1,7 +1,6 @@
 package bg.softuni.bookstore.service;
 
 import bg.softuni.bookstore.model.dto.AddCategoryDTO;
-import bg.softuni.bookstore.model.entity.Category;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;

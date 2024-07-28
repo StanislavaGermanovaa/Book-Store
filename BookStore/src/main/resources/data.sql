@@ -65,7 +65,7 @@ But a determination to survive won’t be enough this year.
 
 Because Violet knows the real secret hidden for centuries at Basgiath War College—and nothing, not even dragon fire, may be enough to save them in the end.',
         'https://res.cloudinary.com/dcyp9ocyf/image/upload/v1721227828/z1peczbufgk7mtzyv8t6.jpg',
-        25.00,'Iron Flame',2,'FANTASY',10);
+        25.00,'Iron Flame',2,'FANTASY',1);
 INSERT INTO books(id,description,image_url,price,title,author_id,category,stock)
 VALUES (3,'“Sandwich is joy in book form. I laughed continuously, except for the parts that made me cry. Catherine Newman does a miraculous job reminding us of all the wonder there is to be found in life."—Ann Patchett, New York Times bestselling author of Tom Lake
 

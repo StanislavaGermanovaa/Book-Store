@@ -19,19 +19,23 @@ xmlns:th="http://www.thymeleaf.org">
         <h2>Welcome, Admin!</h2>
         <div class="container">
             <div class="text-center"><img src="/images/profile.jpg" width="100" class="rounded-circle"></div>
-            <div class="text-center">
-                <h5 class="mt-4 mb-0">Full name</h5>
-                <span th:text="${adminData.fullName}">UI/UX Designer</span>
-                <h5 class="mt-2 mb-0">Username</h5>
-                <span th:text="${adminData.username}">UI/UX Designer</span>
-                <h5 class="mt-2 mb-0">Age</h5>
-                <span th:text="${adminData.age}">33</span>
-            </div>
             <ul>
                 <li><a th:href="@{/book/add}">Add Book</a></li>
                 <li><a th:href="@{/delete-books}">Manage Book</a></li>
                 <li><a th:href="@{/category/add}">Add Category</a></li>
             </ul>
+            <div class="notifications">
+                <h3>Notifications</h3>
+                <ul>
+                    <li th:each="notification : ${notifications}">
+                        <span th:text="${notification.message}"></span>
+                        <form th:action="@{/users/admin/{id}(id=${notification.id})}" method="post" style="display:inline;">
+                            <input type="hidden" name="_method" value="delete">
+                            <button type="submit" class="btn-delete">Delete</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
         </div>
     </main>
 
