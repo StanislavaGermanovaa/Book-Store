@@ -14,23 +14,23 @@ import lombok.Setter;
 @ValidatePasswords
 public class UserRegisterDTO {
 
-    @Size(min = 3,message = "Username must be at least 3 symbols!")
-    @UniqueUsername(message = "Username is already occupied!")
+    @Size(min = 3,message = "{nav_bar_username_error_message}")
+    @UniqueUsername(message = "{nav_bar_username_is_taken_message}")
     private String username;
 
-    @Email(regexp = ".*@.*")
-    @UniqueEmail(message = "Email is already occupied!")
+    @Email(regexp = ".*@.*",message = "{nav_bar_email_error}")
+    @UniqueEmail(message = "{nav_bar_email_is_take_message}")
     private String email;
 
 
-    @Size(min = 5, max = 80,message ="Name must be between 5 and 80 characters!")
+    @Size(min = 5, max = 80,message ="{nav_bar_name_error_message}")
     private String fullName;
 
-    @Min(1)
-    @Max(90)
+    @Min(value = 1,message = "{nav_bar_age_error_message}")
+    @Max(value = 90,message = "{nav_bar_age_error_message}")
     private Integer age;
 
-    @Size(min = 3,max = 20,message ="Name must be between 5 and 80 symbols!")
+    @Size(min = 3,max = 20,message ="{nav_bar_password_error_message}")
     private String password;
 
     private String confirmPassword;

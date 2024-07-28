@@ -11,15 +11,15 @@ xmlns:th="http://www.thymeleaf.org">
 </head>
 <body>
     <div class="wrapper">
-        <h2>Welcome</h2>
+        <h2 th:text="#{nav_bar_welcome}" >Welcome</h2>
         <form th:method="POST"
               th:action="@{/users/login}"
               th:object="${loginData}">
 
-            <div class="bg-danger" th:if="${showErrorMessage}" th:text="'Invalid email or password'"></div>
+            <div class="bg-danger" th:if="${showErrorMessage}" th:text="#{nav_bar_invalid_login}"></div>
 
             <div class="input-field">
-                <label for="email" class="sr-only">Username</label>
+                <label for="email" class="sr-only" th:text="#{nav_bar_username}" >Username</label>
                 <input
                         th:field="*{username}"
                         type="text"
@@ -29,7 +29,7 @@ xmlns:th="http://www.thymeleaf.org">
                 <i class="bx bxs-user"></i>
             </div>
             <div class="input-field">
-                <label for="password" class="sr-only">Password</label>
+                <label for="password" class="sr-only" th:text="#{nav_bar_password}">Password</label>
                 <input th:field="*{password}"
                         type="password"
                         id="password"
@@ -37,8 +37,9 @@ xmlns:th="http://www.thymeleaf.org">
                         placeholder="Password">
                 <i class="bx bxs-lock-alt"></i>
             </div>
-            <button type="submit" class="login">Login</button>
-            <p>Don't have an account? <a th:href="@{/users/register}" class="sign-up">Sign up</a></p>
+            <button  th:text="#{nav_bar_login}" type="submit" class="login">Login</button>
+            <p  th:text="#{nav_bar_doNotHaveAccount}">Don't have an account?</p>
+            <a th:href="@{/users/register}" class="sign-up" th:text="#{nav_bar_signUp}">Sign up</a>
         </form>
     </div>
 </body>

@@ -1,35 +1,43 @@
 <header th:fragment="header">
     <div class="logo">Book store</div>
     <ul>
-        <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/books}">Books</a></li>
-        <li><a th:href="@{/categories/all}">Categories</a></li>
+        <li><a  th:text="#{nav_bar_home}" th:href="@{/}">Home</a></li>
+        <li><a th:text="#{nav_bar_books}" th:href="@{/books}">Books</a></li>
+        <li><a th:text="#{nav_bar_categories}" th:href="@{/categories/all}">Categories</a></li>
         <th:block sec:authorize="hasRole('USER')">
-        <li><a th:href="@{/users/profile}">Profile</a></li>
-        <li><a th:href="@{/}">Shopping Bag</a></li>
+            <li><a th:text="#{nav_bar_profile}" th:href="@{/users/profile}">Profile</a></li>
+            <li><a th:text="#{nav_bar_ShoppingBag}" th:href="@{/}">Shopping Bag</a></li>
         </th:block>
         <th:block sec:authorize="hasRole('ADMIN')">
-        <li><a th:href="@{/users/admin}">Admin Board</a></li>
+            <li><a th:text="#{nav_bar_adminBoard}" th:href="@{/users/admin}">Admin Board</a></li>
         </th:block>
     </ul>
     <ul>
         <th:block sec:authorize="!isAuthenticated()">
-        <li><a th:href="@{/users/login}">Login</a></li>
-        <li><a th:href="@{/users/register}">Register</a></li>
+            <li><a th:text="#{nav_bar_login}" th:href="@{/users/login}">Login</a></li>
+            <li><a th:text="#{nav_bar_register}" th:href="@{/users/register}">Register</a></li>
         </th:block>
         <th:block sec:authorize="isAuthenticated()">
-        <li><form
-                th:method="POST"
-                th:action="@{/users/logout}"
-        ><button type="submit">Logout</button>
-        </form>
-        </li>
+            <li>
+                <form th:method="POST" th:action="@{/users/logout}">
+                    <button th:text="#{nav_bar_logout}" type="submit">Logout</button>
+                </form>
+            </li>
         </th:block>
     </ul>
-    <form class="field-search" id="search-form">
-        <input type="search" placeholder="Search for books" id="search" name="query">
-        <button type="submit">Search</button>
-    </form>
+    <div class="search-language-container">
+        <form class="field-search" id="search-form">
+            <input type="search" placeholder="Search for books" id="search" name="query">
+            <button th:text="#{nav_bar_search}" type="submit">Search</button>
+        </form>
+        <form class="about-language" th:method="get">
+            <label class="text-white" for="lang" th:text="#{nav_bar_language}">Language</label>
+            <select id="lang" name="lang" onchange="this.form.submit()">
+                <option value="en_US" th:selected="${#locale.toString()} == 'en_US'">English</option>
+                <option value="bg_BG" th:selected="${#locale.toString()} == 'bg_BG'">Български</option>
+            </select>
+        </form>
+    </div>
 </header>
 
 

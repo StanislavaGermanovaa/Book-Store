@@ -15,7 +15,7 @@ xmlns:th="http://www.thymeleaf.org">
               th:action="@{/users/register}"
               th:method="POST">
             <div class="input-field">
-                <label for="username" class="sr-only">Username</label>
+                <label for="username" class="sr-only" th:text="#{nav_bar_username}">Username</label>
                 <input th:field="*{username}"
                         type="text"
                         id="username"
@@ -30,7 +30,7 @@ xmlns:th="http://www.thymeleaf.org">
                 </th:block>
             </div>
             <div class="input-field">
-                <label for="email" class="sr-only">Email</label>
+                <label for="email" class="sr-only" th:text="#{nav_bar_email}">Email</label>
                 <input th:field="*{email}"
                         type="email"
                         id="email"
@@ -45,7 +45,7 @@ xmlns:th="http://www.thymeleaf.org">
                 </th:block>
             </div>
             <div class="input-field">
-                <label for="name" class="sr-only">Name</label>
+                <label for="name" class="sr-only" th:text="#{nav_bar_name}">Name</label>
                 <input th:field="*{fullName}"
                         type="text"
                         id="name"
@@ -60,7 +60,7 @@ xmlns:th="http://www.thymeleaf.org">
                 </th:block>
             </div>
             <div class="input-field">
-                <label for="age" class="sr-only">Age</label>
+                <label for="age" class="sr-only" th:text="#{nav_bar_age}">Age</label>
                 <input th:field="*{age}"
                         type="text"
                         id="age"
@@ -75,7 +75,7 @@ xmlns:th="http://www.thymeleaf.org">
                 </th:block>
             </div>
             <div class="input-field">
-                <label for="password" class="sr-only">Password</label>
+                <label for="password" class="sr-only" th:text="#{nav_bar_password}">Password</label>
                 <input th:field="*{password}"
                         type="password"
                         id="password"
@@ -90,7 +90,7 @@ xmlns:th="http://www.thymeleaf.org">
                 </th:block>
             </div>
             <div class="input-field">
-                <label for="confirm-password" class="sr-only">Confirm Password</label>
+                <label for="confirm-password" class="sr-only" th:text="#{nav_bar_confirm_password}">Confirm Password</label>
                 <input th:field="*{confirmPassword}"
                         type="password"
                         id="confirm-password"
@@ -98,7 +98,7 @@ xmlns:th="http://www.thymeleaf.org">
                         placeholder="Confirm Password">
                 <i class="bx bxs-lock-alt"></i>
             </div>
-            <button type="submit" class="register">Register</button>
+            <button type="submit" class="register" th:text="#{nav_bar_register}">Register</button>
         </form>
     </div>
 </body>

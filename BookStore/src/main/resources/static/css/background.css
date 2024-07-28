@@ -6,37 +6,47 @@ body{
     height: 100vh;
 }
 
-header{
+
+header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 0 0.5em;
+    padding: 0 1em;
     height: 5em;
     color: #fff;
 }
 
-.logo{
-    font-size: 2em;
+.logo {
+    font-size: 2.5em;
     font-weight: 800;
 }
 
-ul{
-    margin-right: 3.2em;
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0 1em;
+}
+
+ul {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0 1em;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 li a,
 li form,
-li button{
+li button {
     text-decoration: none;
     color: #fff;
     font-weight: 600;
 }
-li button{
+
+li button {
     background: none;
     border: none;
     color: inherit;
@@ -45,28 +55,10 @@ li button{
     cursor: pointer;
     font: inherit;
 }
-a:hover { 
-    text-decoration: none; 
+
+a:hover {
+    text-decoration: none;
     border-bottom: 0.1em solid #fff;
-} 
-
-/*.field-search{*/
-/*    border-radius: 1em;*/
-/*    border: 0.2em solid #fff;*/
-/*}*/
-
-/*.field-search input{*/
-/*    border-radius: 1em;*/
-/*    border: 0.2em solid #fff;*/
-/*}*/
-
-footer{
-    color: #fff;
-    text-align: center;
-    padding: 1rem;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
 }
 
 .field-search {
@@ -93,4 +85,66 @@ footer{
 
 .field-search button:hover {
     background-color: #0056b3;
+}
+
+.search-language-container {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.about-language {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.about-language label {
+    color: #fff;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.about-language select {
+    background-color: #555;
+    color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 3px 5px;
+    font-size: 12px;
+    outline: none;
+}
+
+.about-language select option {
+    background-color: #333;
+    color: #fff;
+}
+
+.about-language select:hover,
+.about-language select:focus {
+    background-color: #777;
+}
+
+.about-language select:active {
+    background-color: #999;
+}
+
+.about-language select:hover,
+.about-language select:focus {
+    background-color: #777;
+}
+
+.about-language select:active {
+    background-color: #999;
+}
+
+footer{
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
