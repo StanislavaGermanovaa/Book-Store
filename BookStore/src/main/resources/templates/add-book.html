@@ -64,6 +64,13 @@ xmlns:th="http://www.thymeleaf.org">
                     <span th:errors="*{imageURL}"></span>
                 </small>
             </div>
+            <div class="input-field">
+                <label for="stock" class="sr-only"></label>
+                <input th:field="*{stock}" type="text" id="stock" name="title" placeholder="stock" th:errorclass="is-invalid">
+                <small th:if="${#fields.hasErrors('stock')}" class="errors alert alert-danger">
+                    <span th:errors="*{stock}"></span>
+                </small>
+            </div>
             <button type="submit" class="add">Add</button>
         </form>
     </div>

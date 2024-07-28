@@ -30,4 +30,6 @@ public class Book extends BaseEntity{
     @Column(nullable = false)
     private double price;
 
+    private int stock;
+
 }

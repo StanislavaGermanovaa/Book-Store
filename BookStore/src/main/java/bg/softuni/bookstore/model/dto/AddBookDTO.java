@@ -2,10 +2,7 @@ package bg.softuni.bookstore.model.dto;
 
 import bg.softuni.bookstore.model.entity.Category;
 import bg.softuni.bookstore.vallidation.annotation.UniqueUsername;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,10 +32,14 @@ public class AddBookDTO {
     @Positive(message = "The price should be positive number ")
     private double price;
 
-    public AddBookDTO(Object o, Object o1, Object o2, Object o3, Object o4, Object o5) {
+    @Min(value = 0, message = "The stock must be greater than or equal to 0")
+    private int stock;
+
+    public AddBookDTO(Object o, Object o1, Object o2, Object o3, Object o4, Object o5, Object o6) {
     }
 
+
     public static AddBookDTO empty() {
-        return new AddBookDTO(null, null, null, null, null, null);
+        return new AddBookDTO(null, null, null, null, null, null,null);
     }
 }

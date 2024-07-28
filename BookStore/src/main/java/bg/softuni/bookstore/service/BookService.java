@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -59,5 +60,16 @@ public class BookService {
             return List.of();
         }
         return bookRepository.findByTitleContainingIgnoreCase(query.trim());
+    }
+
+    public void refillStock(Long id, int amount) {
+        Optional<Book> optionalBook = bookRepository.findById(id);
+        if (optionalBook.isPresent()) {
+            Book book = optionalBook.get();
+            book.setStock(book.getStock() + amount);
+            bookRepository.save(book);
+        } else {
+            throw new IllegalArgumentException("Book not found");
+        }
     }
 }

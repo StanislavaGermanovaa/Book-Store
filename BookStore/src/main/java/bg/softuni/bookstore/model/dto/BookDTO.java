@@ -17,4 +17,5 @@ public class BookDTO{
     private String imageURL;
     private String description;
     private double price;
+    private int stock;
 }

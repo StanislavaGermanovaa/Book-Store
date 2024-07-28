@@ -21,12 +21,22 @@
             <tr>
                 <th>ID</th>
                 <th>Title</th>
+                <th>Stock</th>
+                <th>Refill Stock</th>
+                <th>Delete Book</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="book : ${books}">
                 <td th:text="${book.id}">1</td>
                 <td th:text="${book.title}">Title</td>
+                <td th:text="${book.stock}">Stock</td>
+                <td>
+                    <form th:action="@{/book/refill/{id}(id=${book.id})}" method="post" style="display:inline;">
+                        <input type="number" name="amount" min="1" required>
+                        <button type="submit" class="btn-refill">Refill</button>
+                    </form>
+                </td>
                     <td>
                         <form th:action="@{/book/{id}(id=${book.id})}" method="post" style="display:inline;">
                             <input type="hidden" name="_method" value="delete">
