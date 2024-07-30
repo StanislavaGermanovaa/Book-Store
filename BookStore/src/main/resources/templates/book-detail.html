@@ -18,8 +18,11 @@ xmlns:th="http://www.thymeleaf.org">
             <h1 th:text="*{title}">Book title</h1>
             <a th:href="@{/author/{id}(id=*{author.id})}" th:text="*{author.name}">Author name</a>
             <img th:src="@{*{imageURL}}" alt="Book Image" />
-            <span th:text="*{category.category}">Category Name</span>
+            <span th:text="*{category}">Category Name</span>
             <span th:text="${bookDetails.price}">Price</span>
+            <form th:action="@{/shopping-bag/add/{bookId}(bookId=${bookDetails.id})}" method="post">
+                <button type="submit" class="btn btn-primary">Add to Bag</button>
+            </form>
             <p th:text="*{description}">Description</p>
         </div>
     </main>

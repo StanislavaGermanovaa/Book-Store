@@ -15,13 +15,19 @@ import java.util.List;
 @Getter
 public class Order extends BaseEntity{
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany
+    @ManyToMany
+    @JoinTable(
+            name = "order_books",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
     private List<Book> books;
 
-    @Column(name = "order-date")
+    @Column(name = "order_date")
     private LocalDate orderDate;
 
     public Order() {

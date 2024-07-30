@@ -11,19 +11,32 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "shopping-bag")
+
 @Setter
 @Getter
-public class ShoppingBag extends BaseEntity{
-    @OneToOne
-    private User user;
+public class ShoppingBag{
+    private List<ShoppingBagItems> shoppingBagItems = new ArrayList<>();
 
-    @ManyToMany
-    private List<Book> books;
+    public void addBook(Book book) {
+        for (ShoppingBagItems item : shoppingBagItems) {
+            if (item.getBook().getId().equals(book.getId())) {
+                item.setQuantity(item.getQuantity() + 1);
+                return;
+            }
+        }
+        shoppingBagItems.add(new ShoppingBagItems(book, 1));
+    }
 
-    public ShoppingBag() {
-        this.books=new ArrayList<>();
+    public void removeBook(Book book) {
+        shoppingBagItems.removeIf(item -> item.getBook().getId().equals(book.getId()));
+    }
+
+    public double getTotal() {
+        return shoppingBagItems.stream().mapToDouble(ShoppingBagItems::getSubtotal).sum();
+    }
+
+    public void clear() {
+        shoppingBagItems.clear();
     }
 
 }

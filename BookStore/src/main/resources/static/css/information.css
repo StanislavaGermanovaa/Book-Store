@@ -486,29 +486,33 @@ margin-bottom: 2rem;
     text-align: center;
 }
 
-/* List of notifications */
 .notifications ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    width: 450px;
+    height: 260px;
 
 }
 
 .notifications li {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid #ddd;
     padding: 10px 0;
     margin-bottom: 10px;
     color: #555;
 }
 
-/* Style for the notification message */
+
 .notifications li span {
     margin-bottom: 5px;
 }
 
-/* Style for the delete button */
+
 .btn-delete {
     background-color: #e74c3c;
     color: white;
@@ -524,7 +528,7 @@ margin-bottom: 2rem;
     background-color: #c0392b;
 }
 
-/* Ensure form button is aligned properly */
+
 .notifications form {
     display: flex;
     justify-content: flex-end;

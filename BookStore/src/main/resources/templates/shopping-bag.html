@@ -14,15 +14,15 @@
 <header th:replace="fragments/header"></header>
     <main class="shopping-bag">
         <div class="container">
-            <h1 class="cart-header">Your Shopping Cart</h1>
+            <h1 class="cart-header">Your Shopping Bag</h1>
 
-            <div th:if="${cart.cartItems.isEmpty()}">
+            <div th:if="${shoppingBag.shoppingBagItems.isEmpty()}">
                 <div class="alert alert-info" role="alert">
                     Your cart is empty.
                 </div>
             </div>
 
-            <div th:if="${not #lists.isEmpty(cart.cartItems)}">
+            <div th:if="${not #lists.isEmpty(shoppingBag.shoppingBagItems)}">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -34,14 +34,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="item : ${cart.cartItems}">
-                            <td th:text="${item.Book.title}">Title</td>
+                        <tr th:each="item : ${shoppingBag.shoppingBagItems}">
+                            <td th:text="${item.book.title}">Title</td>
                             <td th:text="${item.quantity}">Quantity</td>
-                            <td th:text="${item.eBook.price}">Price</td>
-                            <td th:text="${#numbers.formatDecimal(item.eBook.price * item.quantity, 2)}">Subtotal</td>
+                            <td th:text="${item.book.price}">Price</td>
+                            <td th:text="${item.book.price * item.quantity}">Subtotal</td>
                             <td>
-                                <form th:action="@{/cart/remove}" method="post" class="d-inline">
-                                    <input type="hidden" name="eBookId" th:value="${item.eBook.id}" />
+                                <form th:action="@{/remove}" method="post" class="d-inline">
+                                    <input type="hidden" name="bookId" th:value="${item.book.id}" />
                                     <button type="submit" class="btn btn-danger btn-sm">Remove</button>
                                 </form>
                             </td>
@@ -49,13 +49,12 @@
                     </tbody>
                 </table>
                 <div class="cart-total text-right">
-                    <h5>Total: <span
-                            th:text="${#numbers.formatDecimal(#lists.sum(cart.cartItems, 'eBook.price * quantity'), 2)}"></span>
+                    <h5>Total: <span th:text="${total}"></span>
                     </h5>
                 </div>
             </div>
 
-            <form th:action="@{/orders/checkout}" method="post" class="text-right mt-3">
+            <form th:action="@{/shopping-bag/checkout}" method="post" class="text-right mt-3">
                 <button type="submit" class="btn btn-success">Checkout</button>
             </form>
         </div>
