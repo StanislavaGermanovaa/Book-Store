@@ -37,7 +37,5 @@ public class AuthorService {
                     return authorDTO;
                 })
                 .orElse(null);
-
-
     }
 }

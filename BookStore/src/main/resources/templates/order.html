@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book store</title>
+    <link rel="stylesheet" href="/css/background.css">
+    <link rel="stylesheet" href="/css/information.css">
+    <script src="/js/search.js" defer></script>
+
+</head>
+<body>
+<header th:replace="fragments/header"></header>
+
+<main>
+    <section class="order-details">
+        <h2>Order Details</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>User</th>
+                <th>Order Date</th>
+                <th>Books</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${ordersDetails}">
+                <td th:text="${order.id}">1</td>
+                <td th:text="${order.user.username}">User</td>
+                <td th:text="${order.orderDate}">Date</td>
+                <td>
+                    <ul>
+                        <li th:each="book : ${order.books}" th:text="${book.title}">Book Title</li>
+                    </ul>
+                </td>
+                <td>
+                    <form  method="post" style="display:inline;">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" class="btn-delete">Delete Order</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+</body>
+</html>

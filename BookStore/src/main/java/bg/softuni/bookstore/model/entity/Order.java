@@ -15,11 +15,11 @@ import java.util.List;
 @Getter
 public class Order extends BaseEntity{
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "order_books",
             joinColumns = @JoinColumn(name = "order_id"),

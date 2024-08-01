@@ -64,11 +64,11 @@ public class ShoppingBagController {
 
                 return "confirmation";
             } else {
-                return "error";
+                return "checkout-error";
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return "error";
+            return "checkout-error";
         }
     }
         private Optional<User> getUserFromPrincipal(Principal principal) {
