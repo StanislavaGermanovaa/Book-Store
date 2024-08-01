@@ -5,7 +5,9 @@ import bg.softuni.bookstore.model.entity.Order;
 import bg.softuni.bookstore.service.OrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -24,5 +26,9 @@ public class OrderController {
         return "order";
     }
 
-    //TODO delete order
+    @DeleteMapping("/order/{id}")
+    public String deleteOrder(@PathVariable("id") Long id){
+        orderService.deleteOrder(id);
+        return "redirect:/order";
+    }
 }

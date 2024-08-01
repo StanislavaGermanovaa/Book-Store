@@ -37,7 +37,7 @@
                     </ul>
                 </td>
                 <td>
-                    <form  method="post" style="display:inline;">
+                    <form th:action="@{/order/{id}(id=${order.id})}" method="post" style="display:inline;">
                         <input type="hidden" name="_method" value="delete">
                         <button type="submit" class="btn-delete">Delete Order</button>
                     </form>

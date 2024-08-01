@@ -51,4 +51,8 @@ public class OrderService {
                 .collect(Collectors.toList());
     }
 
+    public void deleteOrder(Long id){
+        orderRepository.deleteById(id);
+    }
+
 }
