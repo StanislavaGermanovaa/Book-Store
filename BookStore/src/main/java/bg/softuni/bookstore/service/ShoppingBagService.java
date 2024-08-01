@@ -4,11 +4,12 @@ import bg.softuni.bookstore.model.entity.Book;
 import bg.softuni.bookstore.model.entity.ShoppingBag;
 import bg.softuni.bookstore.repo.BookRepository;
 import jakarta.annotation.PostConstruct;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ShoppingBagService {
+    @Getter
     private ShoppingBag shoppingBag;
     private final BookRepository bookRepository;
 
@@ -19,10 +20,6 @@ public class ShoppingBagService {
     @PostConstruct
     public void init() {
         shoppingBag = new ShoppingBag();
-    }
-
-    public ShoppingBag getShoppingCart() {
-        return shoppingBag;
     }
 
     public void addBookToBag(Long bookId) {

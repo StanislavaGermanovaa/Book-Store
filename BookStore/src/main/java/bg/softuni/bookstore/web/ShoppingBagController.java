@@ -1,25 +1,34 @@
 package bg.softuni.bookstore.web;
 
 import bg.softuni.bookstore.model.entity.ShoppingBag;
+import bg.softuni.bookstore.model.entity.User;
+import bg.softuni.bookstore.service.OrderService;
 import bg.softuni.bookstore.service.ShoppingBagService;
+import bg.softuni.bookstore.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.text.DecimalFormat;
+import java.util.Optional;
 
 @Controller
 public class ShoppingBagController {
 
     private final ShoppingBagService shoppingBagService;
+    private final OrderService orderService;
+    private final UserService userService;
 
-    public ShoppingBagController(ShoppingBagService shoppingBagService) {
+    public ShoppingBagController(ShoppingBagService shoppingBagService, OrderService orderService, UserService userService) {
         this.shoppingBagService = shoppingBagService;
+        this.orderService = orderService;
+        this.userService = userService;
     }
 
     @GetMapping("/shopping-bag")
     public String viewCart(Model model) {
-        ShoppingBag bag = shoppingBagService.getShoppingCart();
+        ShoppingBag bag = shoppingBagService.getShoppingBag();
         double total = bag.getTotal();
         DecimalFormat df = new DecimalFormat("0.00");
         String formattedTotal = df.format(total);
@@ -43,9 +52,26 @@ public class ShoppingBagController {
     }
 
     @PostMapping("/shopping-bag/checkout")
-    public String checkout() {
-        // TODO order
-        shoppingBagService.clearBag();
-        return "redirect:/shopping-bag";
+    public String checkout(Principal principal) {
+        try {
+            Optional<User> userOptional = getUserFromPrincipal(principal);
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+
+                orderService.createOrder(user, shoppingBagService.getShoppingBag());
+
+                shoppingBagService.clearBag();
+
+                return "confirmation";
+            } else {
+                return "error";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
     }
+        private Optional<User> getUserFromPrincipal(Principal principal) {
+            return userService.findByUsername(principal.getName());
+        }
 }

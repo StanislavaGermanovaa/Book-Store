@@ -8,6 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 
 @Service
 public class UserService {
@@ -41,5 +43,10 @@ public class UserService {
 
     public boolean isEmailUnique(String email) {
         return !userRepository.existsByEmail(email);
+    }
+
+    public Optional<User> findByUsername(String name) {
+
+        return userRepository.findByUsername(name);
     }
 }

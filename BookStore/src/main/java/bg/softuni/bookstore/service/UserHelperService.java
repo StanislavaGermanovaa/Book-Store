@@ -24,19 +24,11 @@ public class UserHelperService {
         return userRepository.findByUsername(getUserDetails().getUsername())
                 .orElse(null);
     }
-
-    public boolean hasRole(String role) {
-        return getAuthentication().getAuthorities().stream()
-                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(ROLE_PREFIX + role));
-    }
-
     public UserDetails getUserDetails() {
         return (UserDetails) getAuthentication().getPrincipal();
     }
 
-    public boolean isAuthenticated() {
-        return !hasRole("ANONYMOUS");
-    }
+
 
     public Authentication getAuthentication() {
         return SecurityContextHolder.getContext().getAuthentication();
