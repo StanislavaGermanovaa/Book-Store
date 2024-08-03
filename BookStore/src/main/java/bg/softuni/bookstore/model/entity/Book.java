@@ -1,5 +1,6 @@
 package bg.softuni.bookstore.model.entity;
 
+import bg.softuni.bookstore.service.exceptions.OutOfStockException;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,5 +32,14 @@ public class Book extends BaseEntity{
     private double price;
 
     private int stock;
+
+    public void decreaseStock() {
+        if (stock > 0) {
+            stock--;
+        } else {
+            throw new OutOfStockException("Stock is already zero.");
+        }
+    }
+
 
 }
