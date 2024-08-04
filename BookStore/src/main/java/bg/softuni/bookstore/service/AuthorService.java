@@ -19,10 +19,8 @@ import java.util.stream.Collectors;
 public class AuthorService {
     private final AuthorRepository authorRepository;
     private final ModelMapper modelMapper;
-    private final RestClient booksRestClient;
 
-    public AuthorService(@Qualifier("booksRestClient") RestClient booksRestClient,AuthorRepository authorRepository, ModelMapper modelMapper) {
-        this.booksRestClient = booksRestClient;
+    public AuthorService(AuthorRepository authorRepository, ModelMapper modelMapper) {
         this.authorRepository = authorRepository;
         this.modelMapper = modelMapper;
     }
