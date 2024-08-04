@@ -31,18 +31,6 @@ public class OrderService {
     }
 
     public void createOrder(User user, ShoppingBag shoppingBag) {
-//        Order order = new Order();
-//        order.setUser(user);
-//        order.setOrderDate(LocalDate.now());
-//
-//
-//        List<Book> books = shoppingBag.getShoppingBagItems().stream()
-//                .map(ShoppingBagItems::getBook)
-//                .collect(toList());
-//
-//        order.setBooks(books);
-//
-//        orderRepository.save(order);
         Order order = new Order();
         order.setUser(user);
         order.setOrderDate(LocalDate.now());

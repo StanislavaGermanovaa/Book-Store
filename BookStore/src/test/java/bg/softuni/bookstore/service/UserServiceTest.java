@@ -142,4 +142,29 @@ public class UserServiceTest {
 
         assertFalse(result, "Email should not be unique");
     }
+
+    @Test
+    void testFindByUsername_UserExists() {
+        String username = "testUser";
+        User mockUser = new User();
+        mockUser.setUsername(username);
+
+        when(mockUserRepository.findByUsername(username)).thenReturn(Optional.of(mockUser));
+
+        Optional<User> result = testService.findByUsername(username);
+
+        assertTrue(result.isPresent(), "User should be present");
+        assertEquals(username, result.get().getUsername(), "Usernames should match");
+    }
+
+    @Test
+    void testFindByUsername_UserDoesNotExist() {
+        String username = "testUser";
+
+        when(mockUserRepository.findByUsername(username)).thenReturn(Optional.empty());
+
+        Optional<User> result = testService.findByUsername(username);
+
+        assertFalse(result.isPresent(), "User should not be present");
+    }
 }

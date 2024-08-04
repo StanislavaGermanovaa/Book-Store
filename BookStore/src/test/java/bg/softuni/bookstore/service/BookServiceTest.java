@@ -246,4 +246,72 @@ public class BookServiceTest {
         verify(mockBookRepository, times(1)).findById(bookId);
         verify(mockBookRepository, times(0)).save(any(Book.class));
     }
+
+    @Test
+    void testSearchBooks_QueryIsNull() {
+        List<Book> result = testService.searchBooks(null);
+
+        assertNotNull(result, "Result should not be null");
+        assertTrue(result.isEmpty(), "Result should be an empty list");
+    }
+
+    @Test
+    void testSearchBooks_QueryIsEmpty() {
+        List<Book> result = testService.searchBooks("");
+
+        assertNotNull(result, "Result should not be null");
+        assertTrue(result.isEmpty(), "Result should be an empty list");
+    }
+
+    @Test
+    void testSearchBooks_QueryIsValid() {
+
+        String query = "Sample";
+        Book book1 = new Book();
+        book1.setTitle("Sample Book 1");
+        Book book2 = new Book();
+        book2.setTitle("Another Sample Book");
+
+        when(mockBookRepository.findByTitleContainingIgnoreCase(query)).thenReturn(List.of(book1, book2));
+
+        List<Book> result = testService.searchBooks(query);
+
+        assertNotNull(result, "Result should not be null");
+        assertEquals(2, result.size(), "Result list size should match");
+        assertTrue(result.contains(book1), "Result should contain 'Sample Book 1'");
+        assertTrue(result.contains(book2), "Result should contain 'Another Sample Book'");
+    }
+
+    @Test
+    void testGetLowStockBooks_NoBooksBelowThreshold() {
+        int threshold = 10;
+
+        when(mockBookRepository.findByStockLessThan(threshold)).thenReturn(List.of());
+
+        List<Book> result = testService.getLowStockBooks(threshold);
+
+        assertNotNull(result, "Result should not be null");
+        assertTrue(result.isEmpty(), "Result should be an empty list when no books are below the threshold");
+    }
+
+    @Test
+    void testGetLowStockBooks_SomeBooksBelowThreshold() {
+        int threshold = 10;
+        Book book1 = new Book();
+        book1.setTitle("Book Below Threshold");
+        book1.setStock(5);
+
+        Book book2 = new Book();
+        book2.setTitle("Book Above Threshold");
+        book2.setStock(15);
+
+        when(mockBookRepository.findByStockLessThan(threshold)).thenReturn(List.of(book1));
+
+        List<Book> result = testService.getLowStockBooks(threshold);
+
+        assertNotNull(result, "Result should not be null");
+        assertEquals(1, result.size(), "Result list size should match");
+        assertTrue(result.contains(book1), "Result should contain the book below the threshold");
+        assertFalse(result.contains(book2), "Result should not contain the book above the threshold");
+    }
 }
