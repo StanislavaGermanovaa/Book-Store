@@ -69,7 +69,6 @@ public class UserController {
     @GetMapping("users/profile")
     public ModelAndView profile() {
         ModelAndView modelAndView = new ModelAndView("profile");
-
         modelAndView.addObject("profileData", userService.getProfileData());
 
         return modelAndView;

@@ -15,8 +15,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
-
 @Service
 public class OrderService {
 
@@ -41,15 +39,16 @@ public class OrderService {
                 .collect(Collectors.toList());
 
 
-        boolean allBooksInStock = books.stream()
-                .allMatch(book -> book.getStock() > 0);
+        boolean allBooksInStock = shoppingBag.getShoppingBagItems().stream()
+                .allMatch(item -> item.getBook().getStock() >= item.getQuantity());
 
         if (!allBooksInStock) {
             throw new OutOfStockException("One or more books are out of stock.");
         }
 
-        for (Book book : books) {
-            book.decreaseStock();
+        for (ShoppingBagItems item : shoppingBag.getShoppingBagItems()) {
+            Book book = item.getBook();
+            book.decreaseStock(item.getQuantity());
             bookRepository.save(book);
         }
 

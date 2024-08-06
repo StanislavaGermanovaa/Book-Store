@@ -1,11 +1,9 @@
 package bg.softuni.bookstore.service;
 
-import bg.softuni.bookstore.model.dto.BookDTO;
 import bg.softuni.bookstore.model.dto.OrderDTO;
 import bg.softuni.bookstore.model.entity.*;
 import bg.softuni.bookstore.repo.BookRepository;
 import bg.softuni.bookstore.repo.OrderRepository;
-import bg.softuni.bookstore.service.exceptions.OutOfStockException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,15 +13,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -54,7 +47,6 @@ public class OrderServiceTest {
 
     @Test
     void testGetOrderDetails() {
-        // Setup
         Order order = new Order();
         Book book = new Book();
         book.setTitle("Book Title");

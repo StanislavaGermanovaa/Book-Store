@@ -33,11 +33,11 @@ public class Book extends BaseEntity{
 
     private int stock;
 
-    public void decreaseStock() {
-        if (stock > 0) {
-            stock--;
+    public void decreaseStock(int quantity) {
+        if (stock >= quantity) {
+            stock -= quantity;
         } else {
-            throw new OutOfStockException("Stock is already zero.");
+            throw new OutOfStockException("Not enough stock available.");
         }
     }
 
