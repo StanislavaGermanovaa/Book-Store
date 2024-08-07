@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserHelperService {
 
-    private static final String ROLE_PREFIX = "ROLE_";
     private final UserRepository userRepository;
 
     public UserHelperService(UserRepository userRepository) {
@@ -27,8 +26,6 @@ public class UserHelperService {
     public UserDetails getUserDetails() {
         return (UserDetails) getAuthentication().getPrincipal();
     }
-
-
 
     public Authentication getAuthentication() {
         return SecurityContextHolder.getContext().getAuthentication();

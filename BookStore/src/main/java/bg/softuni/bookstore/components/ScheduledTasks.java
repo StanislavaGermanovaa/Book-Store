@@ -21,7 +21,7 @@ public class ScheduledTasks {
     }
 
     //@Scheduled(cron = "0 0 0 * * ?") // Runs daily at midnight
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 60000) //Runs every minute
     public void checkStockLevels() {
         List<Book> lowStockBooks = bookService.getLowStockBooks(STOCK_THRESHOLD);
         for (Book book : lowStockBooks) {
