@@ -1,4 +1,4 @@
-package bg.softuni.bookstore.service.session;
+package bg.softuni.bookstore.application.session;
 
 import bg.softuni.bookstore.model.entity.User;
 import bg.softuni.bookstore.repo.UserRepository;
@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class AppUserDetailsService implements UserDetailsService {
-
 
     private final UserRepository userRepository;
 
@@ -37,7 +36,6 @@ public class AppUserDetailsService implements UserDetailsService {
                 .authorities(mapToGrantedAuthorities(user))
                 .build();
     }
-
     private List<GrantedAuthority> mapToGrantedAuthorities(User user) {
         return user
                 .getRoles().stream()

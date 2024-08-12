@@ -1,11 +1,11 @@
-package bg.softuni.bookstore.service;
+package bg.softuni.bookstore.application;
 
 import bg.softuni.bookstore.model.dto.AuthorDTO;
 import bg.softuni.bookstore.model.dto.BookDTO;
 import bg.softuni.bookstore.model.entity.Author;
 import bg.softuni.bookstore.model.entity.Book;
-import bg.softuni.bookstore.model.entity.User;
 import bg.softuni.bookstore.repo.AuthorRepository;
+import bg.softuni.bookstore.application.services.AuthorService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,7 +37,7 @@ public class AuthorServiceTest {
     private AuthorService testService;
 
     @BeforeEach
-    void setYp(){
+    void setUp(){
         testService=new AuthorService(
                 mockAuthorRepository,
                 mockModelMapper

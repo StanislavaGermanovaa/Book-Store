@@ -10,6 +10,11 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Optional;
+
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -49,5 +54,6 @@ public class UserControllerIT {
                 .andExpect(model().attributeExists("loginData"))
                 .andExpect(model().attribute("showErrorMessage", true));
     }
+
 
 }

@@ -1,4 +1,4 @@
-package bg.softuni.bookstore.service;
+package bg.softuni.bookstore.application.services;
 
 import bg.softuni.bookstore.model.entity.Book;
 import bg.softuni.bookstore.model.entity.ShoppingBag;

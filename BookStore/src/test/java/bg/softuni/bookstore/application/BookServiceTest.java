@@ -1,4 +1,4 @@
-package bg.softuni.bookstore.service;
+package bg.softuni.bookstore.application;
 
 import bg.softuni.bookstore.model.dto.AddBookDTO;
 import bg.softuni.bookstore.model.dto.BookDTO;
@@ -6,6 +6,7 @@ import bg.softuni.bookstore.model.entity.Author;
 import bg.softuni.bookstore.model.entity.Book;
 import bg.softuni.bookstore.repo.AuthorRepository;
 import bg.softuni.bookstore.repo.BookRepository;
+import bg.softuni.bookstore.application.services.BookService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +15,7 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,6 +38,9 @@ public class BookServiceTest {
     @Mock
     private BookRepository mockBookRepository;
 
+    @Mock
+    private ApplicationEventPublisher mockApplicationEventPublisher;
+
     private BookService testService;
 
     private Book book1;
@@ -48,7 +53,8 @@ public class BookServiceTest {
         testService = new BookService(
                 mockAuthorRepository,
                 mockModelMapper,
-                mockBookRepository
+                mockBookRepository,
+                mockApplicationEventPublisher
         );
 
         book1 = new Book();

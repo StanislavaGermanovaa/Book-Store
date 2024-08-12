@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book store</title>
+    <link rel="stylesheet" href="/css/background.css">
+    <link rel="stylesheet" href="/css/information.css">
+    <script src="/js/search.js" defer></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+          integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+<header th:replace="fragments/header"></header>
+
+<main class="profile">
+    <div class="container">
+        <h2>Change Profile Info</h2>
+        <form th:action="@{/users/profile/update}"
+              th:object="${profileData}"
+              method="post">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName"
+                       th:field="*{fullName}"
+                       class="form-control"
+                       th:errorclass="is-invalid">
+                <small th:if="${#fields.hasErrors('fullName')}" class="errors alert alert-danger">
+                    <span th:errors="*{fullName}"></span>
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username"
+                       th:field="*{username}"
+                       class="form-control"
+                       th:errorclass="is-invalid">
+                <small th:if="${#fields.hasErrors('username')}" class="errors alert alert-danger">
+                    <span th:errors="*{username}"></span>
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age"
+                       th:field="*{age}"
+                       class="form-control"
+                       th:errorclass="is-invalid">
+                <small th:if="${#fields.hasErrors('age')}" class="errors alert alert-danger">
+                    <span th:errors="*{age}"></span>
+                </small>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a href="/users/profile">Back to Profile</a>
+        </form>
+    </div>
+</main>
+
+</body>
+
+</html>

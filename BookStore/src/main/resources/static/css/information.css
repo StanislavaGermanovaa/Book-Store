@@ -204,8 +204,8 @@ margin-bottom: 2rem;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    width: 400px;
-    height: 530px;
+    width: 420px;
+    height: 550px;
     text-align: center;
     border: 1px solid rgb(241, 241, 241);
     border-radius: 12px;
@@ -689,4 +689,132 @@ margin-bottom: 2rem;
 
 .btn-delete:hover {
     background-color: #c82333;
+}
+
+.mt-4 {
+    margin-top: 1rem;
+}
+
+/* Style the container for the newly published books */
+.newly-published-books {
+    background-color: #ffffff;
+    padding: 0.6rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.newly-published-books h5 {
+    margin-bottom: 0.70rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Style the list */
+.newly-published-books ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Style each list item */
+.newly-published-books li {
+    margin-bottom: 0.20rem;
+}
+
+/* Style the links within the list items */
+.newly-published-books a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 0.860rem;
+}
+
+.newly-published-books a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+
+.profile .btn-primary {
+    display: inline-block;
+    padding: 5px 18px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.profile .btn-primary:hover {
+    background-color: #0056b3;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile .btn-primary:active {
+    background-color: #004085;
+    box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+.profile h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: black;
+}
+
+/* Form group styling */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Label styling */
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: black;
+}
+
+/* Input field styling */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Input field focus styling */
+.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+/* Error message styling */
+.errors {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #dc3545;
+}
+
+/* Back to Profile link styling */
+.profile a {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color:black;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.profile a:hover {
+    color: #343a40;
 }

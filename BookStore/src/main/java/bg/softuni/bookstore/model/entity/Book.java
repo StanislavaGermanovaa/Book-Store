@@ -1,6 +1,6 @@
 package bg.softuni.bookstore.model.entity;
 
-import bg.softuni.bookstore.service.exceptions.OutOfStockException;
+import bg.softuni.bookstore.application.exceptions.OutOfStockException;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

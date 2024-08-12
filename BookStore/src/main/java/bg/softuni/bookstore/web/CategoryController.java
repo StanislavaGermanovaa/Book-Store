@@ -1,7 +1,7 @@
 package bg.softuni.bookstore.web;
 
 import bg.softuni.bookstore.model.dto.AddCategoryDTO;
-import bg.softuni.bookstore.service.CategoryService;
+import bg.softuni.bookstore.application.services.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

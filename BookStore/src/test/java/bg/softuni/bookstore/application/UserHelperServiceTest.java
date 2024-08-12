@@ -1,7 +1,8 @@
-package bg.softuni.bookstore.service;
+package bg.softuni.bookstore.application;
 
 import bg.softuni.bookstore.model.entity.User;
 import bg.softuni.bookstore.repo.UserRepository;
+import bg.softuni.bookstore.application.services.UserHelperService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

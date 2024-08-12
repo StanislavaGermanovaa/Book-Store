@@ -1,9 +1,10 @@
-package bg.softuni.bookstore.service;
+package bg.softuni.bookstore.application;
 
 import bg.softuni.bookstore.model.dto.OrderDTO;
 import bg.softuni.bookstore.model.entity.*;
 import bg.softuni.bookstore.repo.BookRepository;
 import bg.softuni.bookstore.repo.OrderRepository;
+import bg.softuni.bookstore.application.services.OrderService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

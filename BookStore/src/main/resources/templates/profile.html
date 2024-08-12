@@ -35,11 +35,21 @@ xmlns:th="http://www.thymeleaf.org">
                     <li><i class="fab fa-linkedin"></i></li>
                     <li><i class="fab fa-google"></i></li>
                 </ul>
+                <div class="mt-4">
+                    <a href="/users/profile/change-info" class="btn btn-primary">Change Info</a>
+                </div>
+                <div class="mt-4 newly-published-books">
+                    <h5>Newly Published Books</h5>
+                    <ul>
+                        <li th:each="book : ${profileData.books}">
+                            <a th:href="@{/book/{id}(id=${book.id})}" th:text="${book.title}"></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </main>
 
-    <footer th:replace="fragments/footer"></footer>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-package bg.softuni.bookstore.service;
+package bg.softuni.bookstore.application.services;
 
 import bg.softuni.bookstore.model.dto.AddCategoryDTO;
 import org.springframework.beans.factory.annotation.Qualifier;

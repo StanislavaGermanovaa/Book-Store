@@ -1,13 +1,16 @@
-package bg.softuni.bookstore.service;
+package bg.softuni.bookstore.application.services;
 
 import bg.softuni.bookstore.model.dto.UserProfileDTO;
 import bg.softuni.bookstore.model.dto.UserRegisterDTO;
+import bg.softuni.bookstore.model.entity.Role;
 import bg.softuni.bookstore.model.entity.User;
+import bg.softuni.bookstore.repo.RoleRepository;
 import bg.softuni.bookstore.repo.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -16,13 +19,13 @@ public class UserService {
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
-    private final UserHelperService userHelperService;
+    private final RoleRepository roleRepository;
 
-    public UserService(ModelMapper modelMapper, PasswordEncoder passwordEncoder, UserRepository userRepository, UserHelperService userHelperService) {
+    public UserService(ModelMapper modelMapper, PasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository) {
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
-        this.userHelperService = userHelperService;
+        this.roleRepository = roleRepository;
     }
 
     public void register(UserRegisterDTO userRegisterDTO) {
@@ -30,11 +33,11 @@ public class UserService {
 
         user.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
 
-        userRepository.save(user);
-    }
+        Role role = roleRepository.findById(2L)
+                .orElseThrow(() -> new RuntimeException("Role not found"));
 
-    public UserProfileDTO getProfileData() {
-        return modelMapper.map(userHelperService.getUser(), UserProfileDTO.class);
+        user.getRoles().add(role);
+        userRepository.save(user);
     }
 
     public boolean isUsernameUnique(String username) {
@@ -49,4 +52,5 @@ public class UserService {
 
         return userRepository.findByUsername(name);
     }
+
 }

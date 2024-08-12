@@ -2,9 +2,9 @@ package bg.softuni.bookstore.web;
 
 import bg.softuni.bookstore.model.entity.ShoppingBag;
 import bg.softuni.bookstore.model.entity.User;
-import bg.softuni.bookstore.service.OrderService;
-import bg.softuni.bookstore.service.ShoppingBagService;
-import bg.softuni.bookstore.service.UserService;
+import bg.softuni.bookstore.application.services.OrderService;
+import bg.softuni.bookstore.application.services.ShoppingBagService;
+import bg.softuni.bookstore.application.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

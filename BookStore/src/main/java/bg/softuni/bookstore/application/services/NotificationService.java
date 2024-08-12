@@ -1,11 +1,9 @@
-package bg.softuni.bookstore.service;
+package bg.softuni.bookstore.application.services;
 
 import bg.softuni.bookstore.model.entity.Notification;
 import bg.softuni.bookstore.repo.NotificationRepository;
-import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

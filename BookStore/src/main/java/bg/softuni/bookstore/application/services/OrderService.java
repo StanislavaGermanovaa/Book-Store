@@ -1,13 +1,10 @@
-package bg.softuni.bookstore.service;
+package bg.softuni.bookstore.application.services;
 
-import bg.softuni.bookstore.model.dto.BookDTO;
 import bg.softuni.bookstore.model.dto.OrderDTO;
 import bg.softuni.bookstore.model.entity.*;
 import bg.softuni.bookstore.repo.BookRepository;
 import bg.softuni.bookstore.repo.OrderRepository;
-import bg.softuni.bookstore.service.exceptions.OutOfStockException;
-import org.antlr.v4.runtime.misc.LogManager;
-import org.modelmapper.Converters;
+import bg.softuni.bookstore.application.exceptions.OutOfStockException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 package bg.softuni.bookstore.web;
 
 import bg.softuni.bookstore.model.dto.AuthorDTO;
-import bg.softuni.bookstore.service.AuthorService;
+import bg.softuni.bookstore.application.services.AuthorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

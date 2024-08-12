@@ -1,4 +1,4 @@
-package bg.softuni.bookstore.service.exceptions;
+package bg.softuni.bookstore.application.exceptions;
 
 public class OutOfStockException extends RuntimeException {
     public OutOfStockException(String message) {

@@ -1,18 +1,11 @@
-package bg.softuni.bookstore.service;
+package bg.softuni.bookstore.application.services;
 
 import bg.softuni.bookstore.model.dto.AuthorDTO;
 import bg.softuni.bookstore.model.dto.BookDTO;
-import bg.softuni.bookstore.model.entity.Author;
 import bg.softuni.bookstore.repo.AuthorRepository;
-import jakarta.persistence.Tuple;
-import org.modelmapper.Converters;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service

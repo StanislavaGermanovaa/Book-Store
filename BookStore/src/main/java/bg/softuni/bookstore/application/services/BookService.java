@@ -1,12 +1,14 @@
-package bg.softuni.bookstore.service;
+package bg.softuni.bookstore.application.services;
 
 import bg.softuni.bookstore.model.dto.AddBookDTO;
 import bg.softuni.bookstore.model.dto.BookDTO;
 import bg.softuni.bookstore.model.entity.Author;
 import bg.softuni.bookstore.model.entity.Book;
+import bg.softuni.bookstore.model.events.BookAddedEvent;
 import bg.softuni.bookstore.repo.AuthorRepository;
 import bg.softuni.bookstore.repo.BookRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,11 +20,13 @@ public class BookService {
     private final AuthorRepository authorRepository;
     private final ModelMapper modelMapper;
     private final BookRepository bookRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
-    public BookService(AuthorRepository authorRepository1, ModelMapper modelMapper, BookRepository bookRepository) {
+    public BookService(AuthorRepository authorRepository1, ModelMapper modelMapper, BookRepository bookRepository, ApplicationEventPublisher eventPublisher) {
         this.authorRepository = authorRepository1;
         this.modelMapper = modelMapper;
         this.bookRepository = bookRepository;
+        this.eventPublisher = eventPublisher;
     }
 
     public List<BookDTO> getAllBooks() {
@@ -43,6 +47,8 @@ public class BookService {
         }
         book.setAuthor(author);
         bookRepository.save(book);
+
+        eventPublisher.publishEvent(new BookAddedEvent(this, book));
     }
     public BookDTO getBooksDetails(Long id) {
         return bookRepository.findById(id)

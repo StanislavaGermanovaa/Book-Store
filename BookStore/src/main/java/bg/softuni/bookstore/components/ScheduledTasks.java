@@ -1,8 +1,8 @@
 package bg.softuni.bookstore.components;
 
 import bg.softuni.bookstore.model.entity.Book;
-import bg.softuni.bookstore.service.BookService;
-import bg.softuni.bookstore.service.NotificationService;
+import bg.softuni.bookstore.application.services.BookService;
+import bg.softuni.bookstore.application.services.NotificationService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 

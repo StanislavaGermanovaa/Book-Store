@@ -1,8 +1,8 @@
-package bg.softuni.bookstore.service;
+package bg.softuni.bookstore.application;
 
 import bg.softuni.bookstore.model.entity.Notification;
 import bg.softuni.bookstore.repo.NotificationRepository;
-import org.junit.jupiter.api.BeforeAll;
+import bg.softuni.bookstore.application.services.NotificationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

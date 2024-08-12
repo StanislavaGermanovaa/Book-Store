@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -35,9 +37,15 @@ public class User extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "roles_id"))
     private Set<Role> roles;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "users_books",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    private Set<Book> books;
 
     public User() {
         this.roles=new HashSet<>();
+        this.books=new HashSet<>();
     }
 
 }

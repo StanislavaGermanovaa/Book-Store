@@ -2,7 +2,7 @@ package bg.softuni.bookstore.web;
 
 import bg.softuni.bookstore.model.dto.UserLoginDTO;
 import bg.softuni.bookstore.model.dto.UserRegisterDTO;
-import bg.softuni.bookstore.service.UserService;
+import bg.softuni.bookstore.application.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,12 +65,4 @@ public class UserController {
         return modelAndView;
     }
 
-
-    @GetMapping("users/profile")
-    public ModelAndView profile() {
-        ModelAndView modelAndView = new ModelAndView("profile");
-        modelAndView.addObject("profileData", userService.getProfileData());
-
-        return modelAndView;
-    }
 }

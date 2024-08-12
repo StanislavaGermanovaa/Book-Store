@@ -3,9 +3,8 @@ package bg.softuni.bookstore.web;
 import bg.softuni.bookstore.model.dto.AddBookDTO;
 import bg.softuni.bookstore.model.dto.AddCategoryDTO;
 import bg.softuni.bookstore.model.entity.Book;
-import bg.softuni.bookstore.service.AuthorService;
-import bg.softuni.bookstore.service.BookService;
-import bg.softuni.bookstore.service.CategoryService;
+import bg.softuni.bookstore.application.services.BookService;
+import bg.softuni.bookstore.application.services.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +16,6 @@ import java.util.List;
 
 @Controller
 public class BookController {
-
-
     private final BookService bookService;
     private final CategoryService categoryService;
 

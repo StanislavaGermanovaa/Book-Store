@@ -1,4 +1,4 @@
-package bg.softuni.bookstore.service;
+package bg.softuni.bookstore.application.services;
 
 
 
@@ -11,13 +11,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserHelperService {
-
     private final UserRepository userRepository;
 
     public UserHelperService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
 
     public User getUser() {
         return userRepository.findByUsername(getUserDetails().getUsername())

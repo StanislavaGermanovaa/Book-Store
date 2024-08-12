@@ -1,6 +1,6 @@
 package bg.softuni.bookstore.vallidation.validator;
 
-import bg.softuni.bookstore.service.UserService;
+import bg.softuni.bookstore.application.services.UserService;
 import bg.softuni.bookstore.vallidation.annotation.UniqueEmail;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
