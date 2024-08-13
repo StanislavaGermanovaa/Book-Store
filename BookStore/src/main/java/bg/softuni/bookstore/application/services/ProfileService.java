@@ -1,5 +1,7 @@
 package bg.softuni.bookstore.application.services;
 
+import bg.softuni.bookstore.application.error.ProfileUpdateException;
+import bg.softuni.bookstore.application.error.UserNotFoundException;
 import bg.softuni.bookstore.model.dto.UserProfileDTO;
 import bg.softuni.bookstore.model.entity.Book;
 import bg.softuni.bookstore.model.entity.User;
@@ -29,25 +31,41 @@ public class ProfileService {
     @Transactional
     public UserProfileDTO getProfileData() {
         User user = userHelperService.getUser();
+        if (user == null) {
+            throw new UserNotFoundException("User not found.");
+        }
         return modelMapper.map(user, UserProfileDTO.class);
     }
 
     @Transactional
     public void updateProfile(UserProfileDTO userProfileDTO) {
         User user = userHelperService.getUser();
-        user.setUsername(userProfileDTO.getUsername());
-        user.setFullName(userProfileDTO.getFullName());
-        user.setAge(userProfileDTO.getAge());
-
-        userRepository.save(user);
+        if (user == null) {
+            throw new UserNotFoundException("User not found.");
+        }
+        try {
+            user.setUsername(userProfileDTO.getUsername());
+            user.setFullName(userProfileDTO.getFullName());
+            user.setAge(userProfileDTO.getAge());
+            userRepository.save(user);
+        } catch (Exception e) {
+            throw new ProfileUpdateException("Failed to update profile.");
+        }
     }
 
     @Transactional
     public void addBookToAllProfiles(Book book) {
         List<User> users = userRepository.findAll();
-        for (User user : users) {
-            user.getBooks().add(book);
-            userRepository.save(user);
+        if (users.isEmpty()) {
+            throw new UserNotFoundException("No users found to add the book.");
+        }
+        try {
+            for (User user : users) {
+                user.getBooks().add(book);
+                userRepository.save(user);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to add book to all profiles.", e);
         }
     }
 }

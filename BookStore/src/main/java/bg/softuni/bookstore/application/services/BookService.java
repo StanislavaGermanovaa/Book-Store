@@ -1,5 +1,6 @@
 package bg.softuni.bookstore.application.services;
 
+import bg.softuni.bookstore.application.error.ObjectNotFoundException;
 import bg.softuni.bookstore.model.dto.AddBookDTO;
 import bg.softuni.bookstore.model.dto.BookDTO;
 import bg.softuni.bookstore.model.entity.Author;
@@ -44,6 +45,8 @@ public class BookService {
             author = new Author();
             author.setName(addBookDTO.getAuthor());
             author = authorRepository.save(author);
+        }else {
+            throw new ObjectNotFoundException("Author not found!",addBookDTO.getAuthor());
         }
         book.setAuthor(author);
         bookRepository.save(book);
@@ -53,10 +56,13 @@ public class BookService {
     public BookDTO getBooksDetails(Long id) {
         return bookRepository.findById(id)
                 .map(book -> modelMapper.map(book, BookDTO.class))
-                .orElse(null);
+                .orElseThrow(()-> new ObjectNotFoundException("Book not found!",id));
     }
 
     public void deleteBook(Long id) {
+        if (!bookRepository.existsById(id)) {
+            throw new ObjectNotFoundException("Book not found!", id);
+        }
         bookRepository.deleteById(id);
     }
 
@@ -75,7 +81,7 @@ public class BookService {
             book.setStock(book.getStock() + amount);
             bookRepository.save(book);
         } else {
-            throw new IllegalArgumentException("Book not found");
+            throw new ObjectNotFoundException("Book not found!",id);
         }
     }
 

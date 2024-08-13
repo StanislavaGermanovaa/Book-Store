@@ -1,5 +1,6 @@
 package bg.softuni.bookstore.application.services;
 
+import bg.softuni.bookstore.application.error.ObjectNotFoundException;
 import bg.softuni.bookstore.model.entity.Notification;
 import bg.softuni.bookstore.repo.NotificationRepository;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,9 @@ public class NotificationService {
         }
     
     public void removeNotification(Long id) {
+        if(!notificationRepository.existsById(id)){
+            throw new ObjectNotFoundException("Notification not found!", id);
+        }
         notificationRepository.deleteById(id);
     }
 }

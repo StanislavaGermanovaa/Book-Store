@@ -1,5 +1,6 @@
 package bg.softuni.bookstore.application.services;
 
+import bg.softuni.bookstore.application.error.RoleNotFoundException;
 import bg.softuni.bookstore.model.dto.UserProfileDTO;
 import bg.softuni.bookstore.model.dto.UserRegisterDTO;
 import bg.softuni.bookstore.model.entity.Role;
@@ -34,7 +35,7 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
 
         Role role = roleRepository.findById(2L)
-                .orElseThrow(() -> new RuntimeException("Role not found"));
+                .orElseThrow(() -> new RoleNotFoundException(2L));
 
         user.getRoles().add(role);
         userRepository.save(user);

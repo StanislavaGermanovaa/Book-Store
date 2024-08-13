@@ -1,10 +1,11 @@
 package bg.softuni.bookstore.application.services;
 
+import bg.softuni.bookstore.application.error.ObjectNotFoundException;
+import bg.softuni.bookstore.application.error.OutOfStockException;
 import bg.softuni.bookstore.model.dto.OrderDTO;
 import bg.softuni.bookstore.model.entity.*;
 import bg.softuni.bookstore.repo.BookRepository;
 import bg.softuni.bookstore.repo.OrderRepository;
-import bg.softuni.bookstore.application.exceptions.OutOfStockException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -66,6 +67,9 @@ public class OrderService {
     }
 
     public void deleteOrder(Long id){
+        if(!orderRepository.existsById(id)){
+            throw new ObjectNotFoundException("Order not found!",id);
+        }
         orderRepository.deleteById(id);
     }
 

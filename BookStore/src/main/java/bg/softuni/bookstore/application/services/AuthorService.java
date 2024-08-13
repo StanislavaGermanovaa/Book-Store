@@ -1,5 +1,6 @@
 package bg.softuni.bookstore.application.services;
 
+import bg.softuni.bookstore.application.error.ObjectNotFoundException;
 import bg.softuni.bookstore.model.dto.AuthorDTO;
 import bg.softuni.bookstore.model.dto.BookDTO;
 import bg.softuni.bookstore.repo.AuthorRepository;
@@ -27,6 +28,6 @@ public class AuthorService {
                             .collect(Collectors.toSet()));
                     return authorDTO;
                 })
-                .orElse(null);
+                .orElseThrow(()-> new ObjectNotFoundException("Author not found!",id));
     }
 }

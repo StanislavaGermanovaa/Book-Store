@@ -1,5 +1,7 @@
 package bg.softuni.bookstore.web;
 
+import bg.softuni.bookstore.application.error.ObjectNotFoundException;
+import bg.softuni.bookstore.application.error.UserNotFoundException;
 import bg.softuni.bookstore.model.entity.ShoppingBag;
 import bg.softuni.bookstore.model.entity.User;
 import bg.softuni.bookstore.application.services.OrderService;
@@ -53,7 +55,7 @@ public class ShoppingBagController {
 
     @PostMapping("/shopping-bag/checkout")
     public String checkout(Principal principal) {
-        try {
+
             Optional<User> userOptional = getUserFromPrincipal(principal);
             if (userOptional.isPresent()) {
                 User user = userOptional.get();
@@ -64,12 +66,9 @@ public class ShoppingBagController {
 
                 return "confirmation";
             } else {
-                return "error";
+                throw new UserNotFoundException("User not found!");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "error";
-        }
+
     }
         private Optional<User> getUserFromPrincipal(Principal principal) {
             return userService.findByUsername(principal.getName());
