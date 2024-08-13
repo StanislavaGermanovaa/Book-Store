@@ -1,5 +1,6 @@
 package bg.softuni.bookstore.application;
 
+import bg.softuni.bookstore.application.error.ObjectNotFoundException;
 import bg.softuni.bookstore.model.dto.OrderDTO;
 import bg.softuni.bookstore.model.entity.*;
 import bg.softuni.bookstore.repo.BookRepository;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -62,13 +64,29 @@ public class OrderServiceTest {
     }
 
     @Test
-    void testDeleteOrder() {
+    void testDeleteOrder_OrderExists() {
         Long orderId = 1L;
+
+        when(mockOrderRepository.existsById(orderId)).thenReturn(true);
 
         testService.deleteOrder(orderId);
 
         verify(mockOrderRepository, times(1)).deleteById(orderId);
+        verify(mockOrderRepository, times(1)).existsById(orderId);
     }
 
+    @Test
+    void testDeleteOrder_OrderDoesNotExist() {
+        Long orderId = 1L;
+
+        when(mockOrderRepository.existsById(orderId)).thenReturn(false);
+
+        assertThrows(ObjectNotFoundException.class, () -> {
+            testService.deleteOrder(orderId);
+        });
+
+        verify(mockOrderRepository, times(1)).existsById(orderId);
+        verify(mockOrderRepository, times(0)).deleteById(orderId);
+    }
 
 }

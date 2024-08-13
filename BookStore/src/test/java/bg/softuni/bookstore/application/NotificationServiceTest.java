@@ -1,5 +1,6 @@
 package bg.softuni.bookstore.application;
 
+import bg.softuni.bookstore.application.error.ObjectNotFoundException;
 import bg.softuni.bookstore.model.entity.Notification;
 import bg.softuni.bookstore.repo.NotificationRepository;
 import bg.softuni.bookstore.application.services.NotificationService;
@@ -15,8 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -78,14 +78,27 @@ public class NotificationServiceTest {
     }
 
     @Test
-    void testRemoveNotification() {
-
+    void testRemoveNotification_NotificationExists() {
         Long notificationId = 1L;
 
-        testService.removeNotification(notificationId);
+        when(mockNotificationRepository.existsById(notificationId)).thenReturn(true);
 
+        testService.removeNotification(notificationId);
         verify(mockNotificationRepository, times(1)).deleteById(notificationId);
     }
 
+    @Test
+    void testRemoveNotification_NotificationDoesNotExist() {
+        Long notificationId = 1L;
+
+        when(mockNotificationRepository.existsById(notificationId)).thenReturn(false);
+
+        assertThrows(ObjectNotFoundException.class, () -> {
+            testService.removeNotification(notificationId);
+        });
+
+        verify(mockNotificationRepository, times(1)).existsById(notificationId);
+        verify(mockNotificationRepository, times(0)).deleteById(notificationId);
+    }
 
 }

@@ -1,5 +1,6 @@
 package bg.softuni.bookstore.application;
 
+import bg.softuni.bookstore.application.error.ObjectNotFoundException;
 import bg.softuni.bookstore.model.entity.Book;
 import bg.softuni.bookstore.model.entity.ShoppingBag;
 import bg.softuni.bookstore.repo.BookRepository;
@@ -15,8 +16,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.hibernate.validator.internal.util.Contracts.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ShoppingBagServiceTest {
@@ -27,6 +28,9 @@ public class ShoppingBagServiceTest {
     @Mock
     private BookRepository mockBookRepository;
 
+    @Mock
+    private ShoppingBag mockShoppingBag;
+
     private ShoppingBagService testService;
 
     @BeforeEach
@@ -35,21 +39,6 @@ public class ShoppingBagServiceTest {
         testService.init();
     }
 
-//    @Test
-//    void testAddBookToBag_BookExists() {
-//
-//        Long bookId = 1L;
-//        Book book = new Book();
-//        book.setId(bookId);
-//        book.setTitle("Sample Book");
-//
-//        when(mockBookRepository.findById(bookId)).thenReturn(Optional.of(book));
-//
-//        testService.addBookToBag(bookId);
-//
-//        ShoppingBag shoppingBag = testService.getShoppingBag();
-//        assertTrue(shoppingBag.getShoppingBagItems().contains(book), "The shopping bag should contain the added book.");
-//    }
 
     @Test
     void testAddBookToBag_BookDoesNotExist() {
@@ -57,10 +46,12 @@ public class ShoppingBagServiceTest {
 
         when(mockBookRepository.findById(bookId)).thenReturn(Optional.empty());
 
-        testService.addBookToBag(bookId);
+        assertThrows(ObjectNotFoundException.class, () -> {
+            testService.addBookToBag(bookId);
+        });
 
-        ShoppingBag shoppingBag = testService.getShoppingBag();
-        assertTrue(shoppingBag.getShoppingBagItems().isEmpty(), "The shopping bag should not contain any books.");
+        verify(mockBookRepository, times(1)).findById(bookId);
+        verify(mockShoppingBag, times(0)).addBook(any(Book.class));
     }
 
     @Test
@@ -88,10 +79,14 @@ public class ShoppingBagServiceTest {
 
         when(mockBookRepository.findById(bookId)).thenReturn(Optional.empty());
 
-        testService.removeBookFromBag(bookId);
+        ObjectNotFoundException thrownException = assertThrows(ObjectNotFoundException.class, () -> {
+            testService.removeBookFromBag(bookId);
+        });
 
-        ShoppingBag shoppingBag = testService.getShoppingBag();
-        assertTrue(shoppingBag.getShoppingBagItems().isEmpty(), "The shopping bag should not contain any books.");
+        assertEquals("Book not found!", thrownException.getMessage());
+
+        verify(mockBookRepository, times(1)).findById(bookId);
+        verify(mockShoppingBag, times(0)).removeBook(any(Book.class));
     }
 
     @Test

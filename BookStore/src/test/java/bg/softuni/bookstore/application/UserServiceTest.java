@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+import bg.softuni.bookstore.application.error.RoleNotFoundException;
 import bg.softuni.bookstore.application.services.UserService;
 import bg.softuni.bookstore.model.dto.UserRegisterDTO;
 import bg.softuni.bookstore.model.entity.Role;
@@ -87,8 +88,11 @@ public class UserServiceTest {
         when(mockPasswordEncoder.encode(userRegisterDTO.getPassword())).thenReturn("encodedPassword");
         when(mockRoleRepository.findById(2L)).thenReturn(Optional.empty());
 
-        RuntimeException thrownException = assertThrows(RuntimeException.class, () -> testService.register(userRegisterDTO));
-        assertEquals("Role not found", thrownException.getMessage());
+        RoleNotFoundException thrownException = assertThrows(RoleNotFoundException.class, () -> {
+            testService.register(userRegisterDTO);
+        });
+
+        assertEquals("Role not found with ID: 2", thrownException.getMessage());
     }
 
     @Test

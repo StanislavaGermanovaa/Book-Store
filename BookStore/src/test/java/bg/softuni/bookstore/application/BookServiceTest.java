@@ -1,5 +1,6 @@
 package bg.softuni.bookstore.application;
 
+import bg.softuni.bookstore.application.error.ObjectNotFoundException;
 import bg.softuni.bookstore.model.dto.AddBookDTO;
 import bg.softuni.bookstore.model.dto.BookDTO;
 import bg.softuni.bookstore.model.entity.Author;
@@ -189,26 +190,42 @@ public class BookServiceTest {
 
     @Test
     void testGetBooksDetails_BookDoesNotExist() {
-
         Long bookId = 1L;
 
         when(mockBookRepository.findById(bookId)).thenReturn(Optional.empty());
 
-        BookDTO result = testService.getBooksDetails(bookId);
-
-        assertNull(result);
+        assertThrows(ObjectNotFoundException.class, () -> {
+            testService.getBooksDetails(bookId);
+        });
 
         verify(mockBookRepository, times(1)).findById(bookId);
         verify(mockModelMapper, times(0)).map(any(Book.class), eq(BookDTO.class));
     }
 
     @Test
-    void testDeleteBook() {
+    void testDeleteBook_BookExists() {
         Long bookId = 1L;
+
+        when(mockBookRepository.existsById(bookId)).thenReturn(true);
 
         testService.deleteBook(bookId);
 
         verify(mockBookRepository, times(1)).deleteById(bookId);
+        verify(mockBookRepository, times(1)).existsById(bookId);
+    }
+
+    @Test
+    void testDeleteBook_BookDoesNotExist() {
+        Long bookId = 1L;
+
+        when(mockBookRepository.existsById(bookId)).thenReturn(false);
+
+        assertThrows(ObjectNotFoundException.class, () -> {
+            testService.deleteBook(bookId);
+        });
+
+        verify(mockBookRepository, times(1)).existsById(bookId);
+        verify(mockBookRepository, times(0)).deleteById(bookId);
     }
 
     @Test
@@ -237,17 +254,16 @@ public class BookServiceTest {
 
     @Test
     void testRefillStock_BookDoesNotExist() {
-
         Long bookId = 1L;
         int amount = 10;
 
         when(mockBookRepository.findById(bookId)).thenReturn(Optional.empty());
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        ObjectNotFoundException exception = assertThrows(ObjectNotFoundException.class, () -> {
             testService.refillStock(bookId, amount);
         });
 
-        assertEquals("Book not found", exception.getMessage());
+        assertEquals("Book not found!", exception.getMessage());
 
         verify(mockBookRepository, times(1)).findById(bookId);
         verify(mockBookRepository, times(0)).save(any(Book.class));

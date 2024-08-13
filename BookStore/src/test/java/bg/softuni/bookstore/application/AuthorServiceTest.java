@@ -1,5 +1,6 @@
 package bg.softuni.bookstore.application;
 
+import bg.softuni.bookstore.application.error.ObjectNotFoundException;
 import bg.softuni.bookstore.model.dto.AuthorDTO;
 import bg.softuni.bookstore.model.dto.BookDTO;
 import bg.softuni.bookstore.model.entity.Author;
@@ -19,8 +20,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -88,11 +88,12 @@ public class AuthorServiceTest {
 
         when(mockAuthorRepository.findById(authorId)).thenReturn(Optional.empty());
 
-        AuthorDTO result = testService.getAuthorDetails(authorId);
-
-        assertNull(result);
+        assertThrows(ObjectNotFoundException.class, () -> {
+            testService.getAuthorDetails(authorId);
+        });
 
         verify(mockAuthorRepository, times(1)).findById(authorId);
+
         verify(mockModelMapper, times(0)).map(any(Author.class), eq(AuthorDTO.class));
         verify(mockModelMapper, times(0)).map(any(Book.class), eq(BookDTO.class));
     }

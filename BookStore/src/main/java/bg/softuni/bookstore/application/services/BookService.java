@@ -45,8 +45,6 @@ public class BookService {
             author = new Author();
             author.setName(addBookDTO.getAuthor());
             author = authorRepository.save(author);
-        }else {
-            throw new ObjectNotFoundException("Author not found!",addBookDTO.getAuthor());
         }
         book.setAuthor(author);
         bookRepository.save(book);

@@ -30,7 +30,6 @@ public class ShoppingBagService {
     }
 
     public void removeBookFromBag(Long bookId) {
-
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new ObjectNotFoundException("Book not found!",bookId));
         shoppingBag.removeBook(book);
