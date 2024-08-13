@@ -1,5 +1,7 @@
 package bg.softuni.bookstore.application;
 
+import bg.softuni.bookstore.application.error.ProfileUpdateException;
+import bg.softuni.bookstore.application.error.UserNotFoundException;
 import bg.softuni.bookstore.application.services.ProfileService;
 import bg.softuni.bookstore.application.services.UserHelperService;
 import bg.softuni.bookstore.model.dto.UserProfileDTO;
@@ -18,10 +20,8 @@ import org.modelmapper.ModelMapper;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ProfileServiceTest {
@@ -50,7 +50,7 @@ public class ProfileServiceTest {
     }
 
     @Test
-    void testGetProfileData() {
+    void testGetProfileData_UserExists() {
         User user = new User();
         UserProfileDTO userProfileDTO = new UserProfileDTO();
 
@@ -60,12 +60,26 @@ public class ProfileServiceTest {
         UserProfileDTO result = profileService.getProfileData();
 
         assertEquals(userProfileDTO, result);
-        verify(mockUserHelperService).getUser();
-        verify(mockModelMapper).map(user, UserProfileDTO.class);
+        verify(mockUserHelperService, times(1)).getUser();
+        verify(mockModelMapper, times(1)).map(user, UserProfileDTO.class);
     }
 
     @Test
-    void testUpdateProfile() {
+    void testGetProfileData_UserNotFound() {
+
+        when(mockUserHelperService.getUser()).thenReturn(null);
+
+        UserNotFoundException thrownException = assertThrows(UserNotFoundException.class, () -> {
+            profileService.getProfileData();
+        });
+
+        assertEquals("User not found.", thrownException.getMessage());
+        verify(mockUserHelperService, times(1)).getUser();
+        verify(mockModelMapper, times(0)).map(any(User.class), eq(UserProfileDTO.class));
+    }
+
+    @Test
+    void testUpdateProfile_Success() {
         User user = new User();
         UserProfileDTO userProfileDTO = new UserProfileDTO();
         userProfileDTO.setUsername("newUsername");
@@ -76,13 +90,51 @@ public class ProfileServiceTest {
 
         profileService.updateProfile(userProfileDTO);
 
-        verify(mockUserHelperService).getUser();
-        verify(mockUserRepository).save(userCaptor.capture());
+        verify(mockUserHelperService, times(1)).getUser();
+        verify(mockUserRepository, times(1)).save(userCaptor.capture());
 
         User capturedUser = userCaptor.getValue();
         assertEquals("newUsername", capturedUser.getUsername());
         assertEquals("New FullName", capturedUser.getFullName());
         assertEquals(30, capturedUser.getAge());
+    }
+
+    @Test
+    void testUpdateProfile_UserNotFound() {
+        UserProfileDTO userProfileDTO = new UserProfileDTO();
+        userProfileDTO.setUsername("newUsername");
+        userProfileDTO.setFullName("New FullName");
+        userProfileDTO.setAge(30);
+
+        when(mockUserHelperService.getUser()).thenReturn(null);
+
+        UserNotFoundException thrownException = assertThrows(UserNotFoundException.class, () -> {
+            profileService.updateProfile(userProfileDTO);
+        });
+
+        assertEquals("User not found.", thrownException.getMessage());
+        verify(mockUserHelperService, times(1)).getUser();
+        verify(mockUserRepository, times(0)).save(any(User.class));
+    }
+
+    @Test
+    void testUpdateProfile_FailureDuringSave() {
+        User user = new User();
+        UserProfileDTO userProfileDTO = new UserProfileDTO();
+        userProfileDTO.setUsername("newUsername");
+        userProfileDTO.setFullName("New FullName");
+        userProfileDTO.setAge(30);
+
+        when(mockUserHelperService.getUser()).thenReturn(user);
+        doThrow(new RuntimeException("Database error")).when(mockUserRepository).save(user);
+
+        ProfileUpdateException thrownException = assertThrows(ProfileUpdateException.class, () -> {
+            profileService.updateProfile(userProfileDTO);
+        });
+
+        assertEquals("Failed to update profile.", thrownException.getMessage());
+        verify(mockUserHelperService, times(1)).getUser();
+        verify(mockUserRepository, times(1)).save(user);
     }
 
     @Test
