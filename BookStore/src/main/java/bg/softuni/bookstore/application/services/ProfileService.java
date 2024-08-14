@@ -44,10 +44,15 @@ public class ProfileService {
             throw new UserNotFoundException("User not found.");
         }
         try {
+            String oldUsername = user.getUsername();
             user.setUsername(userProfileDTO.getUsername());
             user.setFullName(userProfileDTO.getFullName());
             user.setAge(userProfileDTO.getAge());
             userRepository.save(user);
+
+            if (!oldUsername.equals(user.getUsername())) {
+                userHelperService.changeNameInSecurityContext(user, userProfileDTO.getUsername());
+            }
         } catch (Exception e) {
             throw new ProfileUpdateException("Failed to update profile.");
         }

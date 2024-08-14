@@ -4,6 +4,7 @@ package bg.softuni.bookstore.application.services;
 
 import bg.softuni.bookstore.model.entity.User;
 import bg.softuni.bookstore.repo.UserRepository;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,4 +29,22 @@ public class UserHelperService {
     public Authentication getAuthentication() {
         return SecurityContextHolder.getContext().getAuthentication();
     }
+
+    public void changeNameInSecurityContext(User loggedUser, String newUsername){
+        Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+         UserDetails updatePrincipal=org.springframework.security.core.userdetails.User
+                 .withUsername(newUsername)
+                 .password(loggedUser.getPassword())
+                 .authorities(authentication.getAuthorities())
+                 .build();
+
+        UsernamePasswordAuthenticationToken updateAuth=
+                new UsernamePasswordAuthenticationToken(
+                        updatePrincipal,
+                        authentication.getCredentials(),
+                        authentication.getAuthorities());
+
+        SecurityContextHolder.getContext().setAuthentication(updateAuth);
+    }
+
 }
