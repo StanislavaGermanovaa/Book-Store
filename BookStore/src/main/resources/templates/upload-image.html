@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book store</title>
+    <link rel="stylesheet" href="/css/background.css">
+    <link rel="stylesheet" href="/css/information.css">
+</head>
+<body>
+<main class="upload-image">
+    <h1>Upload Image</h1>
+    <form th:action="@{/api/files/upload}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" />
+        <button type="submit">Upload</button>
+    </form>
+    <div th:if="${imageUrl != null}">
+        <p>Image URL: <a th:href="${imageUrl}" th:text="${imageUrl}"></a></p>
+        <img th:src="${imageUrl}" alt="Uploaded Image" />
+    </div>
+    <div th:if="${error != null}">
+        <p th:text="${error}"></p>
+    </div>
+</main>>
+</body>
+</html>

@@ -228,9 +228,14 @@ margin-bottom: 2rem;
     height: 30px;
 }
 
+.admin .container .navigation li{
+    width: 250px;
+    height: 40px;
+}
+
 .admin .container{
     width: 500px;
-    height: 540px;
+    height: 560px;
 }
 
 .admin .container a{
@@ -817,4 +822,68 @@ margin-bottom: 2rem;
 
 .profile a:hover {
     color: #343a40;
+}
+
+
+.upload-image form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Heading */
+.upload-image h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #444;
+}
+
+/* File Input */
+.upload-image input[type="file"] {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    cursor: pointer;
+}
+
+/* Submit Button */
+.upload-image button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.upload-image button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* Image URL and Error Messages */
+.upload-image div p {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.upload-image div a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.upload-image div a:hover {
+    text-decoration: underline;
+}
+
+/* Displaying the Uploaded Image */
+.upload-image img {
+    margin-top: 15px;
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

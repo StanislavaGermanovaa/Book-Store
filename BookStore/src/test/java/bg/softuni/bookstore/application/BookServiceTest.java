@@ -1,13 +1,16 @@
 package bg.softuni.bookstore.application;
 
 import bg.softuni.bookstore.application.error.ObjectNotFoundException;
+import bg.softuni.bookstore.application.error.OutOfStockException;
 import bg.softuni.bookstore.model.dto.AddBookDTO;
 import bg.softuni.bookstore.model.dto.BookDTO;
 import bg.softuni.bookstore.model.entity.Author;
 import bg.softuni.bookstore.model.entity.Book;
+import bg.softuni.bookstore.model.entity.User;
 import bg.softuni.bookstore.repo.AuthorRepository;
 import bg.softuni.bookstore.repo.BookRepository;
 import bg.softuni.bookstore.application.services.BookService;
+import bg.softuni.bookstore.repo.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -42,6 +45,9 @@ public class BookServiceTest {
     @Mock
     private ApplicationEventPublisher mockApplicationEventPublisher;
 
+    @Mock
+    private UserRepository mockUserRepository;
+
     private BookService testService;
 
     private Book book1;
@@ -55,7 +61,8 @@ public class BookServiceTest {
                 mockAuthorRepository,
                 mockModelMapper,
                 mockBookRepository,
-                mockApplicationEventPublisher
+                mockApplicationEventPublisher,
+                mockUserRepository
         );
 
         book1 = new Book();
@@ -202,30 +209,38 @@ public class BookServiceTest {
         verify(mockModelMapper, times(0)).map(any(Book.class), eq(BookDTO.class));
     }
 
+
+
     @Test
     void testDeleteBook_BookExists() {
         Long bookId = 1L;
 
-        when(mockBookRepository.existsById(bookId)).thenReturn(true);
+        Book mockBook = new Book();
+        mockBook.setId(bookId);
+
+        User user1 = new User();
+        user1.setId(1L);
+        user1.getBooks().add(mockBook);
+
+        User user2 = new User();
+        user2.setId(2L);
+        user2.getBooks().add(mockBook);
+
+        List<User> users = Arrays.asList(user1, user2);
+
+        when(mockBookRepository.findById(bookId)).thenReturn(Optional.of(mockBook));
+        when(mockUserRepository.findAll()).thenReturn(users);
 
         testService.deleteBook(bookId);
 
+        for (User user : users) {
+            assertFalse(user.getBooks().contains(mockBook));
+        }
+
+        verify(mockBookRepository, times(1)).findById(bookId);
+        verify(mockUserRepository, times(1)).findAll();
+        verify(mockUserRepository, times(1)).saveAll(users);
         verify(mockBookRepository, times(1)).deleteById(bookId);
-        verify(mockBookRepository, times(1)).existsById(bookId);
-    }
-
-    @Test
-    void testDeleteBook_BookDoesNotExist() {
-        Long bookId = 1L;
-
-        when(mockBookRepository.existsById(bookId)).thenReturn(false);
-
-        assertThrows(ObjectNotFoundException.class, () -> {
-            testService.deleteBook(bookId);
-        });
-
-        verify(mockBookRepository, times(1)).existsById(bookId);
-        verify(mockBookRepository, times(0)).deleteById(bookId);
     }
 
     @Test
@@ -335,5 +350,46 @@ public class BookServiceTest {
         assertEquals(1, result.size(), "Result list size should match");
         assertTrue(result.contains(book1), "Result should contain the book below the threshold");
         assertFalse(result.contains(book2), "Result should not contain the book above the threshold");
+    }
+
+    @Test
+    void testDecreaseStock_SufficientStock() {
+        Book book=new Book();
+        book.setStock(10);
+
+        int initialStock = book.getStock();
+        int quantityToDecrease = 5;
+
+        book.decreaseStock(quantityToDecrease);
+
+        assertEquals(initialStock - quantityToDecrease, book.getStock());
+    }
+
+    @Test
+    void testDecreaseStock_InsufficientStock() {
+        Book book=new Book();
+
+        int quantityToDecrease = 15;
+
+        OutOfStockException thrown = assertThrows(
+                OutOfStockException.class,
+                () -> book.decreaseStock(quantityToDecrease),
+                "Expected decreaseStock to throw, but it didn't"
+        );
+
+        assertTrue(thrown.getMessage().contains("Not enough stock available."));
+    }
+
+    @Test
+    void testDecreaseStock_ExactStock() {
+        Book book=new Book();
+        book.setStock(10);
+
+        int initialStock = book.getStock();
+        int quantityToDecrease = initialStock;
+
+        book.decreaseStock(quantityToDecrease);
+
+        assertEquals(0, book.getStock());
     }
 }

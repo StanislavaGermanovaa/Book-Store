@@ -19,11 +19,12 @@ xmlns:th="http://www.thymeleaf.org">
         <h2>Welcome, Admin!</h2>
         <div class="container">
             <div class="text-center"><img src="/images/profile.jpg" width="100" class="rounded-circle"></div>
-            <ul>
+            <ul class="navigation">
                 <li><a th:href="@{/book/add}">Add Book</a></li>
                 <li><a th:href="@{/delete-books}">Manage Book</a></li>
                 <li><a th:href="@{/category/add}">Add Category</a></li>
                 <li><a th:href="@{/order}">Orders</a></li>
+                <li><a th:href="@{/upload}">Upload Image</a></li>
             </ul>
             <div class="notifications">
                 <h3>Notifications</h3>

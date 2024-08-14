@@ -5,15 +5,19 @@ import bg.softuni.bookstore.model.dto.AddBookDTO;
 import bg.softuni.bookstore.model.dto.BookDTO;
 import bg.softuni.bookstore.model.entity.Author;
 import bg.softuni.bookstore.model.entity.Book;
+import bg.softuni.bookstore.model.entity.User;
 import bg.softuni.bookstore.model.events.BookAddedEvent;
 import bg.softuni.bookstore.repo.AuthorRepository;
 import bg.softuni.bookstore.repo.BookRepository;
+import bg.softuni.bookstore.repo.UserRepository;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,12 +26,14 @@ public class BookService {
     private final ModelMapper modelMapper;
     private final BookRepository bookRepository;
     private final ApplicationEventPublisher eventPublisher;
+    private final UserRepository userRepository;
 
-    public BookService(AuthorRepository authorRepository1, ModelMapper modelMapper, BookRepository bookRepository, ApplicationEventPublisher eventPublisher) {
+    public BookService(AuthorRepository authorRepository1, ModelMapper modelMapper, BookRepository bookRepository, ApplicationEventPublisher eventPublisher, UserRepository userRepository) {
         this.authorRepository = authorRepository1;
         this.modelMapper = modelMapper;
         this.bookRepository = bookRepository;
         this.eventPublisher = eventPublisher;
+        this.userRepository = userRepository;
     }
 
     public List<BookDTO> getAllBooks() {
@@ -57,10 +63,17 @@ public class BookService {
                 .orElseThrow(()-> new ObjectNotFoundException("Book not found!",id));
     }
 
+    @Transactional
     public void deleteBook(Long id) {
-        if (!bookRepository.existsById(id)) {
-            throw new ObjectNotFoundException("Book not found!", id);
+        Book bookToDelete = bookRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Book not found!", id));
+
+        List<User> users = userRepository.findAll();
+        for (User user : users) {
+            user.getBooks().remove(bookToDelete);
         }
+
+        userRepository.saveAll(users);
+
         bookRepository.deleteById(id);
     }
 
