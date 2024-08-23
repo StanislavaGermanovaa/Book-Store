@@ -5,6 +5,7 @@ import bg.softuni.bookstore.model.dto.UserProfileDTO;
 import bg.softuni.bookstore.model.dto.UserRegisterDTO;
 import bg.softuni.bookstore.model.entity.Role;
 import bg.softuni.bookstore.model.entity.User;
+import bg.softuni.bookstore.model.enums.UserRoles;
 import bg.softuni.bookstore.repo.RoleRepository;
 import bg.softuni.bookstore.repo.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -34,10 +35,14 @@ public class UserService {
 
         user.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
 
-        Role role = roleRepository.findById(2L)
-                .orElseThrow(() -> new RoleNotFoundException(2L));
+        Role userRole;
+        if (userRepository.count() == 0) {
+            userRole = roleRepository.findByRole(UserRoles.ADMIN);
+        } else {
+            userRole = roleRepository.findByRole(UserRoles.USER);
+        }
 
-        user.getRoles().add(role);
+        user.getRoles().add(userRole);
         userRepository.save(user);
     }
 

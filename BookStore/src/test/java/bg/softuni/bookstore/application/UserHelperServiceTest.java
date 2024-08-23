@@ -87,4 +87,5 @@ public class UserHelperServiceTest {
         assertNotNull(result);
         assertEquals(auth, result);
     }
+
 }

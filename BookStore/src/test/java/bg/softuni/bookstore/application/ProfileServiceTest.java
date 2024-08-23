@@ -81,6 +81,7 @@ public class ProfileServiceTest {
     @Test
     void testUpdateProfile_Success() {
         User user = new User();
+        user.setUsername("oldUsername");
         UserProfileDTO userProfileDTO = new UserProfileDTO();
         userProfileDTO.setUsername("newUsername");
         userProfileDTO.setFullName("New FullName");
@@ -97,6 +98,8 @@ public class ProfileServiceTest {
         assertEquals("newUsername", capturedUser.getUsername());
         assertEquals("New FullName", capturedUser.getFullName());
         assertEquals(30, capturedUser.getAge());
+
+        verify(mockUserHelperService, times(1)).changeNameInSecurityContext(user, "newUsername");
     }
 
     @Test

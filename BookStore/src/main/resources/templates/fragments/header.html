@@ -4,8 +4,10 @@
         <li><a  th:text="#{nav_bar_home}" th:href="@{/}">Home</a></li>
         <li><a th:text="#{nav_bar_books}" th:href="@{/books}">Books</a></li>
         <li><a th:text="#{nav_bar_categories}" th:href="@{/categories/all}">Categories</a></li>
-        <th:block sec:authorize="hasRole('USER')">
+        <th:block sec:authorize="isAuthenticated()">
             <li><a th:text="#{nav_bar_profile}" th:href="@{/users/profile}">Profile</a></li>
+        </th:block>
+        <th:block sec:authorize="hasRole('USER')">
             <li><a th:text="#{nav_bar_ShoppingBag}" th:href="@{/shopping-bag}">Shopping Bag</a></li>
         </th:block>
         <th:block sec:authorize="hasRole('ADMIN')">
