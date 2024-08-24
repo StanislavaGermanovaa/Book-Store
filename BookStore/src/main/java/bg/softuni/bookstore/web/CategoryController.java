@@ -50,7 +50,6 @@ public class CategoryController {
 
     @GetMapping("/categories/all")
     public String getAllCategories(Model model) {
-
         model.addAttribute("categoryDetails", categoryService.getAllCategories());
         return "category-details";
     }
