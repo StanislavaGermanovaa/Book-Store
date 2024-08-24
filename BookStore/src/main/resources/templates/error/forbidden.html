@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Object Not Found</title>
+    <title>Access Forbidden</title>
     <link rel="stylesheet" href="/css/errors.css">
 
 </head>
 <body>
 <div class="error-container">
-    <p th:text="${message}">There was a problem processing your request.</p>
+    <h1>403 - Forbidden</h1>
+    <p th:text="${message}"></p>
     <a th:href="@{/}">Return to Home Page</a>
 </div>
-
 </body>
 </html>

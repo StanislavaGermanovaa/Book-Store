@@ -54,4 +54,11 @@ public class GlobalExceptionHandler {
         return "error/out-of-stock";
     }
 
+    @ExceptionHandler(ForbiddenException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public String handleForbiddenException(ForbiddenException ex, Model model) {
+        model.addAttribute("message", ex.getMessage());
+        return "error/forbidden";
+    }
+
 }
