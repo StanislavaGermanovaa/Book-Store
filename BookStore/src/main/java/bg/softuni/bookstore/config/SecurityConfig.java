@@ -15,8 +15,9 @@ public class SecurityConfig {
                         authorizeRequest -> {
                             authorizeRequest
                                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                                    .requestMatchers("/", "/users/login", "/users/login-error", "/users/register","/books","/book/{id}","/categories/all","/author/{id}").permitAll()
+                                    .requestMatchers("/", "/users/login", "/users/register","/books","/book/{id}","/categories/all","/author/{id}").permitAll()
                                     .requestMatchers("/users/admin","/book/add","/delete-books","/category/add","/order","/order/**","/upload").hasRole("ADMIN")
+                                    .requestMatchers("/admin/users").hasRole("ADMIN")
                                     .anyRequest().authenticated();
                         }
                 )

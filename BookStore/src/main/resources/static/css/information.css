@@ -887,3 +887,110 @@ margin-bottom: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.about-the-users h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Table Styles */
+.about-the-users table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-the-users thead {
+    background-color: #007bff;
+    color: white;
+}
+
+.about-the-users th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.about-the-users h {
+    font-size: 16px;
+}
+
+.about-the-users td ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.about-the-users td ul li {
+    display: inline-block;
+    margin-right: 5px;
+    padding: 2px 8px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Row Hover Effect */
+.about-the-users tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Button Styles */
+.about-the-users button {
+    padding: 8px 12px;
+    font-size: 14px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 5px;
+}
+
+.about-the-users button:hover {
+    background-color: #0056b3;
+}
+
+.about-the-users button:active {
+    background-color: #004085;
+}
+
+.about-the-users form {
+    display: inline;
+}
+
+/* Confirmation Dialog */
+.about-the-users button[onclick]:hover {
+    background-color: #dc3545;  /* Red color for delete confirmation */
+}
+
+/* Responsive Styles */
+.about-the-users @media (max-width: 768px) {
+    table {
+        width: 100%;
+    }
+
+    th, td {
+        display: block;
+        text-align: right;
+    }
+
+    th::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+
+    td ul li {
+        display: block;
+        margin-bottom: 5px;
+    }
+}

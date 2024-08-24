@@ -13,6 +13,9 @@
         <th:block sec:authorize="hasRole('ADMIN')">
             <li><a th:text="#{nav_bar_adminBoard}" th:href="@{/users/admin}">Admin Board</a></li>
         </th:block>
+        <th:block sec:authorize="hasRole('ADMIN')">
+            <li><a th:text="#{nav_bar_userBoard}" th:href="@{/admin/users}">Users Board</a></li>
+        </th:block>
     </ul>
     <ul>
         <th:block sec:authorize="!isAuthenticated()">
