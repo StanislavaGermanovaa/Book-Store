@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,5 +30,9 @@ public class ReviewService {
         review.setBook(bookService.findById(reviewDTO.getBookId()));
 
         reviewRepository.save(review);
+    }
+
+    public List<Review> getReviewsByBookId(Long bookId) {
+        return reviewRepository.findByBookId(bookId);
     }
 }

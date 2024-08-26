@@ -1,0 +1,140 @@
+.books-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+    backdrop-filter: blur(6px);
+    box-shadow: 5px 5px 10px 0 rgba(0,0,0,0.5);
+}
+
+.book-details {
+    width: 100%;
+    margin-bottom: 20px;
+
+}
+
+.book-details h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.book-details a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.book-details img {
+    width: 200px;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.book-details span {
+    display: block;
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+.book-details .btn {
+    margin-top: 10px;
+}
+.review-form {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reviews-list {
+    width: 100%;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.review-form h2, .reviews-list h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.review-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.review-form input[type="number"], .review-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+.review-form .btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.review-form .btn:hover {
+    background-color: #0056b3;
+}
+
+.reviews-list .review-item {
+    margin-bottom: 15px;
+    padding: 15px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.reviews-list .review-item:last-child {
+    border-bottom: none;
+}
+
+.reviews-list .review-item strong {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.description {
+    overflow: hidden;
+    max-height: 100px;
+    transition: max-height 0.5s ease;
+}
+
+.description.expanded {
+    max-height: none;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.read-more:hover {
+    color: #0056b3;
+}

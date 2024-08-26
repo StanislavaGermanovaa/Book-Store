@@ -6,8 +6,8 @@ xmlns:th="http://www.thymeleaf.org">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book store</title>
     <link rel="stylesheet" href="/css/background.css">
-    <link rel="stylesheet" href="/css/information.css">
-    <script src="/js/search.js" defer></script>
+    <link rel="stylesheet" href="/css/book.css">
+    <script src="/js/learn-more.js" defer></script>
     
 </head>
 <body>
@@ -23,7 +23,8 @@ xmlns:th="http://www.thymeleaf.org">
             <form th:action="@{/shopping-bag/add/{bookId}(bookId=${bookDetails.id})}" method="post">
                 <button type="submit" class="btn btn-primary">Add to Bag</button>
             </form>
-            <p th:text="*{description}">Description</p>
+            <p th:text="*{description}" id="description" class="description">Description</p>
+            <a href="javascript:void(0)" id="readMore" class="read-more">Read more</a>
 
             <div class="review-form">
                 <h2>Leave a Review</h2>
@@ -38,6 +39,17 @@ xmlns:th="http://www.thymeleaf.org">
 
                     <button type="submit" class="btn btn-primary">Submit Review</button>
                 </form>
+            </div>
+        </div>
+
+        <div class="reviews-list">
+            <h2>Reviews</h2>
+            <div th:each="review : ${reviews}">
+                <div class="review-item">
+                    <strong>Rating:</strong> <span th:text="${review.rating}">Rating</span><br/>
+                    <strong>Comment:</strong> <p th:text="${review.comment}">Comment</p><br/>
+                    <strong>Date:</strong> <span th:text="${review.reviewDate}">Date</span><br/>
+                </div>
             </div>
         </div>
     </main>
