@@ -100,4 +100,9 @@ public class BookService {
     public List<Book> getLowStockBooks(int threshold) {
         return bookRepository.findByStockLessThan(threshold);
     }
+
+    public Book findById(Long id) {
+        Optional<Book> bookOptional = bookRepository.findById(id);
+        return bookOptional.orElse(null);
+    }
 }
