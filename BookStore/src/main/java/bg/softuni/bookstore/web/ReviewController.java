@@ -2,6 +2,7 @@ package bg.softuni.bookstore.web;
 
 import bg.softuni.bookstore.application.services.ReviewService;
 import bg.softuni.bookstore.model.dto.AddReviewDTO;
+import bg.softuni.bookstore.model.dto.BookDTO;
 import bg.softuni.bookstore.model.entity.Review;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -29,11 +30,15 @@ public class ReviewController {
         model.addAttribute("bookId", bookId);
         model.addAttribute("reviewDTO", new AddReviewDTO());
 
-        List<Review> reviews = reviewService.getReviewsByBookId(bookId);
-        model.addAttribute("reviews", reviews);
+////        //TODO fix
+
+        List<AddReviewDTO> reviews = reviewService.getReviewsByBookId(bookId);
+        model.addAttribute("allBookReviews", reviews);
+
 
         return "book-detail";
     }
+
 
     @PostMapping("/add/{bookId}")
     public String addReview(@Valid @ModelAttribute("reviewDTO") AddReviewDTO reviewDTO,

@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "books")
 @Setter
@@ -32,6 +35,9 @@ public class Book extends BaseEntity{
     private double price;
 
     private int stock;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
 
     public void decreaseStock(int quantity) {
         if (stock >= quantity) {

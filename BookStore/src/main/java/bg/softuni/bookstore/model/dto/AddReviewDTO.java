@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -22,5 +24,7 @@ public class AddReviewDTO {
 
     @NotBlank(message = "Comment cannot be empty")
     private String comment;
+
+    private LocalDate reviewDate;
 
 }

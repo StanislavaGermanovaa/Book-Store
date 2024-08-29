@@ -44,12 +44,13 @@ xmlns:th="http://www.thymeleaf.org">
 
         <div class="reviews-list">
             <h2>Reviews</h2>
-            <div th:each="review : ${reviews}">
-                <div class="review-item">
-                    <strong>Rating:</strong> <span th:text="${review.rating}">Rating</span><br/>
-                    <strong>Comment:</strong> <p th:text="${review.comment}">Comment</p><br/>
-                    <strong>Date:</strong> <span th:text="${review.reviewDate}">Date</span><br/>
-                </div>
+            <div th:if="${#lists.isEmpty(allBookReviews)}">
+                <p>No reviews yet.</p>
+            </div>
+            <div th:each="review : ${allBookReviews}" class="review-item">
+                <strong>Rating:</strong> <span th:text="${review.rating}">Rating</span><br/>
+                <strong>Comment:</strong> <p th:text="${review.comment}">Comment</p><br/>
+                <strong>Date:</strong> <span th:text="${review.reviewDate}">Date</span><br/>
             </div>
         </div>
     </main>
