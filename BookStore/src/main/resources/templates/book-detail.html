@@ -21,6 +21,8 @@ xmlns:th="http://www.thymeleaf.org">
             <span th:text="*{category}">Category Name</span>
             <span th:text="${bookDetails.price}">Price</span>
             <form th:action="@{/shopping-bag/add/{bookId}(bookId=${bookDetails.id})}" method="post">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" min="1" max="10" value="1" required />
                 <button type="submit" class="btn btn-primary">Add to Bag</button>
             </form>
             <p th:text="*{description}" id="description" class="description">Description</p>

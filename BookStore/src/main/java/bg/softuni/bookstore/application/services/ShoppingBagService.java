@@ -1,6 +1,7 @@
 package bg.softuni.bookstore.application.services;
 
 import bg.softuni.bookstore.application.error.ObjectNotFoundException;
+import bg.softuni.bookstore.application.error.OutOfStockException;
 import bg.softuni.bookstore.model.entity.Book;
 import bg.softuni.bookstore.model.entity.ShoppingBag;
 import bg.softuni.bookstore.repo.BookRepository;
@@ -23,16 +24,22 @@ public class ShoppingBagService {
         shoppingBag = new ShoppingBag();
     }
 
-    public void addBookToBag(Long bookId) {
+    public void addBookToBag(Long bookId, int quantity) {
         Book book = bookRepository.findById(bookId)
-                .orElseThrow(()-> new ObjectNotFoundException("Book not found!",bookId));
-        shoppingBag.addBook(book);
+                .orElseThrow(() -> new ObjectNotFoundException("Book not found!", bookId));
+
+        if (quantity > book.getStock()) {
+            throw new OutOfStockException("Not enough stock available for book ID: " + bookId);
+        }
+
+        shoppingBag.addBook(book, quantity);
     }
 
-    public void removeBookFromBag(Long bookId) {
+    public void removeBookFromBag(Long bookId, int quantity) {
         Book book = bookRepository.findById(bookId)
-                .orElseThrow(() -> new ObjectNotFoundException("Book not found!",bookId));
-        shoppingBag.removeBook(book);
+                .orElseThrow(() -> new ObjectNotFoundException("Book not found!", bookId));
+
+        shoppingBag.removeBook(book, quantity);
     }
     public void clearBag() {
         shoppingBag.clear();

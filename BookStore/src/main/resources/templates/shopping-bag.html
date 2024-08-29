@@ -40,8 +40,9 @@
                             <td th:text="${item.book.price}">Price</td>
                             <td th:text="${item.book.price * item.quantity}">Subtotal</td>
                             <td>
-                                <form th:action="@{/remove}" method="post" class="d-inline">
+                                <form th:action="@{/shopping-bag/remove}" method="post" class="d-inline">
                                     <input type="hidden" name="bookId" th:value="${item.book.id}" />
+                                    <input type="number" name="quantity" min="1" max="${item.quantity}" th:value="1" required />
                                     <button type="submit" class="btn btn-danger btn-sm">Remove</button>
                                 </form>
                             </td>

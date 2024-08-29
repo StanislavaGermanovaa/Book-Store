@@ -1,6 +1,7 @@
 package bg.softuni.bookstore.web;
 
 import bg.softuni.bookstore.application.error.ObjectNotFoundException;
+import bg.softuni.bookstore.application.error.OutOfStockException;
 import bg.softuni.bookstore.application.error.UserNotFoundException;
 import bg.softuni.bookstore.model.entity.ShoppingBag;
 import bg.softuni.bookstore.model.entity.User;
@@ -41,15 +42,25 @@ public class ShoppingBagController {
         return "shopping-bag";
     }
 
-    @PostMapping("/shopping-bag/add/{bookId}")
-    public String addBookToBag(@PathVariable Long bookId) {
-        shoppingBagService.addBookToBag(bookId);
-        return "redirect:/shopping-bag";
-    }
+@PostMapping("/shopping-bag/add/{bookId}")
+public String addBookToBag(@PathVariable Long bookId, @RequestParam("quantity") int quantity, Model model) {
+    try {
+        shoppingBagService.addBookToBag(bookId, quantity);
+    } catch (OutOfStockException e) {
+        model.addAttribute("error", e.getMessage());
 
-    @PostMapping("/remove")
-    public String removeBookFromBag(@RequestParam("bookId") Long bookId) {
-        shoppingBagService.removeBookFromBag(bookId);
+        return "redirect:/book-details/" + bookId;
+    }
+    return "redirect:/shopping-bag";
+}
+
+    @PostMapping("/shopping-bag/remove")
+    public String removeBookFromBag(@RequestParam("bookId") Long bookId, @RequestParam("quantity") int quantity, Model model) {
+        try {
+            shoppingBagService.removeBookFromBag(bookId, quantity);
+        } catch (Exception e) {
+            model.addAttribute("error", "Error removing book from bag: " + e.getMessage());
+        }
         return "redirect:/shopping-bag";
     }
 

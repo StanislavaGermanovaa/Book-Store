@@ -1,6 +1,7 @@
 package bg.softuni.bookstore.model.entity;
 
 
+import bg.softuni.bookstore.application.error.OutOfStockException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,18 +14,42 @@ import java.util.List;
 public class ShoppingBag{
     private List<ShoppingBagItems> shoppingBagItems = new ArrayList<>();
 
-    public void addBook(Book book) {
+    public void addBook(Book book, int quantity) {
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Quantity must be greater than zero");
+        }
+
         for (ShoppingBagItems item : shoppingBagItems) {
             if (item.getBook().getId().equals(book.getId())) {
-                item.setQuantity(item.getQuantity() + 1);
+                int newQuantity = item.getQuantity() + quantity;
+                if (newQuantity > book.getStock()) {
+                    throw new OutOfStockException("Not enough stock available for book ID: " + book.getId());
+                }
+                item.setQuantity(newQuantity);
                 return;
             }
         }
-        shoppingBagItems.add(new ShoppingBagItems(book, 1));
+
+        if (quantity > book.getStock()) {
+            throw new OutOfStockException("Not enough stock available for book ID: " + book.getId());
+        }
+
+        shoppingBagItems.add(new ShoppingBagItems(book, quantity));
     }
 
-    public void removeBook(Book book) {
-        shoppingBagItems.removeIf(item -> item.getBook().getId().equals(book.getId()));
+    public void removeBook(Book book, int quantity) {
+        for (ShoppingBagItems item : shoppingBagItems) {
+            if (item.getBook().getId().equals(book.getId())) {
+                int newQuantity = item.getQuantity() - quantity;
+                if (newQuantity <= 0) {
+                    shoppingBagItems.remove(item);
+                } else {
+                    item.setQuantity(newQuantity);
+                }
+                return;
+            }
+        }
+        throw new IllegalArgumentException("Book not found in the shopping bag");
     }
 
     public double getTotal() {
