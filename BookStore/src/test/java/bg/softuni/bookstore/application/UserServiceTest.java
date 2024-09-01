@@ -8,6 +8,7 @@ import bg.softuni.bookstore.application.services.UserService;
 import bg.softuni.bookstore.model.dto.UserRegisterDTO;
 import bg.softuni.bookstore.model.entity.Role;
 import bg.softuni.bookstore.model.entity.User;
+import bg.softuni.bookstore.model.enums.UserRoles;
 import bg.softuni.bookstore.repo.RoleRepository;
 import bg.softuni.bookstore.repo.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -53,47 +54,61 @@ public class UserServiceTest {
     }
 
     @Test
-    void testRegisterSuccess() {
+    void testRegisterSuccess_FirstUser() {
         UserRegisterDTO userRegisterDTO = new UserRegisterDTO();
         userRegisterDTO.setUsername("testuser");
         userRegisterDTO.setPassword("password");
         userRegisterDTO.setEmail("test@example.com");
 
         User user = new User();
-        Role role = new Role();
+        Role adminRole = new Role();
+        adminRole.setRole(UserRoles.ADMIN);
 
         when(mockModelMapper.map(userRegisterDTO, User.class)).thenReturn(user);
         when(mockPasswordEncoder.encode(userRegisterDTO.getPassword())).thenReturn("encodedPassword");
-        when(mockRoleRepository.findById(2L)).thenReturn(Optional.of(role));
+        when(mockUserRepository.count()).thenReturn(0L);
+        when(mockRoleRepository.findByRole(UserRoles.ADMIN)).thenReturn(adminRole);
 
         testService.register(userRegisterDTO);
 
         verify(mockModelMapper).map(userRegisterDTO, User.class);
         verify(mockPasswordEncoder).encode(userRegisterDTO.getPassword());
-        verify(mockRoleRepository).findById(2L);
+        verify(mockRoleRepository).findByRole(UserRoles.ADMIN);
         verify(mockUserRepository).save(userCaptor.capture());
 
         User capturedUser = userCaptor.getValue();
         assertEquals("encodedPassword", capturedUser.getPassword());
-        assertTrue(capturedUser.getRoles().contains(role));
+        assertTrue(capturedUser.getRoles().contains(adminRole));
     }
 
     @Test
-    void testRegisterRoleNotFound() {
+    void testRegisterSuccess_SubsequentUser() {
         UserRegisterDTO userRegisterDTO = new UserRegisterDTO();
         userRegisterDTO.setUsername("testuser");
         userRegisterDTO.setPassword("password");
+        userRegisterDTO.setEmail("test@example.com");
 
-        when(mockModelMapper.map(userRegisterDTO, User.class)).thenReturn(new User());
+        User user = new User();
+        Role userRole = new Role();
+        userRole.setRole(UserRoles.USER);
+
+        when(mockModelMapper.map(userRegisterDTO, User.class)).thenReturn(user);
         when(mockPasswordEncoder.encode(userRegisterDTO.getPassword())).thenReturn("encodedPassword");
-        when(mockRoleRepository.findById(2L)).thenReturn(Optional.empty());
+        when(mockUserRepository.count()).thenReturn(1L);
+        when(mockRoleRepository.findByRole(UserRoles.USER)).thenReturn(userRole);
 
-        RoleNotFoundException thrownException = assertThrows(RoleNotFoundException.class, () -> {
-            testService.register(userRegisterDTO);
-        });
+        testService.register(userRegisterDTO);
 
-        assertEquals("Role not found with ID: 2", thrownException.getMessage());
+        verify(mockModelMapper).map(userRegisterDTO, User.class);
+        verify(mockPasswordEncoder).encode(userRegisterDTO.getPassword());
+        verify(mockRoleRepository).findByRole(UserRoles.USER);
+        verify(mockUserRepository).save(userCaptor.capture());
+
+        User capturedUser = userCaptor.getValue();
+        assertEquals("encodedPassword", capturedUser.getPassword());
+        assertTrue(capturedUser.getRoles().contains(userRole));
     }
+
 
     @Test
     void testIsUsernameUnique() {

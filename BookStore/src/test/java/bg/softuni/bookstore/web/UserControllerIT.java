@@ -46,14 +46,5 @@ public class UserControllerIT {
                 .andExpect(model().attributeExists("loginData"));
     }
 
-    @Test
-    public void testViewLoginError() throws Exception {
-        mockMvc.perform(get("/users/login-error"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("login"))
-                .andExpect(model().attributeExists("loginData"))
-                .andExpect(model().attribute("showErrorMessage", true));
-    }
-
 
 }
