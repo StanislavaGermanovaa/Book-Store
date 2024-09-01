@@ -44,6 +44,8 @@ public class ShoppingBagControllerIT {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ShoppingBagService shoppingBagService;
 
     @Autowired
     private AuthorRepository authorRepository;
@@ -52,18 +54,19 @@ public class ShoppingBagControllerIT {
     @Test
     @WithMockUser(username = "testuser@example.com")
     public void testViewCart() throws Exception {
+        User testUser = createTestUser();
         Author testAuthor = createTestAuthor();
         Book testBook = createTestBook(testAuthor);
-        ShoppingBag testBag = new ShoppingBag();
-        testBag.addBook(testBook);
 
-        ResultActions result = mockMvc
-                .perform(get("/shopping-bag", testBag)
-                        .contentType(MediaType.APPLICATION_JSON));
+        shoppingBagService.addBookToBag(testBook.getId(), 1);
+
+        ResultActions result = mockMvc.perform(get("/shopping-bag")
+                .contentType(MediaType.APPLICATION_JSON));
 
         result.andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("shopping-bag"))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("shoppingBag"));
+                .andExpect(MockMvcResultMatchers.model().attributeExists("shoppingBag"))
+                .andExpect(MockMvcResultMatchers.model().attribute("shoppingBag", shoppingBagService.getShoppingBag()));
     }
 
 
@@ -97,11 +100,6 @@ public class ShoppingBagControllerIT {
         return userRepository.save(user);
     }
 
-//    private ShoppingBag createTestShoppingBag() {
-//        ShoppingBag bag = new ShoppingBag();
-//        bag.addBook(testBook);
-//        return bag;
-//    }
 }
 
 
