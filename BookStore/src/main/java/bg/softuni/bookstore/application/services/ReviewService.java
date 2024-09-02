@@ -4,6 +4,7 @@ import bg.softuni.bookstore.model.dto.AddReviewDTO;
 import bg.softuni.bookstore.model.entity.Book;
 import bg.softuni.bookstore.model.entity.Review;
 import bg.softuni.bookstore.repo.ReviewRepository;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -23,13 +24,16 @@ public class ReviewService {
         this.modelMapper = modelMapper;
         this.bookService = bookService;
     }
-
+    @Transactional
     public void save(AddReviewDTO reviewDTO) {
-        Review review = modelMapper.map(reviewDTO, Review.class);
-
         Book book = bookService.findById(reviewDTO.getBookId());
 
+        Review review = new Review();
+        review.setRating(reviewDTO.getRating());
+        review.setComment(reviewDTO.getComment());
         review.setBook(book);
+
+        book.addReview(review);
 
         reviewRepository.save(review);
     }

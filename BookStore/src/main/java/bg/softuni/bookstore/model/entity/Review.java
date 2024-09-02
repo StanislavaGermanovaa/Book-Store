@@ -14,16 +14,16 @@ import java.time.LocalDate;
 @Setter
 @Getter
 public class Review extends BaseEntity{
+
     @ManyToOne
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
 
     @Min(1)
     @Max(5)
-    @Column(nullable = false)
     private int rating;
 
-    @Column(columnDefinition = "TEXT",nullable = false)
+    @Column(columnDefinition = "TEXT")
     private String comment;
 
     @Column(name = "review_date")

@@ -36,8 +36,18 @@ public class Book extends BaseEntity{
 
     private int stock;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "book")
     private List<Review> reviews = new ArrayList<>();
+
+    public void addReview(Review review) {
+        reviews.add(review);
+        review.setBook(this);
+    }
+
+    public void removeReview(Review review) {
+        reviews.remove(review);
+        review.setBook(null);
+    }
 
     public void decreaseStock(int quantity) {
         if (stock >= quantity) {
